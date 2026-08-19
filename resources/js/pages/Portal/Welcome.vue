@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { router } from '@inertiajs/vue3';
 
 const props = defineProps<{
@@ -14,13 +14,56 @@ const maskedPhone = computed(() => {
 });
 
 const services = [
-  { label: 'Portal Layanan', sub: 'Layanan Publik Daerah', color: '#0891b2' },
-  { label: 'Smart Kampung', sub: 'Digitalisasi Desa', color: '#15803d' },
-  { label: 'B-One ID', sub: 'Identitas Digital Tunggal', color: '#7c3aed' },
-  { label: 'PPID Banyuwangi', sub: 'Informasi Publik', color: '#b45309' },
-  { label: 'Lapor BWI', sub: 'Pengaduan Masyarakat', color: '#dc2626' },
-  { label: 'Siaran Daerah', sub: 'Info & Siaran Lokal', color: '#0891b2' },
+  {
+    label: 'Portal Layanan',
+    sub: 'Layanan Publik Daerah',
+    color: '#0891b2',
+    href: 'https://sipp.banyuwangikab.go.id/',
+    logo: '/images/services/portal-layanan.png',
+  },
+  {
+    label: 'Smart Kampung',
+    sub: 'Digitalisasi Desa',
+    color: '#15803d',
+    href: 'https://smartkampung.id/',
+    logo: '/images/services/smart-kampung.png',
+  },
+  {
+    label: 'B-One ID',
+    sub: 'Identitas Digital Tunggal',
+    color: '#7c3aed',
+    href: 'https://bsid.banyuwangikab.go.id/',
+    logo: '/images/services/b-one-id.png',
+  },
+  {
+    label: 'PPID Banyuwangi',
+    sub: 'Informasi Publik',
+    color: '#b45309',
+    href: 'https://ppid.banyuwangikab.go.id/',
+    logo: '/images/services/ppid.png',
+  },
+  {
+    label: 'Lapor BWI',
+    sub: 'Pengaduan Masyarakat',
+    color: '#dc2626',
+    href: 'https://www.lapor.go.id/instansi/pemerintah-kabupaten-banyuwangi',
+    logo: '/images/services/lapor-bwi.png',
+  },
+  {
+    label: 'Siaran Daerah',
+    sub: 'Info & Siaran Lokal',
+    color: '#0891b2',
+    href: 'https://infobanyuwangi.co.id/',
+    logo: '/images/services/siaran-daerah.png',
+  },
 ];
+
+// Kalau file logo belum ada / salah nama di public/images/services/, jangan
+// biarkan kotaknya kosong — fallback ke inisial huruf seperti sebelumnya.
+const logoFailed = ref<Record<string, boolean>>({});
+function onLogoError(label: string) {
+  logoFailed.value[label] = true;
+}
 
 let statusTimer: ReturnType<typeof setInterval> | null = null;
 
@@ -65,11 +108,14 @@ onUnmounted(() => {
 <template>
   <div class="min-h-screen text-slate-800" style="background: linear-gradient(180deg, #f0f7ff 0%, #edf7fb 30%, #f8fafc 100%);">
     <div class="min-h-screen flex flex-col relative">
-      <div
-        class="fixed inset-0 pointer-events-none bg-cover bg-center"
-        style="background-image: url('/images/banyuwangi-bec.jpg'); filter: saturate(1.1) contrast(1.05);"
+      <img
+        src="/images/background-welcome.jpg"
+        alt=""
+        class="fixed inset-0 w-full h-full object-cover pointer-events-none"
+        style="filter: saturate(1.05) contrast(1.03) brightness(0.97);"
+        @error="() => console.error('[Welcome] Gagal memuat /images/background-welcome.jpg — cek nama file & folder public/images/')"
       />
-      <div class="fixed inset-0" style="background: linear-gradient(to bottom, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.20) 30%, rgba(248,250,252,0.72) 100%);" />
+      <div class="fixed inset-0" style="background: linear-gradient(180deg, rgba(240,247,255,0.88) 0%, rgba(237,247,251,0.82) 35%, rgba(248,250,252,0.93) 100%);" />
 
       <header class="relative z-10 border-b border-slate-200" style="background: rgba(255,255,255,0.82); backdrop-filter: blur(20px);">
         <div class="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -127,12 +173,21 @@ onUnmounted(() => {
               <a
                 v-for="s in services"
                 :key="s.label"
-                href="#"
+                :href="s.href"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="group rounded-xl p-4 flex flex-col gap-3 transition-all hover:scale-[1.02]"
                 style="background: rgba(255,255,255,0.85); backdrop-filter: blur(16px); border: 1px solid rgba(148,163,184,0.2); box-shadow: 0 6px 18px rgba(15,23,42,0.06);"
               >
-                <div class="w-9 h-9 rounded-xl flex items-center justify-center font-bold font-display" :style="{ background: s.color + '22', color: s.color }">
-                  {{ s.label.charAt(0) }}
+                <div class="w-9 h-9 rounded-xl flex items-center justify-center overflow-hidden" :style="{ background: s.color + '14' }">
+                  <img
+                    v-if="!logoFailed[s.label]"
+                    :src="s.logo"
+                    :alt="s.label"
+                    class="w-full h-full object-contain p-1"
+                    @error="onLogoError(s.label)"
+                  />
+                  <span v-else class="font-bold font-display" :style="{ color: s.color }">{{ s.label.charAt(0) }}</span>
                 </div>
                 <div>
                   <p class="text-slate-800 text-sm font-semibold font-display leading-tight">{{ s.label }}</p>
