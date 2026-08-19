@@ -1,17 +1,30 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import type { BackgroundImage } from '@/types/portal';
 
 defineProps<{ images: BackgroundImage[]; activeIndex: number }>();
 const emit = defineEmits<{ (e: 'select', index: number): void }>();
+
+// Tracks which slides failed to load so we don't silently show a black
+// screen — check the browser console for the exact path that 404'd.
+const failed = ref<Record<number, boolean>>({});
+
+function onImageError(index: number, image: BackgroundImage) {
+  failed.value[index] = true;
+  console.error(`[BackgroundSlider] Gagal memuat gambar (cek path/nama file): ${image.url}`);
+}
 </script>
 
 <template>
-  <div class="absolute inset-0 overflow-hidden">
-    <div
+  <div class="absolute inset-0 overflow-hidden" style="background: #050c1a;">
+    <img
       v-for="(image, index) in images"
       :key="image.url"
+      :src="image.url"
+      :alt="image.alt"
       class="bg-slide"
-      :style="{ backgroundImage: `url('${image.url}')`, opacity: index === activeIndex ? 1 : 0 }"
+      :style="{ opacity: index === activeIndex && !failed[index] ? 1 : 0 }"
+      @error="onImageError(index, image)"
     />
   </div>
 
