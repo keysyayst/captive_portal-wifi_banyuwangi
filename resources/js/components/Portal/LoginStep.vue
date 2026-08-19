@@ -83,6 +83,7 @@ const isValid = computed(() => rawPhoneLength.value >= 8 && props.form.agreed);
             placeholder="812 3456 7890"
             class="card-input"
             style="letter-spacing: normal;"
+            maxlength="13"
             :value="form.phone"
             @input="onPhoneInput"
           />

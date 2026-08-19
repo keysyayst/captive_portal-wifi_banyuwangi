@@ -5,9 +5,9 @@ import type { BackgroundImage } from '@/types/portal';
 
 // Swap these for photos of your own service area / kabupaten.
 const images: BackgroundImage[] = [
-  { url: 'https://images.unsplash.com/photo-1559273278-31d91743cbb2?w=1920&h=1080&fit=crop&auto=format', alt: 'Kawah Ijen' },
-  { url: 'https://images.unsplash.com/photo-1613365891889-7f7e3316be61?w=1920&h=1080&fit=crop&auto=format', alt: 'Pantai Banyuwangi' },
-  { url: 'https://images.unsplash.com/photo-1500100711100-fa7d55b8f658?w=1920&h=1080&fit=crop&auto=format', alt: 'Gunung Raung' },
+  { url: '/images/kawah-ijen.jpg', alt: 'Kawah Ijen' },
+  { url: '/images/pantai-banyuwangi.jpg', alt: 'Pantai Banyuwangi' },
+  { url: '/images/gunung-raung.jpg', alt: 'Gunung Raung' },
 ];
 
 const { activeIndex, goTo } = useBackgroundSlider(images);
