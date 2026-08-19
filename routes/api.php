@@ -4,6 +4,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CountryController;
+
+Route::get('/countries', [CountryController::class, 'index']);
+Route::get('/countries/{code}', [CountryController::class, 'show']);
 
 Route::post('/login', [AuthController::class, 'login']);
 
