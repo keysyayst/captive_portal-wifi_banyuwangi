@@ -94,7 +94,6 @@ const isValid = computed(() => rawPhoneLength.value >= 8 && props.form.agreed);
           </div>
         </div>
       </div>
-      <p class="text-xs text-slate-400 mt-1.5">Masukkan nomor tanpa awalan 0</p>
     </div>
 
     <label class="flex items-start gap-3 cursor-pointer" @click="emit('toggle-agree')">

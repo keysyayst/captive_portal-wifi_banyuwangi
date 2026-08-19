@@ -5,8 +5,8 @@ import type { BackgroundImage } from '@/types/portal';
 
 // Swap these for photos of your own service area / kabupaten.
 const images: BackgroundImage[] = [
-  { url: '/images/kawah-ijen.jpg', alt: 'Kawah Ijen' },
-  { url: '/images/pantai-banyuwangi.jpg', alt: 'Pantai Banyuwangi' },
+  { url: '/images/Kawah-Ijen-Indonesia.jpg', alt: 'Kawah Ijen' },
+  { url: '/images/pantai-merah-banyuwangi.jpg', alt: 'Pantai Banyuwangi' },
   { url: '/images/gunung-raung.jpg', alt: 'Gunung Raung' },
 ];
 
