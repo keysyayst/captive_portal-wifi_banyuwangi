@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Session as UserSession;
-use Illuminate\Support\Facades\DB;
+use App\Models\User;
 use Carbon\Carbon;
 
 class DashboardController extends Controller

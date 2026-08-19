@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Device;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -20,7 +20,7 @@ class AuthController extends Controller
             'terms_agreed' => 'required|boolean',
         ]);
 
-        if (!$validated['terms_agreed']) {
+        if (! $validated['terms_agreed']) {
             return response()->json([
                 'message' => 'Anda harus menyetujui syarat dan ketentuan',
             ], 422);
@@ -67,7 +67,7 @@ class AuthController extends Controller
     {
         // Update session logout
         // (optional: bisa track duration di sini)
-        
+
         $request->user()->currentAccessToken()->delete();
 
         return response()->json([

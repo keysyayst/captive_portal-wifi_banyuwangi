@@ -18,7 +18,7 @@ return new class extends Migration
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamp('last_login')->nullable();
             $table->timestamps();
-            
+
             $table->index('phone_number');
         });
     }

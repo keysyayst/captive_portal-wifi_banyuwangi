@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('mac_address')->unique();
             $table->string('device_type')->nullable();
             $table->timestamps();
-            
+
             $table->index('mac_address');
         });
     }

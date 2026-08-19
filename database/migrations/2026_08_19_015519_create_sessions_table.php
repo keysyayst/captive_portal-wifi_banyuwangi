@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('duration')->nullable(); // minutes
             $table->enum('authentication_status', ['success', 'failed'])->default('success');
             $table->timestamps();
-            
+
             $table->index('login_time');
         });
     }
