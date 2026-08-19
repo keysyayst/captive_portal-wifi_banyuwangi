@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Model
@@ -18,12 +20,12 @@ class User extends Model
     ];
 
     // Relationship
-    public function devices()
+    public function devices(): HasMany
     {
         return $this->hasMany(Device::class);
     }
 
-    public function sessions()
+    public function sessions(): HasManyThrough
     {
         return $this->hasManyThrough(Session::class, Device::class);
     }
