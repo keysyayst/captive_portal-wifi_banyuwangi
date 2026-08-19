@@ -1,124 +1,153 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { Head, Link } from '@inertiajs/vue3';
+import { computed, reactive, ref } from 'vue';
+import { router } from '@inertiajs/vue3';
 import PortalLayout from '@/layouts/PortalLayout.vue';
+import CardLogos from '@/components/Portal/CardLogos.vue';
+import LoginStep from '@/components/Portal/LoginStep.vue';
+import OtpMethodStep from '@/components/Portal/OtpMethodStep.vue';
+import OtpStep from '@/components/Portal/OtpStep.vue';
+import Terms from '@/pages/Portal/Terms.vue';
+import { usePortalLocation } from '@/composables/usePortalLocation';
+import { useOtpTimer } from '@/composables/useOtpTimer';
+import type { OtpMethod, PortalStep } from '@/types/portal';
 
 defineOptions({ layout: PortalLayout });
 
-const form = ref({
-    phone_number: '',
-    mac_address: '',
-    device_type: 'mobile',
-    terms_agreed: false,
-});
-const processing = ref(false);
-const error = ref('');
+/**
+ * These props are expected to come from the Laravel controller that renders
+ * this Inertia page. In a real Mikrotik/OpenWRT/pfSense hotspot setup, the
+ * router injects mac/ap (and possibly nik) as query params on the redirect
+ * to this page — read them server-side and pass them down here, the same
+ * way the original index.php read $_GET via process_login.php.
+ */
+const props = defineProps<{
+  error?: string | null;
+  mac?: string | null;
+  ap?: string | null;
+  nik?: string | null;
+}>();
 
-async function login() {
-    error.value = '';
-    if (!form.value.terms_agreed) {
-        error.value = 'Please accept the terms before continuing.';
-        return;
-    }
-    processing.value = true;
-    try {
-        const response = await fetch('/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-            },
-            body: JSON.stringify({
-                ...form.value,
-                ip_address: 'portal-client',
-            }),
-        });
-        const data = await response.json();
-        if (!response.ok)
-            throw new Error(data.message ?? 'Unable to connect right now.');
-        window.location.href = data.redirect_url ?? 'https://banyuwangi.go.id';
-    } catch (exception) {
-        error.value =
-            exception instanceof Error
-                ? exception.message
-                : 'Unable to connect right now.';
-    } finally {
-        processing.value = false;
-    }
+const step = ref<PortalStep>('login');
+const termsOpen = ref(false);
+const submitting = ref(false);
+
+const form = reactive({
+  countryCode: '+62',
+  phone: '',
+  agreed: false,
+  method: 'whatsapp' as OtpMethod,
+  otp: ['', '', '', '', '', ''] as string[],
+});
+
+const { location, loading: locationLoading, detect } = usePortalLocation();
+detect();
+
+const { remaining, start: startTimer } = useOtpTimer(60);
+
+const maskedPhone = computed(() => {
+  const raw = form.phone.replace(/\s/g, '');
+  return `${form.countryCode} ${raw.slice(0, 3)}*** ${raw.slice(-3)}`;
+});
+
+function fullPhone() {
+  return `${form.countryCode.replace(/\D/g, '')}${form.phone.replace(/\s/g, '')}`;
+}
+
+function toggleAgree() {
+  form.agreed = !form.agreed;
+}
+
+function goToOtpMethod() {
+  const raw = form.phone.replace(/\s/g, '');
+  if (raw.length >= 8 && form.agreed) step.value = 'otp-method';
+}
+
+function sendOtp() {
+  // TODO: hit your backend endpoint here to actually dispatch the OTP,
+  // e.g. router.post('/portal/otp/send', { phone: fullPhone(), method: form.method })
+  step.value = 'otp';
+  form.otp = ['', '', '', '', '', ''];
+  startTimer();
+}
+
+function resendOtp() {
+  form.otp = ['', '', '', '', '', ''];
+  startTimer();
+  // TODO: re-trigger the OTP dispatch endpoint here too.
+}
+
+function verify() {
+  if (form.otp.some((d) => !d) || submitting.value) return;
+  submitting.value = true;
+
+  // Swap this literal path for the wayfinder-generated route helper once
+  // the backend controller exists, e.g. PortalLoginController.store().
+  router.post(
+    '/portal/login',
+    {
+      phone: fullPhone(),
+      otp: form.otp.join(''),
+      method: form.method,
+      nik: props.nik ?? '',
+      mac_address: props.mac ?? '',
+      ap_location: props.ap ?? location.value,
+    },
+    {
+      onFinish: () => {
+        submitting.value = false;
+      },
+    },
+  );
 }
 </script>
 
 <template>
-    <Head title="Connect to WiFi" />
-    <section
-        class="grid items-center gap-12 py-10 lg:grid-cols-[1.1fr_0.9fr] lg:py-20"
-    >
-        <div>
-            <p
-                class="text-sm font-semibold tracking-[0.25em] text-cyan-300 uppercase"
-            >
-                Welcome online
-            </p>
-            <h1
-                class="mt-5 max-w-xl text-5xl leading-[1.05] font-black tracking-tight lg:text-7xl"
-            >
-                Good places feel better connected.
-            </h1>
-            <p class="mt-6 max-w-lg text-lg leading-8 text-slate-400">
-                Join the Banyuwangi public network and enjoy fast, reliable
-                access during your visit.
-            </p>
-        </div>
-        <form
-            @submit.prevent="login"
-            class="rounded-3xl bg-white p-6 text-slate-900 shadow-2xl shadow-cyan-950/40 sm:p-8"
-        >
-            <h2 class="text-2xl font-bold">Connect to the network</h2>
-            <p class="mt-2 text-sm text-slate-500">
-                It only takes a few seconds.
-            </p>
-            <div
-                v-if="error"
-                class="mt-5 rounded-xl bg-rose-50 p-3 text-sm text-rose-700"
-            >
-                {{ error }}
-            </div>
-            <label class="mt-6 block text-sm font-semibold"
-                >Phone number<input
-                    v-model="form.phone_number"
-                    required
-                    type="tel"
-                    class="mt-2 w-full rounded-xl border-slate-200 px-4 py-3 focus:border-cyan-500 focus:ring-cyan-500"
-                    placeholder="08xxxxxxxxxx"
-            /></label>
-            <label class="mt-4 block text-sm font-semibold"
-                >Device<input
-                    v-model="form.device_type"
-                    type="text"
-                    class="mt-2 w-full rounded-xl border-slate-200 px-4 py-3 focus:border-cyan-500 focus:ring-cyan-500"
-                    placeholder="Mobile, laptop, tablet"
-            /></label>
-            <label class="mt-5 flex items-start gap-3 text-sm text-slate-600"
-                ><input
-                    v-model="form.terms_agreed"
-                    type="checkbox"
-                    class="mt-0.5 rounded border-slate-300 text-cyan-600 focus:ring-cyan-500"
-                /><span
-                    >I agree to the
-                    <Link
-                        href="/portal/terms"
-                        class="font-semibold text-cyan-700 hover:underline"
-                        >terms of use</Link
-                    >.</span
-                ></label
-            >
-            <button
-                :disabled="processing"
-                type="submit"
-                class="mt-7 w-full rounded-xl bg-cyan-400 px-4 py-3.5 font-bold text-slate-950 transition hover:bg-cyan-300 disabled:cursor-wait disabled:opacity-60"
-            >
-                {{ processing ? 'Connecting...' : 'Connect securely' }}
-            </button>
-        </form>
-    </section>
+  <CardLogos />
+
+  <Transition name="step-fade" mode="out-in">
+    <LoginStep
+      v-if="step === 'login'"
+      key="login"
+      :form="form"
+      :location-text="location"
+      :location-loading="locationLoading"
+      :error="error"
+      @update:phone="(v) => (form.phone = v)"
+      @update:country-code="(v) => (form.countryCode = v)"
+      @toggle-agree="toggleAgree"
+      @show-terms="termsOpen = true"
+      @connect="goToOtpMethod"
+    />
+
+    <OtpMethodStep
+      v-else-if="step === 'otp-method'"
+      key="otp-method"
+      :method="form.method"
+      :masked-phone="maskedPhone"
+      @update:method="(v) => (form.method = v)"
+      @back="step = 'login'"
+      @send="sendOtp"
+    />
+
+    <OtpStep
+      v-else
+      key="otp"
+      :otp="form.otp"
+      :method="form.method"
+      :masked-phone="maskedPhone"
+      :remaining="remaining"
+      @update:otp="(v) => (form.otp = v)"
+      @back="step = 'otp-method'"
+      @verify="verify"
+      @resend="resendOtp"
+    />
+  </Transition>
+
+  <div class="pb-2" />
+
+  <Terms :open="termsOpen" @close="termsOpen = false" />
 </template>
+
+<style scoped>
+.step-fade-enter-active { animation: slide-up 0.45s cubic-bezier(0.22, 0.68, 0, 1.1) both; }
+</style>
