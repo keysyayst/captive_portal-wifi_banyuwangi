@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
+
 class ConfigController extends Controller
 {
-    public function show()
+    public function show(): JsonResponse
     {
         return response()->json([
             'organization_name' => 'Pemerintah Kota Banyuwangi',
@@ -16,7 +18,7 @@ class ConfigController extends Controller
         ]);
     }
 
-    public function terms()
+    public function terms(): JsonResponse
     {
         return response()->json([
             'terms' => '

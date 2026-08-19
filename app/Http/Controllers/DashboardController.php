@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Session as UserSession;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 
 class DashboardController extends Controller
 {
-    public function stats()
+    public function stats(): JsonResponse
     {
         $today = Carbon::today();
         $weekAgo = Carbon::now()->subDays(7);
@@ -22,7 +23,7 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function activeUsers()
+    public function activeUsers(): JsonResponse
     {
         $activeUsers = UserSession::whereNull('logout_time')
             ->with(['device.user'])
@@ -43,7 +44,7 @@ class DashboardController extends Controller
         return response()->json($activeUsers);
     }
 
-    public function loginHistory()
+    public function loginHistory(): JsonResponse
     {
         $history = UserSession::with(['device.user'])
             ->orderBy('login_time', 'desc')
@@ -63,7 +64,7 @@ class DashboardController extends Controller
         return response()->json($history);
     }
 
-    public function locationStats()
+    public function locationStats(): JsonResponse
     {
         $stats = UserSession::select('access_point_location')
             ->selectRaw('COUNT(*) as total_sessions')
