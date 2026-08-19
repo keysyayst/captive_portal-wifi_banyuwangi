@@ -94,9 +94,9 @@ async function verify() {
       body: JSON.stringify({
         phone_number: fullPhone(),
         otp: form.otp.join(''),
-        mac_address: props.mac ?? '',
+        mac_address: props.mac || '00:00:00:00:00:00', // Dummy MAC fallback
         device_type: detectDeviceType(),
-        access_point_location: props.ap ?? location.value,
+        access_point_location: props.ap || 'dummy-ap', // Default AP as well just in case
         terms_agreed: true,
       }),
     });
