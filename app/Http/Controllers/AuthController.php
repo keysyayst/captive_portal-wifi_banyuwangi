@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Device;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
+    public function login(Request $request): JsonResponse
     {
         // Validasi input
         $validated = $request->validate([
@@ -63,15 +64,29 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request): JsonResponse
     {
-        // Update session logout
-        // (optional: bisa track duration di sini)
+        $user = $request->user();
+        
+        $lastSession = $user->sessions()
+            ->whereNull('logout_time')
+            ->latest('login_time')
+            ->first();
 
-        $request->user()->currentAccessToken()->delete();
+        if ($lastSession) {
+            $duration = $lastSession->login_time->diffInMinutes(now());
+            
+            $lastSession->update([
+                'logout_time' => now(),
+                'duration' => $duration,
+            ]);
+        }
+
+        $user->currentAccessToken()->delete();
 
         return response()->json([
             'message' => 'Logout berhasil',
+            'session_duration' => $lastSession?->duration ?? 0,
         ]);
     }
 }
