@@ -8,6 +8,7 @@ defineProps<{
   method: OtpMethod;
   maskedPhone: string;
   remaining: number;
+  error?: string | null;
 }>();
 
 const emit = defineEmits<{
@@ -35,6 +36,10 @@ const emit = defineEmits<{
         Kode dikirim via <span class="font-medium text-slate-600">{{ method === 'whatsapp' ? 'WhatsApp' : 'SMS' }}</span>
         ke <span class="text-slate-600 font-medium">{{ maskedPhone }}</span>
       </p>
+    </div>
+
+    <div v-if="error" class="rounded-xl px-4 py-3 text-xs font-medium" style="background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c;">
+      {{ error }}
     </div>
 
     <OtpInput :model-value="otp" @update:model-value="emit('update:otp', $event)" @complete="emit('verify')" />

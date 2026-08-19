@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, reactive, ref } from 'vue';
-import { router } from '@inertiajs/vue3';
 import PortalLayout from '@/layouts/PortalLayout.vue';
 import CardLogos from '@/components/Portal/CardLogos.vue';
 import LoginStep from '@/components/Portal/LoginStep.vue';
@@ -76,28 +75,48 @@ function resendOtp() {
   // TODO: re-trigger the OTP dispatch endpoint here too.
 }
 
-function verify() {
+const submitError = ref<string | null>(null);
+
+function detectDeviceType() {
+  if (typeof navigator === 'undefined') return 'unknown';
+  return /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop';
+}
+
+async function verify() {
   if (form.otp.some((d) => !d) || submitting.value) return;
   submitting.value = true;
+  submitError.value = null;
 
-  // Swap this literal path for the wayfinder-generated route helper once
-  // the backend controller exists, e.g. PortalLoginController.store().
-  router.post(
-    '/portal/login',
-    {
-      phone: fullPhone(),
-      otp: form.otp.join(''),
-      method: form.method,
-      nik: props.nik ?? '',
-      mac_address: props.mac ?? '',
-      ap_location: props.ap ?? location.value,
-    },
-    {
-      onFinish: () => {
-        submitting.value = false;
-      },
-    },
-  );
+  try {
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        phone_number: fullPhone(),
+        otp: form.otp.join(''),
+        mac_address: props.mac ?? '',
+        device_type: detectDeviceType(),
+        access_point_location: props.ap ?? location.value,
+        terms_agreed: true,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      submitError.value = data.message ?? 'Verifikasi gagal, coba lagi.';
+      return;
+    }
+
+    // Simpan token untuk request berikutnya (mis. logout) — sesuaikan
+    // kalau kamu mau simpan di tempat lain (cookie httpOnly, dsb).
+    localStorage.setItem('portal_token', data.token);
+    window.location.href = data.redirect_url;
+  } catch (err) {
+    submitError.value = 'Tidak bisa terhubung ke server, coba lagi.';
+  } finally {
+    submitting.value = false;
+  }
 }
 </script>
 
@@ -136,6 +155,7 @@ function verify() {
       :method="form.method"
       :masked-phone="maskedPhone"
       :remaining="remaining"
+      :error="submitError"
       @update:otp="(v) => (form.otp = v)"
       @back="step = 'otp-method'"
       @verify="verify"
