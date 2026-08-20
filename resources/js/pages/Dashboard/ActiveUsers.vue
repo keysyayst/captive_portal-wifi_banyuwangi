@@ -17,8 +17,12 @@ const loading = ref(true);
 const error = ref('');
 onMounted(async () => {
     try {
+        const token = localStorage.getItem('portal_token');
         const response = await fetch('/api/dashboard/active-users', {
-            headers: { Accept: 'application/json' },
+            headers: {
+                Accept: 'application/json',
+                ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            },
         });
         if (!response.ok) throw new Error('Active users are unavailable.');
         users.value = await response.json();
