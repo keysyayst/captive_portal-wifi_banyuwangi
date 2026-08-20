@@ -2,8 +2,6 @@
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useWeather } from '@/composables/useWeather';
 
-// TODO: ganti dengan data asli dari backend (mis. endpoint /api/announcements)
-// begitu tersedia — ini masih statis.
 const announcements = [
   'Pemkab Banyuwangi mengimbau warga memanfaatkan layanan Smart Kampung untuk administrasi kependudukan.',
   'Pendaftaran Banyuwangi Festival 2026 sudah dibuka — cek jadwal lengkap di Portal Layanan.',
