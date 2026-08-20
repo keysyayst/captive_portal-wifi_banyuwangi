@@ -31,7 +31,7 @@ class AuthController extends Controller
         $validated = $request->validate([
             'phone_number'          => 'required|string',
             'otp'                   => 'required|digits:6',
-            'mac_address'           => 'required|string',
+            'mac_address'           => 'nullable|string',
             'device_type'           => 'nullable|string',
             'access_point_location' => 'nullable|string',
             'terms_agreed'          => 'required|boolean',
@@ -50,6 +50,11 @@ class AuthController extends Controller
         // Ambil IP asli client di belakang proxy/router hotspot kalau ada.
         $ipAddress = $request->header('X-Forwarded-For', $request->ip());
 
+        // Kalau tidak diakses lewat redirect router hotspot asli, mac_address
+        // bisa kosong (browser tidak boleh baca MAC address perangkat). Fallback
+        // biar tetap bisa dites, tapi ganti jadi wajib lagi begitu sudah live.
+        $macAddress = $validated['mac_address'] ?? 'unknown-' . $ipAddress;
+
         // Cari atau buat user
         $user = User::firstOrCreate(
             ['phone_number' => $validated['phone_number']],
@@ -58,7 +63,7 @@ class AuthController extends Controller
 
         // Cari atau buat device
         $device = Device::firstOrCreate(
-            ['mac_address' => $validated['mac_address']],
+            ['mac_address' => $macAddress],
             [
                 'user_id'     => $user->id,
                 'device_type' => $validated['device_type'] ?? 'unknown',

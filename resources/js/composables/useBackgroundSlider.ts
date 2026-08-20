@@ -1,7 +1,6 @@
 import { onMounted, onUnmounted, ref } from 'vue';
-import type { BackgroundImage } from '@/types/portal';
 
-export function useBackgroundSlider(images: BackgroundImage[], intervalMs = 6500) {
+export function useBackgroundSlider<T>(items: T[], intervalMs = 6500) {
   const activeIndex = ref(0);
   let timer: ReturnType<typeof setInterval> | null = null;
 
@@ -10,9 +9,9 @@ export function useBackgroundSlider(images: BackgroundImage[], intervalMs = 6500
   }
 
   onMounted(() => {
-    if (images.length <= 1) return;
+    if (items.length <= 1) return;
     timer = setInterval(() => {
-      activeIndex.value = (activeIndex.value + 1) % images.length;
+      activeIndex.value = (activeIndex.value + 1) % items.length;
     }, intervalMs);
   });
 
