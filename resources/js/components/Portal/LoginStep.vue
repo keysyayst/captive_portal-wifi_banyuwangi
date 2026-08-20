@@ -158,7 +158,7 @@ const isValid = computed(() => {
 
         <span
           v-else
-          class="flex items-center gap-1.5 text-xs text-teal-600 font-medium truncate max-w-[240px]"
+          class="flex items-center gap-1.5 text-xs text-teal-600 font-medium truncate max-w-60"
         >
 
           <span class="w-3.5 h-3.5 text-teal-500">
@@ -211,7 +211,7 @@ const isValid = computed(() => {
           @update:model-value="handleCountryChange"
         >
 
-          <div class="relative w-[135px] sm:w-40 shrink-0">
+          <div class="relative w-33.75 sm:w-40 shrink-0">
 
             <ListboxButton
               class="
@@ -227,7 +227,6 @@ const isValid = computed(() => {
                 cursor-pointer
                 hover:border-teal-500
                 focus:outline-none
-                focus:border-teal-500
                 focus:ring-2
                 focus:ring-teal-200
                 transition-all
