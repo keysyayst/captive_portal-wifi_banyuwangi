@@ -20,7 +20,7 @@ const { activeIndex, goTo } = useBackgroundSlider(banners, 5000);
 
 <template>
   <div
-    class="relative w-full rounded-2xl overflow-hidden aspect-[16/9] sm:aspect-[21/9] max-h-[190px] sm:max-h-[230px]"
+    class="relative w-full rounded-2xl overflow-hidden aspect-[121/34]"
     style="box-shadow: 0 10px 28px rgba(15,23,42,0.14);"
   >
     <template v-for="(banner, index) in banners" :key="banner.image">
@@ -32,14 +32,14 @@ const { activeIndex, goTo } = useBackgroundSlider(banners, 5000);
         class="absolute inset-0 transition-opacity duration-700"
         :style="{ opacity: index === activeIndex ? 1 : 0, pointerEvents: index === activeIndex ? 'auto' : 'none' }"
       >
-        <img :src="banner.image" :alt="banner.alt" class="w-full h-full object-cover" />
+        <img :src="banner.image" :alt="banner.alt" class="w-full h-full object-contain" />
       </a>
       <div
         v-else
         class="absolute inset-0 transition-opacity duration-700"
         :style="{ opacity: index === activeIndex ? 1 : 0 }"
       >
-        <img :src="banner.image" :alt="banner.alt" class="w-full h-full object-cover" />
+        <img :src="banner.image" :alt="banner.alt" class="w-full h-full object-contain" />
       </div>
     </template>
 

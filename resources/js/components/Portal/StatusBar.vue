@@ -49,10 +49,11 @@ const today = computed(() =>
       <p class="text-xs mt-1 text-slate-600">Gunakan internet dengan bijak, aman, dan bertanggung jawab.</p>
     </div>
 
+    <div class="block lg:hidden h-px w-full bg-slate-200" />
     <div class="hidden lg:block w-px self-stretch bg-slate-200" />
 
     <!-- Cuaca + info berjalan -->
-    <div class="flex flex-col sm:flex-row sm:items-center gap-3 lg:w-[360px] lg:shrink-0">
+    <div class="flex flex-col sm:flex-row sm:items-center gap-3 lg:flex-1 lg:min-w-0">
       <div class="flex items-center gap-3 shrink-0">
         <span class="text-3xl leading-none">{{ icon }}</span>
         <div>
@@ -65,12 +66,12 @@ const today = computed(() =>
         </div>
       </div>
 
-      <div class="flex items-center gap-2 min-w-0 sm:border-l sm:border-slate-200 sm:pl-3">
-        <span class="text-[10px] font-bold uppercase tracking-widest shrink-0 px-2 py-1 rounded-md" style="background: #fef3c7; color: #92400e;">
+      <div class="flex items-center gap-2 min-w-0 sm:flex-1 sm:border-l sm:border-slate-200 sm:pl-3">
+        <span class="text-[10px] font-bold uppercase tracking-widest shrink-0 px-2 py-1 rounded-md" style="background: #e2e8f0; color: #475569;">
           Info
         </span>
         <Transition name="announcement-fade" mode="out-in">
-          <p :key="activeAnnouncement" class="text-xs text-slate-600 leading-snug truncate">
+          <p :key="activeAnnouncement" class="text-xs text-slate-600 leading-snug break-words">
             {{ announcements[activeAnnouncement] }}
           </p>
         </Transition>
