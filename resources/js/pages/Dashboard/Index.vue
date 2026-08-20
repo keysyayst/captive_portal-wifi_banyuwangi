@@ -19,8 +19,12 @@ const stats = ref<Stats>({
 const error = ref('');
 onMounted(async () => {
     try {
+        const token = localStorage.getItem('portal_token');
         const response = await fetch('/api/dashboard/stats', {
-            headers: { Accept: 'application/json' },
+            headers: {
+                Accept: 'application/json',
+                ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            },
         });
         if (!response.ok) throw new Error('Dashboard data is unavailable.');
         stats.value = await response.json();

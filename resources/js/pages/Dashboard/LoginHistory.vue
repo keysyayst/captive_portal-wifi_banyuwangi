@@ -28,8 +28,12 @@ const loading = ref(true);
 const error = ref('');
 onMounted(async () => {
     try {
+        const token = localStorage.getItem('portal_token');
         const response = await fetch('/api/dashboard/login-history', {
-            headers: { Accept: 'application/json' },
+            headers: {
+                Accept: 'application/json',
+                ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            },
         });
         if (!response.ok) throw new Error('Login history is unavailable.');
         history.value = await response.json();
