@@ -7,8 +7,6 @@ interface PromoBanner {
   href?: string;
 }
 
-// TODO: ganti gambar & link sesuai materi promosi terbaru.
-// Taruh filenya di public/images/promo/.
 const banners: PromoBanner[] = [
   { image: '/images/promo/banyuwangi-festival.jpg', alt: 'Banyuwangi Festival', href: 'https://banyuwangifestival.com/' },
   { image: '/images/promo/smart-kampung.jpg', alt: 'Smart Kampung', href: 'https://smartkampung.id/' },
@@ -43,7 +41,6 @@ const { activeIndex, goTo } = useBackgroundSlider(banners, 5000);
       </div>
     </template>
 
-    <!-- Gradient tipis biar dot indicator tetap kebaca di atas gambar apa pun -->
     <div class="absolute inset-x-0 bottom-0 h-12 pointer-events-none" style="background: linear-gradient(to top, rgba(0,0,0,0.32), transparent);" />
 
     <div class="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">

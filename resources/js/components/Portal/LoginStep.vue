@@ -211,7 +211,7 @@ const isValid = computed(() => {
           @update:model-value="handleCountryChange"
         >
 
-          <div class="relative w-33.75 sm:w-40 shrink-0">
+          <div class="relative w-18 shrink-0">
 
             <ListboxButton
               class="
@@ -245,8 +245,7 @@ const isValid = computed(() => {
                 v-else
                 class="block truncate pr-5"
               >
-                {{ selectedCountry?.name }}
-                ({{ selectedCountry?.phone_code }})
+                {{ selectedCountry?.phone_code }}
               </span>
 
 
@@ -278,7 +277,8 @@ const isValid = computed(() => {
                 class="
                   absolute
                   z-50
-                  w-full
+                  w-max
+                  min-w-50
                   py-1
                   mt-1
                   overflow-auto
