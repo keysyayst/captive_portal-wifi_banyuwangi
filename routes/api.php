@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LocationWeatherController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/countries', [CountryController::class, 'index']);
@@ -15,6 +16,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/config', [ConfigController::class, 'show']);
 Route::get('/terms', [ConfigController::class, 'terms']);
 Route::get('/announcements', [AnnouncementController::class, 'index']);
+Route::get('/location/weather', [LocationWeatherController::class, 'show']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);

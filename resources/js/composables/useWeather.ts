@@ -19,33 +19,74 @@ const WEATHER_CODE_MAP: Record<number, { label: string; icon: string }> = {
   95: { label: 'Badai Petir', icon: '⛈️' },
 };
 
-// Koordinat pusat Kabupaten Banyuwangi
-const LAT = -8.2192;
-const LON = 114.3691;
+interface LocationWeatherResponse {
+  location?: {
+    name?: string;
+    region?: string | null;
+  };
+  weather?: {
+    temperature_c?: number | null;
+    weather_code?: number | null;
+  };
+}
 
 export function useWeather() {
   const tempC = ref<number | null>(null);
   const label = ref('Memuat cuaca...');
   const icon = ref('🌤️');
+  const locationName = ref('Lokasi saat ini');
   const loading = ref(true);
   const error = ref(false);
 
-  async function load() {
+  function getCurrentPosition(): Promise<GeolocationPosition> {
+    return new Promise((resolve, reject) => {
+      if (!navigator.geolocation) {
+        reject(new Error('geolocation is not supported'));
+
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(resolve, reject, {
+        enableHighAccuracy: false,
+        timeout: 10000,
+        maximumAge: 300000,
+      });
+    });
+  }
+
+  async function load(): Promise<void> {
     loading.value = true;
     error.value = false;
+
     try {
-      const url = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=temperature_2m,weather_code&timezone=Asia%2FJakarta`;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error('weather request failed');
-      const data = await res.json();
-      const code = data?.current?.weather_code ?? 0;
-      tempC.value = Math.round(data?.current?.temperature_2m ?? 0);
+      const position = await getCurrentPosition();
+      const params = new URLSearchParams({
+        latitude: String(position.coords.latitude),
+        longitude: String(position.coords.longitude),
+      });
+      const res = await fetch(`/api/location/weather?${params.toString()}`, {
+        headers: { Accept: 'application/json' },
+      });
+
+      if (!res.ok) {
+        throw new Error('weather request failed');
+      }
+
+      const data = (await res.json()) as LocationWeatherResponse;
+      const code = data.weather?.weather_code ?? 0;
+      const temperature = data.weather?.temperature_c;
+
+      tempC.value = typeof temperature === 'number' ? Math.round(temperature) : null;
+      locationName.value = data.location?.name ?? 'Lokasi saat ini';
+
       const mapped = WEATHER_CODE_MAP[code] ?? { label: 'Cuaca Tidak Diketahui', icon: '🌡️' };
       label.value = mapped.label;
       icon.value = mapped.icon;
     } catch {
       error.value = true;
+      tempC.value = null;
       label.value = 'Cuaca tidak tersedia';
+      locationName.value = 'Lokasi tidak tersedia';
     } finally {
       loading.value = false;
     }
@@ -53,5 +94,5 @@ export function useWeather() {
 
   onMounted(load);
 
-  return { tempC, label, icon, loading, error, reload: load };
+  return { tempC, label, icon, locationName, loading, error, reload: load };
 }
