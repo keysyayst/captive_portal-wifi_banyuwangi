@@ -42,9 +42,9 @@ class DatabaseSeeder extends Seeder
             ],
         ], ['message'], ['is_active', 'sort_order', 'updated_at']);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        User::firstOrCreate(
+            ['phone_number' => '+6281234567890'],
+            ['name' => 'Test User']
+        );
     }
 }
