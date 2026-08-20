@@ -4,7 +4,7 @@ import { useAnnouncements } from '@/composables/useAnnouncements';
 import { useWeather } from '@/composables/useWeather';
 
 const { announcements, loading: announcementsLoading, error: announcementsError } = useAnnouncements();
-const { tempC, label, icon, loading: weatherLoading } = useWeather();
+const { tempC, label, icon, locationName, loading: weatherLoading } = useWeather();
 
 const activeAnnouncement = ref(0);
 let timer: ReturnType<typeof setInterval> | null = null;
@@ -55,7 +55,7 @@ const today = computed(() =>
       <div class="flex items-center gap-3 shrink-0">
         <span class="text-3xl leading-none">{{ icon }}</span>
         <div>
-          <p class="text-[11px] text-slate-400 leading-tight">{{ today }}</p>
+          <p class="text-[11px] text-slate-400 leading-tight">{{ today }} &bull; {{ locationName }}</p>
           <p class="text-base font-bold font-display text-slate-800 leading-tight">
             <span v-if="weatherLoading">--&deg;</span>
             <span v-else>{{ tempC }}&deg;C</span>
