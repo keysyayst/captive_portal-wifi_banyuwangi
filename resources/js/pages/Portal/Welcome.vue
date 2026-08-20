@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { router } from '@inertiajs/vue3';
+import InfoWidget from '@/components/Portal/InfoWidget.vue';
+import PromoCarousel from '@/components/Portal/PromoCarousel.vue';
+import TickerBar from '@/components/Portal/TickerBar.vue';
 
 const props = defineProps<{
   phone?: string | null;
@@ -108,6 +111,8 @@ onUnmounted(() => {
 <template>
   <div class="min-h-screen text-slate-800" style="background: linear-gradient(180deg, #f0f7ff 0%, #edf7fb 30%, #f8fafc 100%);">
     <div class="min-h-screen flex flex-col relative">
+      <TickerBar />
+
       <img
         src="/images/background-welcome.jpg"
         alt=""
@@ -115,7 +120,7 @@ onUnmounted(() => {
         style="filter: saturate(1.05) contrast(1.03) brightness(0.97);"
         @error="() => console.error('[Welcome] Gagal memuat /images/background-welcome.jpg — cek nama file & folder public/images/')"
       />
-      <div class="fixed inset-0" style="background: linear-gradient(180deg, rgba(240,247,255,0.88) 0%, rgba(237,247,251,0.82) 35%, rgba(248,250,252,0.93) 100%);" />
+      <div class="fixed inset-0" style="background: linear-gradient(180deg, rgba(240,247,255,0.55) 0%, rgba(237,247,251,0.48) 35%, rgba(248,250,252,0.65) 100%);" />
 
       <header class="relative z-10 border-b border-slate-200" style="background: rgba(255,255,255,0.82); backdrop-filter: blur(20px);">
         <div class="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between">
@@ -150,6 +155,8 @@ onUnmounted(() => {
 
       <main class="relative z-10 flex-1 max-w-screen-xl mx-auto w-full px-4 py-6 flex gap-4 items-start">
         <div class="flex-1 min-w-0 space-y-4">
+          <InfoWidget />
+
           <div
             class="rounded-2xl p-5"
             style="background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); border: 1px solid rgba(148,163,184,0.2); border-top: 2px solid #f59e0b; box-shadow: 0 10px 28px rgba(15,23,42,0.08);"
@@ -166,6 +173,8 @@ onUnmounted(() => {
             <h2 class="text-slate-800 text-xl font-bold font-display">Selamat Menikmati Internet</h2>
             <p class="text-xs mt-1 text-slate-500">Gunakan internet dengan bijak, aman, dan bertanggung jawab.</p>
           </div>
+
+          <PromoCarousel />
 
           <div>
             <p class="text-xs font-semibold uppercase tracking-widest mb-3 text-slate-500">Akses Cepat Layanan</p>
