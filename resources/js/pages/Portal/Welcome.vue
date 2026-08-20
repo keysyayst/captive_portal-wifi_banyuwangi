@@ -160,13 +160,13 @@ onUnmounted(() => {
       </header>
 
       <main class="relative z-10 flex-1 max-w-screen-xl mx-auto w-full px-4 py-6 space-y-4">
-        <!-- Baris 2: status terhubung + cuaca/info, satu baris horizontal di desktop -->
-        <StatusBar />
-
-        <!-- Baris 3: banner 21:9, max-height 230px -->
+        <!-- Banner promosi menjadi konten utama di bagian atas -->
         <PromoCarousel />
 
-        <!-- Baris 4: grid 3x2 akses cepat layanan, langsung di bawah banner -->
+        <!-- Status terhubung + cuaca/info berada tepat di bawah banner -->
+        <StatusBar />
+
+        <!-- Grid akses cepat layanan -->
         <div>
           <p class="text-xs font-semibold uppercase tracking-widest mb-3 text-white/85" style="text-shadow: 0 1px 3px rgba(0,0,0,0.35);">
             Akses Cepat Layanan
@@ -178,7 +178,7 @@ onUnmounted(() => {
               :href="s.href"
               target="_blank"
               rel="noopener noreferrer"
-              class="group rounded-2xl p-4 flex flex-col gap-3 transition-all hover:scale-[1.02]"
+              class="group rounded-2xl p-4 flex flex-col items-center gap-3 text-center transition-all hover:scale-[1.02]"
               style="background: rgba(255,255,255,0.92); backdrop-filter: blur(16px); border: 1px solid rgba(148,163,184,0.25); box-shadow: 0 8px 20px rgba(15,23,42,0.12);"
             >
               <div class="w-9 h-9 rounded-xl flex items-center justify-center overflow-hidden" :style="{ background: s.color + '14' }">
