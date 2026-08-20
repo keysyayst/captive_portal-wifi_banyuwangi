@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\DashboardController;
 
 Route::redirect('/', '/portal')->name('home');
 Route::get('/portal', fn () => Inertia::render('Portal/Login'))->name('portal.login');
@@ -11,3 +12,6 @@ Route::get('/portal/terms', fn () => Inertia::render('Portal/Terms'))->name('por
 Route::get('/dashboard', fn () => Inertia::render('Dashboard/Index'))->name('dashboard');
 Route::get('/dashboard/active-users', fn () => Inertia::render('Dashboard/ActiveUsers'))->name('dashboard.active-users');
 Route::get('/dashboard/login-history', fn () => Inertia::render('Dashboard/LoginHistory'))->name('dashboard.login-history');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/dashboard/active-users', [DashboardController::class, 'activeUsers'])->name('dashboard.active-users');
+Route::get('/dashboard/login-history', [DashboardController::class, 'loginHistory'])->name('dashboard.login-history');
