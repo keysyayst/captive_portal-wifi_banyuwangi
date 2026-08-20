@@ -19,7 +19,10 @@ const { activeIndex, goTo } = useBackgroundSlider(banners, 5000);
 </script>
 
 <template>
-  <div class="relative w-full rounded-xl overflow-hidden" style="aspect-ratio: 21 / 6; box-shadow: 0 8px 22px rgba(15,23,42,0.08);">
+  <div
+    class="relative w-full rounded-2xl overflow-hidden aspect-[16/9] sm:aspect-[21/9] max-h-[190px] sm:max-h-[230px]"
+    style="box-shadow: 0 10px 28px rgba(15,23,42,0.14);"
+  >
     <template v-for="(banner, index) in banners" :key="banner.image">
       <a
         v-if="banner.href"
@@ -39,6 +42,9 @@ const { activeIndex, goTo } = useBackgroundSlider(banners, 5000);
         <img :src="banner.image" :alt="banner.alt" class="w-full h-full object-cover" />
       </div>
     </template>
+
+    <!-- Gradient tipis biar dot indicator tetap kebaca di atas gambar apa pun -->
+    <div class="absolute inset-x-0 bottom-0 h-12 pointer-events-none" style="background: linear-gradient(to top, rgba(0,0,0,0.32), transparent);" />
 
     <div class="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
       <button
