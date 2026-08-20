@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ConfigController;
+use App\Http\Controllers\CountryController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CountryController;
 
 Route::get('/countries', [CountryController::class, 'index']);
 Route::get('/countries/{code}', [CountryController::class, 'show']);
@@ -13,6 +14,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/config', [ConfigController::class, 'show']);
 Route::get('/terms', [ConfigController::class, 'terms']);
+Route::get('/announcements', [AnnouncementController::class, 'index']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);

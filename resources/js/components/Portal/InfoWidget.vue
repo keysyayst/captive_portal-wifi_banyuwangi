@@ -1,13 +1,9 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { useAnnouncements } from '@/composables/useAnnouncements';
 import { useWeather } from '@/composables/useWeather';
 
-const announcements = [
-  'Pemkab Banyuwangi mengimbau warga memanfaatkan layanan Smart Kampung untuk administrasi kependudukan.',
-  'Pendaftaran Banyuwangi Festival 2026 sudah dibuka — cek jadwal lengkap di Portal Layanan.',
-  'Gunakan internet dengan bijak, aman, dan bertanggung jawab.',
-];
-
+const { announcements, loading: announcementsLoading, error: announcementsError } = useAnnouncements();
 const { tempC, label, icon, loading: weatherLoading } = useWeather();
 
 const activeAnnouncement = ref(0);
@@ -15,11 +11,15 @@ let timer: ReturnType<typeof setInterval> | null = null;
 
 onMounted(() => {
   timer = setInterval(() => {
-    activeAnnouncement.value = (activeAnnouncement.value + 1) % announcements.length;
+    if (announcements.value.length > 0) {
+      activeAnnouncement.value = (activeAnnouncement.value + 1) % announcements.value.length;
+    }
   }, 6000);
 });
 onUnmounted(() => {
-  if (timer) clearInterval(timer);
+  if (timer) {
+    clearInterval(timer);
+  }
 });
 
 const today = computed(() =>
@@ -52,7 +52,7 @@ const today = computed(() =>
       </span>
       <Transition name="announcement-fade" mode="out-in">
         <p :key="activeAnnouncement" class="text-xs text-slate-600 leading-snug truncate">
-          {{ announcements[activeAnnouncement] }}
+            {{ announcements[activeAnnouncement]?.message ?? (announcementsLoading ? 'Memuat pengumuman...' : announcementsError ? 'Pengumuman tidak tersedia.' : 'Belum ada pengumuman.') }}
         </p>
       </Transition>
     </div>
