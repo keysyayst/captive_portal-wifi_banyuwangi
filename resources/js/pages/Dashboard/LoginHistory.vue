@@ -71,7 +71,7 @@ onMounted(async () => {
                 No login records yet.
             </div>
             <div v-else class="overflow-x-auto">
-                <table class="w-full min-w-[720px] text-left text-sm">
+                <table class="w-full min-w-180 text-left text-sm">
                     <thead
                         class="border-b border-slate-100 bg-slate-50 text-xs tracking-wider text-slate-500 uppercase"
                     >
