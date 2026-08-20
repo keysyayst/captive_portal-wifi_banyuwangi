@@ -18,7 +18,7 @@ const { activeIndex, goTo } = useBackgroundSlider(banners, 5000);
 
 <template>
   <div
-    class="relative w-full rounded-2xl overflow-hidden aspect-[121/34]"
+    class="relative w-full rounded-2xl overflow-hidden aspect-121/34"
     style="box-shadow: 0 10px 28px rgba(15,23,42,0.14);"
   >
     <template v-for="(banner, index) in banners" :key="banner.image">
