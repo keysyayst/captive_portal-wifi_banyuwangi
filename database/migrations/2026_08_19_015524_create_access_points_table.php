@@ -9,13 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('access_points', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+public function up(): void
+{
+    Schema::create('access_points', function (Blueprint $table) {
+        $table->id();
+        $table->string('name');
+        $table->string('ip_address')->nullable();
+        $table->string('mac_address')->nullable();
+        $table->string('location')->nullable();
+        $table->enum('status', ['Online', 'Offline'])->default('Offline');
+        $table->timestamps();
+    });
+}
 
     /**
      * Reverse the migrations.
