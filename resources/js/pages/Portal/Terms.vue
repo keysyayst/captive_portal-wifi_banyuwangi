@@ -13,7 +13,10 @@ const error = ref<string | null>(null);
 
 onMounted(async () => {
   try {
-    const response = await fetch('/api/terms');
+    const params = new URLSearchParams(window.location.search);
+    const queryString = params.toString() ? `?${params.toString()}` : '';
+    
+    const response = await fetch(`/api/terms${queryString}`);
 
     if (!response.ok) {
       throw new Error('Failed to fetch terms');
