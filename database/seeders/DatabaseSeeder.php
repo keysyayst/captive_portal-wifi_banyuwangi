@@ -47,6 +47,9 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Test User']
         );
 
-        $this->call(PortalConfigSeeder::class);
+        $this->call([
+            PortalConfigSeeder::class,
+            UsersTableSeeder::class,
+        ]);
     }
 }

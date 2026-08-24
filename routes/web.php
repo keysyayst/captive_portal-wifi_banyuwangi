@@ -15,3 +15,4 @@ Route::get('/dashboard/login-history', fn () => Inertia::render('Dashboard/Login
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/dashboard/active-users', [DashboardController::class, 'activeUsers'])->name('dashboard.active-users');
 Route::get('/dashboard/login-history', [DashboardController::class, 'loginHistory'])->name('dashboard.login-history');
+Route::get('/dashboard/ap-management', [DashboardController::class, 'apManagement'])->name('dashboard.ap-management');
