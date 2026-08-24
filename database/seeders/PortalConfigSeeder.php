@@ -9,22 +9,20 @@ use App\Models\AccessPoint;
 
 class PortalConfigSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
+
     public function run(): void
     {
         $defaultConfig = PortalConfig::create([
             'name' => 'Default Config',
             'organization_name' => 'Pemerintah Kabupaten Banyuwangi',
-            'logo_url' => asset('images/logo.png'), // Asumsi gambar logo ada di public/images
+            'logo_url' => asset('images/logo.png'),
             'banner_url' => asset('images/banner.jpg'),
             'primary_color' => '#003366',
             'secondary_color' => '#FF6B35',
             'terms_text' => '
                 <h2>Syarat dan Ketentuan Penggunaan Layanan WiFi Publik</h2>
                 <p>Selamat datang di layanan WiFi Publik Pemerintah Kabupaten Banyuwangi. Dengan mengakses dan menggunakan layanan ini, Anda menyatakan setuju untuk tunduk pada seluruh syarat dan ketentuan berikut:</p>
-                
+
                 <h3>1. Penggunaan Layanan</h3>
                 <ul>
                     <li>Layanan ini disediakan gratis untuk keperluan akses informasi, pendidikan, dan komunikasi yang positif.</li>
@@ -53,7 +51,7 @@ class PortalConfigSeeder extends Seeder
 
                 <h3>5. Sanksi Pelanggaran</h3>
                 <p>Penyedia layanan berhak memutus koneksi dan memblokir akses pengguna secara permanen tanpa pemberitahuan sebelumnya apabila ditemukan adanya pelanggaran terhadap syarat dan ketentuan ini.</p>
-                
+
                 <p><strong>Dengan melanjutkan proses login, Anda mengonfirmasi bahwa Anda telah membaca, memahami, dan menyetujui seluruh ketentuan di atas.</strong></p>
             ',
             'is_default' => true,
@@ -77,7 +75,6 @@ class PortalConfigSeeder extends Seeder
             'is_default' => false,
         ]);
 
-        // Buat dummy access point untuk kantor pelayanan publik
         AccessPoint::create([
             'name' => 'Ruang Layanan Publik',
             'mac_address' => 'AA:BB:CC:DD:EE:FF',
