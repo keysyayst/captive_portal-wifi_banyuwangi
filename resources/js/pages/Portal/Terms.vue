@@ -173,14 +173,14 @@ onMounted(async () => {
 
 
 .terms-body {
-  font-size: 0.75rem;
-  line-height: 1.5rem;
-  color: rgb(71 85 105);
+  font-size: 0.875rem;
+  line-height: 1.625rem;
+  color: rgb(51 65 85);
 }
 
 .terms-body h1 {
-  margin-top: 1rem;
-  margin-bottom: 0.75rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
   font-size: 1.25rem;
   line-height: 1.75rem;
   font-weight: 700;
@@ -188,7 +188,7 @@ onMounted(async () => {
 }
 
 .terms-body h2 {
-  margin-top: 1rem;
+  margin-top: 1.25rem;
   margin-bottom: 0.75rem;
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -197,16 +197,16 @@ onMounted(async () => {
 }
 
 .terms-body h3 {
-  margin-top: 0.875rem;
+  margin-top: 1.25rem;
   margin-bottom: 0.5rem;
   font-size: 1rem;
   line-height: 1.5rem;
-  font-weight: 700;
-  color: rgb(15 23 42);
+  font-weight: 600;
+  color: rgb(30 41 59);
 }
 
 .terms-body h4 {
-  margin-top: 0.75rem;
+  margin-top: 1rem;
   margin-bottom: 0.5rem;
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -215,20 +215,19 @@ onMounted(async () => {
 }
 
 .terms-body p {
-  margin-bottom: 0.75rem;
-  font-size: 0.75rem;
-  line-height: 1.5rem;
-  color: rgb(71 85 105);
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.625rem;
+  color: rgb(51 65 85);
 }
 
 .terms-body ul,
 .terms-body ol {
-  margin-left: 1rem;
-  margin-bottom: 0.75rem;
-  padding-left: 1rem;
-  font-size: 0.75rem;
-  line-height: 1.5rem;
-  color: rgb(71 85 105);
+  margin-left: 1.25rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.625rem;
+  color: rgb(51 65 85);
 }
 
 .terms-body ul {
@@ -240,12 +239,16 @@ onMounted(async () => {
 }
 
 .terms-body li {
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.375rem;
+}
+
+.terms-body li::marker {
+  color: rgb(148 163 184);
 }
 
 .terms-body a {
   color: rgb(13 148 136);
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -257,20 +260,20 @@ onMounted(async () => {
 .terms-body strong,
 .terms-body b {
   font-weight: 600;
-  color: rgb(30 41 59);
+  color: rgb(15 23 42);
 }
 
 .terms-body table {
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
   border-collapse: collapse;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
 }
 
 .terms-body th,
 .terms-body td {
   border: 1px solid rgb(226 232 240);
-  padding: 0.5rem;
+  padding: 0.75rem;
   text-align: left;
 }
 
@@ -281,23 +284,24 @@ onMounted(async () => {
 }
 
 .terms-body blockquote {
-  margin: 0.75rem 0;
-  border-left: 3px solid rgb(13 148 136);
-  padding-left: 0.75rem;
-  color: rgb(100 116 139);
+  margin: 1rem 0;
+  border-left: 3px solid rgb(203 213 225);
+  padding-left: 1rem;
+  color: rgb(71 85 105);
+  font-style: italic;
 }
 
 @media (max-width: 380px) {
   .terms-body {
-    font-size: 0.7rem;
-    line-height: 1.4rem;
+    font-size: 0.8125rem;
+    line-height: 1.5rem;
   }
 
   .terms-body p,
   .terms-body ul,
   .terms-body ol {
-    font-size: 0.7rem;
-    line-height: 1.4rem;
+    font-size: 0.8125rem;
+    line-height: 1.5rem;
   }
 }
 </style>
