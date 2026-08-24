@@ -59,31 +59,31 @@ class PortalConfigSeeder extends Seeder
             'is_default' => true,
         ]);
 
-        $dinasKesehatanConfig = PortalConfig::create([
-            'name' => 'Dinas Kesehatan Banyuwangi',
-            'organization_name' => 'Dinas Kesehatan Kabupaten Banyuwangi',
-            'logo_url' => asset('images/logo-dinkes.png'), 
-            'banner_url' => asset('images/banner-dinkes.jpg'),
+        $kantorPelayananConfig = PortalConfig::create([
+            'name' => 'Kantor Pelayanan Publik Banyuwangi',
+            'organization_name' => 'Kantor Pelayanan Publik Kabupaten Banyuwangi',
+            'logo_url' => asset('images/logo.png'),
+            'banner_url' => asset('images/banner.jpg'),
             'primary_color' => '#10B981', // Emerald green
             'secondary_color' => '#3B82F6', // Blue
             'terms_text' => '
-                <h2>Syarat dan Ketentuan WiFi Dinas Kesehatan</h2>
-                <p>Selamat datang di layanan WiFi Dinas Kesehatan. Dengan mengakses layanan ini, Anda setuju:</p>
+                <h2>Syarat dan Ketentuan WiFi Kantor Pelayanan Publik</h2>
+                <p>Selamat datang di layanan WiFi Kantor Pelayanan Publik. Dengan mengakses layanan ini, Anda setuju:</p>
                 <ul>
-                    <li>Digunakan untuk keperluan pencarian informasi kesehatan.</li>
-                    <li>Patuhi protokol kesehatan dan dilarang menyebarkan berita hoaks medis.</li>
+                    <li>Digunakan untuk keperluan layanan administrasi dan akses informasi publik.</li>
+                    <li>Menjaga keamanan akun serta tidak menyalahgunakan akses jaringan.</li>
                 </ul>
             ',
             'is_default' => false,
         ]);
 
-        // Buat dummy access point yang menggunakan config Dinkes
+        // Buat dummy access point untuk kantor pelayanan publik
         AccessPoint::create([
-            'name' => 'Ruang Tunggu Pasien',
+            'name' => 'Ruang Layanan Publik',
             'mac_address' => 'AA:BB:CC:DD:EE:FF',
-            'location' => 'Lantai 1 Dinkes',
+            'location' => 'Lantai 1 Kantor Pelayanan Publik',
             'status' => 'Online',
-            'portal_config_id' => $dinasKesehatanConfig->id,
+            'portal_config_id' => $kantorPelayananConfig->id,
         ]);
     }
 }
