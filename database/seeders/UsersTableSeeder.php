@@ -20,7 +20,6 @@ class UsersTableSeeder extends Seeder
                 'last_login' => now()->subHours(rand(1, 48)),
             ]);
 
-            // Create 1-3 devices per user
             for ($j = 1; $j <= rand(1, 3); $j++) {
                 $device = Device::create([
                     'user_id' => $user->id,
@@ -28,7 +27,6 @@ class UsersTableSeeder extends Seeder
                     'device_type' => ['iPhone', 'Android', 'Laptop', 'Tablet'][array_rand(['iPhone', 'Android', 'Laptop', 'Tablet'])],
                 ]);
 
-                // Create 2-5 sessions per device
                 for ($k = 1; $k <= rand(2, 5); $k++) {
                     $isActive = $i <= 3 && $j === 1 && $k === 1;
                     $loginTime = $isActive
