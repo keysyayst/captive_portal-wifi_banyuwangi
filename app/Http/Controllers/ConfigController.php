@@ -3,33 +3,46 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use App\Models\PortalConfig;
+use App\Models\AccessPoint;
 
 class ConfigController extends Controller
 {
-    public function show(): JsonResponse
+    private function getConfigByAp(Request $request): PortalConfig
     {
+        $mac = $request->query('apmac') ?? $request->query('mac') ?? $request->query('ap');
+        
+        if ($mac) {
+            $ap = AccessPoint::where('mac_address', $mac)->with('portalConfig')->first();
+            if ($ap && $ap->portalConfig) {
+                return $ap->portalConfig;
+            }
+        }
+        
+        return PortalConfig::where('is_default', true)->firstOrFail();
+    }
+
+    public function show(Request $request): JsonResponse
+    {
+        $config = $this->getConfigByAp($request);
+        
         return response()->json([
-            'organization_name' => 'Pemerintah Kota Banyuwangi',
-            'logo_url' => asset('images/logo.png'),
-            'banner_url' => asset('images/banner.jpg'),
-            'primary_color' => '#003366',
-            'secondary_color' => '#FF6B35',
+            'organization_name' => $config->organization_name,
+            'logo_url' => $config->logo_url,
+            'banner_url' => $config->banner_url,
+            'primary_color' => $config->primary_color,
+            'secondary_color' => $config->secondary_color,
             'ssid' => 'BanyuwangiWiFi_Free',
         ]);
     }
 
-    public function terms(): JsonResponse
+    public function terms(Request $request): JsonResponse
     {
+        $config = $this->getConfigByAp($request);
+
         return response()->json([
-            'terms' => '
-                <h2>Syarat dan Ketentuan</h2>
-                <p>Dengan login, Anda menyetujui:</p>
-                <ul>
-                    <li>Penggunaan WiFi publik sesuai peraturan</li>
-                    <li>Tidak melakukan aktivitas ilegal</li>
-                    <li>Data Anda akan dicatat untuk keperluan administrasi</li>
-                </ul>
-            ',
+            'terms' => $config->terms_text,
         ]);
     }
 }

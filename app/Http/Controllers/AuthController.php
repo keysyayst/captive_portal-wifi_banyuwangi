@@ -20,8 +20,8 @@ class AuthController extends Controller
     {
         return Inertia::render('Portal/Login', [
             'error' => $request->query('error'),
-            'mac'   => $request->query('mac'),
-            'ap'    => $request->query('ap'),
+            'mac'   => $request->query('mac') ?? $request->query('usermac'),
+            'ap'    => $request->query('ap') ?? $request->query('apmac'),
             'nik'   => $request->query('nik'),
         ]);
     }

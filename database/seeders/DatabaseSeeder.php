@@ -46,5 +46,7 @@ class DatabaseSeeder extends Seeder
             ['phone_number' => '+6281234567890'],
             ['name' => 'Test User']
         );
+
+        $this->call(PortalConfigSeeder::class);
     }
 }
