@@ -5,6 +5,7 @@ const navigation = [
     { label: 'Overview', href: '/dashboard' },
     { label: 'Active users', href: '/dashboard/active-users' },
     { label: 'Login history', href: '/dashboard/login-history' },
+    { label: 'Manajemen AP', href: '/dashboard/ap-management' },
 ];
 </script>
 

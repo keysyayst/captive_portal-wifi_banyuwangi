@@ -35,6 +35,7 @@
         "@tailwindcss/vite": "^4.1.11",
         "@tanstack/vue-table": "^9.1.2",
         "@vitejs/plugin-vue": "^6.0.0",
+        "apexcharts": "^6.10.0",
         "chart.js": "^4.5.1",
         "clsx": "^2.1.1",
         "concurrently": "^10.0.3",
@@ -44,7 +45,8 @@
         "typescript": "^5.2.2",
         "vite": "^8.0.0",
         "vue": "^3.5.13",
-        "vue-chartjs": "^5.3.4"
+        "vue-chartjs": "^5.3.4",
+        "vue3-apexcharts": "^1.11.1"
     },
     "optionalDependencies": {
         "@laravel/multiplex": "^0.4.1",
