@@ -26,7 +26,6 @@ const props = defineProps<{
     locations: LocationStat[];
 }>();
 
-// --- KONFIGURASI GRAFIK TREN PENGGUNA (BAR CHART) ---
 const trendOptions: ApexOptions = {
     chart: { type: 'bar', toolbar: { show: false } },
     colors: ['#0f172a'],
@@ -40,7 +39,6 @@ const trendSeries = computed(() => [{
     data: [props.stats.daily_users, props.stats.weekly_users, props.stats.monthly_users]
 }]);
 
-// --- KONFIGURASI GRAFIK LOKASI AP (DONUT CHART) ---
 const locationOptions = computed<ApexOptions>(() => ({
     chart: { type: 'donut' },
     labels: props.locations.map(loc => loc.access_point || 'Unknown'),
@@ -63,7 +61,6 @@ const locationSeries = computed(() => props.locations.map(loc => loc.total_sessi
             <span class="text-sm text-slate-500">Updated just now</span>
         </div>
 
-        <!-- Kartu Summary -->
         <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4 mb-8">
             <div
                 v-for="item in [
@@ -81,16 +78,13 @@ const locationSeries = computed(() => props.locations.map(loc => loc.total_sessi
             </div>
         </div>
 
-        <!-- Bagian Grafik Visualisasi -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
 
-            <!-- Bar Chart: Tren Login -->
             <div class="lg:col-span-2 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                 <h3 class="font-bold text-slate-800 mb-4">Tren Login Pengguna</h3>
                 <VueApexCharts type="bar" height="300" :options="trendOptions" :series="trendSeries" />
             </div>
 
-            <!-- Donut Chart: Kepadatan AP -->
             <div class="lg:col-span-1 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
                 <h3 class="font-bold text-slate-800 mb-4">Kepadatan Lokasi AP</h3>
                 <div v-if="locations && locations.length">
