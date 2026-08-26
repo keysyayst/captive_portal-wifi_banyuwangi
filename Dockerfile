@@ -10,7 +10,7 @@ RUN npm run build
 FROM composer:2.7 as vendor
 WORKDIR /app
 COPY composer.json composer.lock ./
-RUN composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev --ignore-platform-reqs
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader --no-dev --ignore-platform-reqs --no-scripts
 
 # Stage 3: Final Production Image
 FROM serversideup/php:8.4-fpm-nginx
