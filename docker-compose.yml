@@ -19,6 +19,8 @@ services:
       - DB_DATABASE=captive_portal
       - DB_USERNAME=captive_user
       - DB_PASSWORD=captive_secret
+    volumes:
+      - ./.env:/var/www/html/.env
     depends_on:
       - db
     networks:
