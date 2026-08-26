@@ -27,8 +27,8 @@ export default defineConfig({
                 },
             },
         }),
-        wayfinder({
+        !process.env.VITE_IGNORE_WAYFINDER ? wayfinder({
             formVariants: true,
-        }),
+        }) : null,
     ],
 });
