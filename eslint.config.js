@@ -89,7 +89,7 @@ export default defineConfigWithVueTs(
             'resources/js/wayfinder/**',
         ],
     },
-    prettier, // Turn off all rules that might conflict with Prettier
+    prettier,
     {
         plugins: {
             '@stylistic': stylistic,

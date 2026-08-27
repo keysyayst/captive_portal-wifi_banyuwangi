@@ -12,21 +12,21 @@ class ConfigController extends Controller
     private function getConfigByAp(Request $request): PortalConfig
     {
         $mac = $request->query('apmac') ?? $request->query('mac') ?? $request->query('ap');
-        
+
         if ($mac) {
             $ap = AccessPoint::where('mac_address', $mac)->with('portalConfig')->first();
             if ($ap && $ap->portalConfig) {
                 return $ap->portalConfig;
             }
         }
-        
+
         return PortalConfig::where('is_default', true)->firstOrFail();
     }
 
     public function show(Request $request): JsonResponse
     {
         $config = $this->getConfigByAp($request);
-        
+
         return response()->json([
             'organization_name' => $config->organization_name,
             'logo_url' => $config->logo_url,

@@ -3,7 +3,7 @@ import BackgroundSlider from '@/components/Portal/BackgroundSlider.vue';
 import { useBackgroundSlider } from '@/composables/useBackgroundSlider';
 import type { BackgroundImage } from '@/types/portal';
 
-// Swap these for photos of your own service area / kabupaten.
+
 const images: BackgroundImage[] = [
   { url: '/images/Kawah-Ijen-Indonesia.jpg', alt: 'Kawah Ijen' },
   { url: '/images/pantai-merah-banyuwangi.jpg', alt: 'Pantai Banyuwangi' },
@@ -18,7 +18,7 @@ const { activeIndex, goTo } = useBackgroundSlider(images);
     <div class="min-h-screen relative flex items-center justify-center lg:justify-end">
       <BackgroundSlider :images="images" :active-index="activeIndex" @select="goTo" />
 
-      <!-- Hero copy over the photo, hidden on small screens (no room next to the card there) -->
+
       <div class="hidden lg:flex flex-col justify-end absolute inset-y-0 left-0 z-10 px-12 xl:px-16 py-16 max-w-xl pointer-events-none">
         <p class="text-xs font-semibold tracking-widest uppercase mb-3" style="color: rgba(255,255,255,0.55);">
           Gratis &bull; Aman &bull; Terpercaya

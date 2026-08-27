@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
+
+
     public function up(): void
     {
         Schema::create('sessions', function (Blueprint $table) {
@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('access_point_location')->nullable();
             $table->timestamp('login_time');
             $table->timestamp('logout_time')->nullable();
-            $table->integer('duration')->nullable(); // minutes
+            $table->integer('duration')->nullable();
             $table->enum('authentication_status', ['success', 'failed'])->default('success');
             $table->timestamps();
 
@@ -26,9 +26,9 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+
+
+
     public function down(): void
     {
         Schema::dropIfExists('sessions');

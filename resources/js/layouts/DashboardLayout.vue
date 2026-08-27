@@ -10,10 +10,10 @@ const navigation = [
 </script>
 
 <template>
-    <!-- Background utama diubah lebih terang (slate-50) -->
+
     <div class="min-h-screen bg-slate-50 text-slate-900 font-sans">
 
-        <!-- Sidebar Bersih -->
+
         <aside class="fixed inset-y-0 left-0 hidden w-64 border-r border-slate-200 bg-white px-5 py-6 lg:block z-10">
             <Link href="/dashboard" class="flex items-center gap-3 px-3">
                 <span class="flex size-10 items-center justify-center rounded-xl bg-cyan-600 font-black text-white shadow-sm">
@@ -36,7 +36,7 @@ const navigation = [
         </aside>
 
         <div class="lg:pl-64">
-            <!-- Header -->
+
             <header class="flex items-center justify-between border-b border-slate-200 bg-white px-6 py-5 lg:px-10 sticky top-0 z-10">
                 <div>
                     <p class="text-xs font-semibold tracking-[0.2em] text-cyan-600 uppercase">
@@ -49,7 +49,7 @@ const navigation = [
                 </span>
             </header>
 
-            <!-- Mobile Navigation -->
+
             <nav class="flex gap-2 overflow-x-auto border-b border-slate-200 bg-white px-6 py-3 lg:hidden">
                 <Link
                     v-for="item in navigation"
@@ -62,7 +62,7 @@ const navigation = [
                 </Link>
             </nav>
 
-            <!-- Konten Utama dibungkus Animasi -->
+
             <main class="p-6 lg:p-10 anim-up">
                 <slot />
             </main>

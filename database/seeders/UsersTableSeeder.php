@@ -11,7 +11,7 @@ class UsersTableSeeder extends Seeder
 {
     public function run(): void
     {
-        // Create 10 test users
+
         for ($i = 1; $i <= 10; $i++) {
             $user = User::create([
                 'phone_number' => '0812345678' . str_pad($i, 2, '0', STR_PAD_LEFT),

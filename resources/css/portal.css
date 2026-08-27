@@ -1,8 +1,8 @@
-/*
-  Shared styling for the Portal (captive portal login) feature.
-  Import this once, e.g. in resources/css/app.css:
-    @import "./portal.css";
-*/
+
+
+
+
+
 
 :root {
   --font-display: 'Plus Jakarta Sans', sans-serif;

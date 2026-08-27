@@ -61,8 +61,8 @@ const services = [
   },
 ];
 
-// Kalau file logo belum ada / salah nama di public/images/services/, jangan
-// biarkan kotaknya kosong — fallback ke inisial huruf.
+
+
 const logoFailed = ref<Record<string, boolean>>({});
 function onLogoError(label: string) {
   logoFailed.value[label] = true;
@@ -99,7 +99,7 @@ async function logout() {
 }
 
 onMounted(() => {
-  // Poll every 30s in case an admin kills the session or it expires server-side.
+
   statusTimer = setInterval(checkStatus, 30000);
 });
 
@@ -113,7 +113,7 @@ onUnmounted(() => {
     <div class="min-h-screen flex flex-col relative">
       <TickerBar />
 
-      <!-- Background: foto budaya + overlay gelap tipis + blur halus, biar semua card di atasnya kontras -->
+
       <img
         src="/images/background-welcome.jpg"
         alt=""
@@ -123,7 +123,7 @@ onUnmounted(() => {
       />
       <div class="fixed inset-0" style="background: linear-gradient(180deg, rgba(6,20,35,0.55) 0%, rgba(6,20,35,0.4) 40%, rgba(6,20,35,0.62) 100%);" />
 
-      <!-- Baris 1: Header — logo kiri, judul+status tengah, keluar kanan -->
+
       <header class="relative z-10 border-b border-white/10" style="background: rgba(255,255,255,0.9); backdrop-filter: blur(20px);">
         <div class="max-w-screen-xl mx-auto px-4 py-3 grid grid-cols-3 items-center gap-2">
           <div class="flex items-center gap-3 justify-self-start">
@@ -160,13 +160,13 @@ onUnmounted(() => {
       </header>
 
       <main class="relative z-10 flex-1 max-w-screen-xl mx-auto w-full px-4 py-6 space-y-4">
-        <!-- Banner promosi menjadi konten utama di bagian atas -->
+
         <PromoCarousel />
 
-        <!-- Status terhubung + cuaca/info berada tepat di bawah banner -->
+
         <StatusBar />
 
-        <!-- Grid akses cepat layanan -->
+
         <div>
           <p class="text-xs font-semibold uppercase tracking-widest mb-3 text-white/85" style="text-shadow: 0 1px 3px rgba(0,0,0,0.35);">
             Akses Cepat Layanan

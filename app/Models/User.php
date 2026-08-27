@@ -19,7 +19,7 @@ class User extends Model
         'last_login',
     ];
 
-    // Relationship
+
     public function devices(): HasMany
     {
         return $this->hasMany(Device::class);

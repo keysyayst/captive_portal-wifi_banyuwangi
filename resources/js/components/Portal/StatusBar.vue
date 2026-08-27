@@ -32,7 +32,7 @@ const today = computed(() =>
     class="rounded-2xl p-4 sm:p-5 flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6"
     style="background: rgba(255,255,255,0.94); backdrop-filter: blur(20px); border: 1px solid rgba(148,163,184,0.25); border-top: 3px solid #f59e0b; box-shadow: 0 10px 28px rgba(15,23,42,0.14);"
   >
-    <!-- Status terhubung -->
+
     <div class="flex-1 min-w-0">
       <div class="flex items-center gap-2 mb-1">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-cyan-600 shrink-0">
@@ -50,7 +50,7 @@ const today = computed(() =>
     <div class="block lg:hidden h-px w-full bg-slate-200" />
     <div class="hidden lg:block w-px self-stretch bg-slate-200" />
 
-    <!-- Cuaca + info berjalan -->
+
     <div class="flex flex-col sm:flex-row sm:items-center gap-3 lg:flex-1 lg:min-w-0">
       <div class="flex items-center gap-3 shrink-0">
         <span class="text-3xl leading-none">{{ icon }}</span>
