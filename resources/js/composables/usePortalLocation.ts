@@ -1,6 +1,17 @@
 import { ref } from 'vue';
 
 const FALLBACK_LOCATION = 'Banyuwangi, Jawa Timur';
+export const PORTAL_LOCATION_STORAGE_KEY = 'portal_location';
+
+export interface PortalLocationData {
+  name: string;
+  latitude?: number;
+  longitude?: number;
+}
+
+function storeLocation(data: PortalLocationData): void {
+  sessionStorage.setItem(PORTAL_LOCATION_STORAGE_KEY, JSON.stringify(data));
+}
 
 export function usePortalLocation() {
   const location = ref('');
@@ -15,11 +26,15 @@ export function usePortalLocation() {
     loading.value = true;
 
     const fallbackTimer = setTimeout(() => {
-      if (loading.value) resolve(FALLBACK_LOCATION);
+      if (loading.value) {
+        storeLocation({ name: FALLBACK_LOCATION });
+        resolve(FALLBACK_LOCATION);
+      }
     }, 5000);
 
     if (!navigator.geolocation) {
       clearTimeout(fallbackTimer);
+      storeLocation({ name: FALLBACK_LOCATION });
       resolve(FALLBACK_LOCATION);
       return;
     }
@@ -34,15 +49,17 @@ export function usePortalLocation() {
           );
           const data = await res.json();
           const addr = data.address ?? {};
-          const name = addr.village || addr.suburb || addr.town || addr.city || addr.county || 'Banyuwangi';
-          const district = addr.county || addr.city_district || '';
-          resolve(district ? `${name}, ${district}` : name);
+          const name = addr.village || addr.suburb || addr.town || addr.city || addr.municipality || 'Banyuwangi';
+          storeLocation({ name, latitude, longitude });
+          resolve(name);
         } catch {
+          storeLocation({ name: FALLBACK_LOCATION });
           resolve(FALLBACK_LOCATION);
         }
       },
       () => {
         clearTimeout(fallbackTimer);
+        storeLocation({ name: FALLBACK_LOCATION });
         resolve(FALLBACK_LOCATION);
       },
       { timeout: 4000, enableHighAccuracy: false },

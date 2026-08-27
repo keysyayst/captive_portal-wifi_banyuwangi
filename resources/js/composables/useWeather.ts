@@ -1,5 +1,6 @@
 import { onMounted, ref } from 'vue';
 import LocationWeatherController from '@/actions/App/Http/Controllers/LocationWeatherController';
+import { PORTAL_LOCATION_STORAGE_KEY, type PortalLocationData } from '@/composables/usePortalLocation';
 
 const WEATHER_CODE_MAP: Record<number, { label: string; icon: string }> = {
   0: { label: 'Cerah', icon: '☀️' },
@@ -45,6 +46,16 @@ const error = ref(false);
 let loadPromise: Promise<void> | null = null;
 
 export function useWeather() {
+  function getStoredLocation(): PortalLocationData | null {
+    try {
+      const value = sessionStorage.getItem(PORTAL_LOCATION_STORAGE_KEY);
+
+      return value ? (JSON.parse(value) as PortalLocationData) : null;
+    } catch {
+      return null;
+    }
+  }
+
   function getCurrentPosition(): Promise<GeolocationPosition> {
     return new Promise((resolve, reject) => {
       if (!navigator.geolocation) {
@@ -98,13 +109,19 @@ export function useWeather() {
       try {
         let latitude: number;
         let longitude: number;
+        const storedLocation = getStoredLocation();
 
-        try {
-          const position = await getCurrentPosition();
-          latitude = position.coords.latitude;
-          longitude = position.coords.longitude;
-        } catch {
-          ({ latitude, longitude } = await getIpPosition());
+        if (typeof storedLocation?.latitude === 'number' && typeof storedLocation.longitude === 'number') {
+          latitude = storedLocation.latitude;
+          longitude = storedLocation.longitude;
+        } else {
+          try {
+            const position = await getCurrentPosition();
+            latitude = position.coords.latitude;
+            longitude = position.coords.longitude;
+          } catch {
+            ({ latitude, longitude } = await getIpPosition());
+          }
         }
 
         const res = await fetch(LocationWeatherController.show.url({
@@ -122,7 +139,8 @@ export function useWeather() {
         const temperature = data.weather?.temperature_c;
 
         tempC.value = typeof temperature === 'number' ? Math.round(temperature) : null;
-        locationName.value = data.location?.name ?? 'Lokasi saat ini';
+        const storedNameIsSpecific = storedLocation?.name && storedLocation.name !== 'Lokasi saat ini';
+        locationName.value = storedNameIsSpecific ? storedLocation.name : data.location?.name ?? 'Lokasi saat ini';
 
         const mapped = WEATHER_CODE_MAP[code] ?? { label: 'Cuaca Tidak Diketahui', icon: '🌡️' };
         label.value = mapped.label;
