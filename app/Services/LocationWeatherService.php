@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Http;
 
 class LocationWeatherService
 {
-    /**
-     * @return array{location: array<string, mixed>, weather: array<string, mixed>}
-     */
+
+
+
     public function get(float $latitude, float $longitude): array
     {
         $responses = Http::pool(fn (Pool $pool) => [

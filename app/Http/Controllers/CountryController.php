@@ -16,11 +16,11 @@ class CountryController extends Controller
                 })
                 ->map(function ($country) {
                     $dialCode = $country->calling_codes[0] ?? '';
-                    
+
                     if (!empty($dialCode) && strpos($dialCode, '+') === false) {
                         $dialCode = '+' . $dialCode;
                     }
-                    
+
                     return [
                         'code' => $country->cca2,
                         'name' => $country->name['common'] ?? $country->name,

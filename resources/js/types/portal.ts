@@ -6,7 +6,7 @@ export interface BackgroundImage {
   alt: string;
 }
 
-/** Local UI state for the login card (kept separate from what actually gets posted to the server). */
+
 export interface PortalLoginState {
   countryCode: string;
   phone: string;
@@ -15,7 +15,7 @@ export interface PortalLoginState {
   otp: string[];
 }
 
-/** Payload sent to the backend once OTP verification succeeds. */
+
 export interface PortalLoginPayload {
   phone: string;
   otp: string;

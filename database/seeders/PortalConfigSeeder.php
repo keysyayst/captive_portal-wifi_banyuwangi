@@ -62,8 +62,8 @@ class PortalConfigSeeder extends Seeder
             'organization_name' => 'Kantor Pelayanan Publik Kabupaten Banyuwangi',
             'logo_url' => asset('images/logo.png'),
             'banner_url' => asset('images/banner.jpg'),
-            'primary_color' => '#10B981', // Emerald green
-            'secondary_color' => '#3B82F6', // Blue
+            'primary_color' => '#10B981',
+            'secondary_color' => '#3B82F6',
             'terms_text' => '
                 <h2>Syarat dan Ketentuan WiFi Kantor Pelayanan Publik</h2>
                 <p>Selamat datang di layanan WiFi Kantor Pelayanan Publik. Dengan mengakses layanan ini, Anda setuju:</p>

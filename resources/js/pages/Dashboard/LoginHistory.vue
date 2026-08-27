@@ -21,8 +21,8 @@ type Pagination = {
     total: number;
 };
 
-// MENERIMA DATA LANGSUNG DARI LARAVEL (Inertia Props)
-// Mengambil variabel 'history' yang dilempar dari DashboardController -> loginHistory()
+
+
 defineProps<{
     history: Pagination;
 }>();

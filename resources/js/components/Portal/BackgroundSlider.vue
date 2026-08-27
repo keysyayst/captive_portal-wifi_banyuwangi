@@ -5,8 +5,8 @@ import type { BackgroundImage } from '@/types/portal';
 defineProps<{ images: BackgroundImage[]; activeIndex: number }>();
 const emit = defineEmits<{ (e: 'select', index: number): void }>();
 
-// Tracks which slides failed to load so we don't silently show a black
-// screen — check the browser console for the exact path that 404'd.
+
+
 const failed = ref<Record<number, boolean>>({});
 
 function onImageError(index: number, image: BackgroundImage) {

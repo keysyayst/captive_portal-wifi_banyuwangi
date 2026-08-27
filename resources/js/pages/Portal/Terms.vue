@@ -15,7 +15,7 @@ onMounted(async () => {
   try {
     const params = new URLSearchParams(window.location.search);
     const queryString = params.toString() ? `?${params.toString()}` : '';
-    
+
     const response = await fetch(`/api/terms${queryString}`);
 
     if (!response.ok) {
@@ -100,7 +100,7 @@ onMounted(async () => {
             </div>
 
 
-            <!-- ERROR -->
+
             <div
               v-else-if="error"
               class="py-8 text-center"

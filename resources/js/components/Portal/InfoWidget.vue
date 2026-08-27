@@ -32,7 +32,7 @@ const today = computed(() =>
     class="rounded-2xl p-4 flex flex-col sm:flex-row items-stretch gap-4"
     style="background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); border: 1px solid rgba(148,163,184,0.2); box-shadow: 0 8px 22px rgba(15,23,42,0.06);"
   >
-    <!-- Cuaca -->
+
     <div class="flex items-center gap-3 sm:pr-4 sm:border-r sm:border-slate-200 shrink-0">
       <span class="text-3xl leading-none">{{ icon }}</span>
       <div>
@@ -45,7 +45,7 @@ const today = computed(() =>
       </div>
     </div>
 
-    <!-- Pengumuman berjalan -->
+
     <div class="flex-1 min-w-0 flex items-center gap-2">
       <span class="text-xs font-bold uppercase tracking-widest shrink-0 px-2 py-1 rounded-md" style="background: #fef3c7; color: #92400e;">
         Info

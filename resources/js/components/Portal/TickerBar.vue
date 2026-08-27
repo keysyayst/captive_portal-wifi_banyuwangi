@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// TODO: ganti dengan data promosi/pengumuman asli, atau ambil dari backend.
+
 const items = [
   'Dapatkan kemudahan administrasi kependudukan dalam satu genggaman. Unduh Smart Kampung sekarang!',
   'WiFi Gratis Banyuwangi — gunakan internet dengan bijak, aman, dan bertanggung jawab.',

@@ -14,8 +14,8 @@ type ActiveUser = {
     duration_minutes: number;
 };
 
-// MENERIMA DATA LANGSUNG DARI LARAVEL (Inertia Props)
-// Perhatikan nama 'activeUsers' ini sama dengan yang kita kirim dari DashboardController
+
+
 defineProps<{
     activeUsers: ActiveUser[];
 }>();

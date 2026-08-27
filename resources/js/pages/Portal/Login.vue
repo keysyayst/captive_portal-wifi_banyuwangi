@@ -12,13 +12,13 @@ import type { OtpMethod, PortalStep } from '@/types/portal';
 
 defineOptions({ layout: PortalLayout });
 
-/**
- * These props are expected to come from the Laravel controller that renders
- * this Inertia page. In a real Mikrotik/OpenWRT/pfSense hotspot setup, the
- * router injects mac/ap (and possibly nik) as query params on the redirect
- * to this page — read them server-side and pass them down here, the same
- * way the original index.php read $_GET via process_login.php.
- */
+
+
+
+
+
+
+
 const props = defineProps<{
   error?: string | null;
   mac?: string | null;
@@ -62,8 +62,8 @@ function goToOtpMethod() {
 }
 
 function sendOtp() {
-  // TODO: hit your backend endpoint here to actually dispatch the OTP,
-  // e.g. router.post('/portal/otp/send', { phone: fullPhone(), method: form.method })
+
+
   step.value = 'otp';
   form.otp = ['', '', '', '', '', ''];
   startTimer();
@@ -72,7 +72,7 @@ function sendOtp() {
 function resendOtp() {
   form.otp = ['', '', '', '', '', ''];
   startTimer();
-  // TODO: re-trigger the OTP dispatch endpoint here too.
+
 }
 
 const submitError = ref<string | null>(null);
@@ -94,9 +94,9 @@ async function verify() {
       body: JSON.stringify({
         phone_number: fullPhone(),
         otp: form.otp.join(''),
-        mac_address: props.mac || '00:00:00:00:00:00', // Dummy MAC fallback
+        mac_address: props.mac || '00:00:00:00:00:00',
         device_type: detectDeviceType(),
-        access_point_location: props.ap || 'dummy-ap', // Default AP as well just in case
+        access_point_location: props.ap || 'dummy-ap',
         terms_agreed: true,
       }),
     });
@@ -108,8 +108,8 @@ async function verify() {
       return;
     }
 
-    // Simpan token untuk request berikutnya (mis. logout) — sesuaikan
-    // kalau kamu mau simpan di tempat lain (cookie httpOnly, dsb).
+
+
     localStorage.setItem('portal_token', data.token);
     window.location.href = data.redirect_url;
   } catch (err) {
