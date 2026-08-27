@@ -11,12 +11,8 @@ class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
 
-
-
-
     public function run(): void
     {
-
 
         Announcement::query()->upsert([
             [
@@ -49,6 +45,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             PortalConfigSeeder::class,
+            TickerItemSeeder::class,
             UsersTableSeeder::class,
         ]);
     }
