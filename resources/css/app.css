@@ -4,14 +4,12 @@
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
-/* Menyesuaikan Font Bawaan Portal */
 @theme inline {
     --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
     --font-display: 'Plus Jakarta Sans', sans-serif;
     --font-serif: 'Lora', serif;
 }
 
-/* Animasi Transisi Halus (Slide Up) */
 .anim-up { animation: slide-up 0.45s cubic-bezier(.22,.68,0,1.1) both; }
 .anim-up-1 { animation: slide-up 0.45s cubic-bezier(.22,.68,0,1.1) 0.06s both; }
 .anim-up-2 { animation: slide-up 0.45s cubic-bezier(.22,.68,0,1.1) 0.12s both; }
