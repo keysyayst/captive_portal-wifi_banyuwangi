@@ -7,9 +7,6 @@ use Illuminate\Support\Facades\Http;
 
 class LocationWeatherService
 {
-
-
-
     public function get(float $latitude, float $longitude): array
     {
         $responses = Http::pool(fn (Pool $pool) => [
@@ -32,7 +29,7 @@ class LocationWeatherService
                     'lat' => $latitude,
                     'lon' => $longitude,
                     'format' => 'jsonv2',
-                    'zoom' => 10,
+                    'zoom' => 18,
                     'addressdetails' => 1,
                 ]),
         ]);
@@ -44,14 +41,16 @@ class LocationWeatherService
         $location = $responses['location']->successful()
             ? $responses['location']->json('address', [])
             : [];
+        $locationName = $location['village']
+            ?? $location['suburb']
+            ?? $location['town']
+            ?? $location['city']
+            ?? $location['municipality']
+            ?? 'Lokasi saat ini';
 
         return [
             'location' => [
-                'name' => $location['city']
-                    ?? $location['town']
-                    ?? $location['village']
-                    ?? $location['municipality']
-                    ?? 'Lokasi saat ini',
+                'name' => $locationName,
                 'region' => $location['state'] ?? null,
                 'country' => $location['country'] ?? null,
                 'latitude' => $latitude,
