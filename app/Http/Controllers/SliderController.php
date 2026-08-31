@@ -22,10 +22,12 @@ class SliderController extends Controller
     {
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'type' => 'required|in:before_login,after_login',
         ]);
 
         $path = $request->file('image')->store('sliders', 'public');
-        Slider::create(['image_path' => $path]);
+
+        Slider::create(['image_path' => $path, 'type' => $request->type]);
 
         return redirect()->back();
     }
