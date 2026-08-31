@@ -13,7 +13,7 @@ return new class extends Migration
 {
     Schema::create('sliders', function (Blueprint $table) {
         $table->id();
-        $table->string('image_path'); // Menyimpan lokasi file gambar
+        $table->string('image_path');
         $table->timestamps();
     });
 }

@@ -6,7 +6,7 @@ const navigation = [
     { label: 'Active users', href: '/dashboard/active-users' },
     { label: 'Login history', href: '/dashboard/login-history' },
     { label: 'Manajemen AP', href: '/dashboard/ap-management' },
-    { label: 'Manajemen Slider', href: '/dashboard/slider' },
+    { label: 'Pengaturan Portal', href: '/dashboard/settings' },
 ];
 </script>
 
