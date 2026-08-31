@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\SliderController;
 use App\Http\Controllers\DashboardController;
 
 Route::redirect('/', '/portal')->name('home');
@@ -16,3 +17,6 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::get('/dashboard/active-users', [DashboardController::class, 'activeUsers'])->name('dashboard.active-users');
 Route::get('/dashboard/login-history', [DashboardController::class, 'loginHistory'])->name('dashboard.login-history');
 Route::get('/dashboard/ap-management', [DashboardController::class, 'apManagement'])->name('dashboard.ap-management');
+Route::get('/dashboard/slider', [SliderController::class, 'index'])->name('dashboard.slider.index');
+Route::post('/dashboard/slider', [SliderController::class, 'store'])->name('dashboard.slider.store');
+Route::delete('/dashboard/slider/{slider}', [SliderController::class, 'destroy'])->name('dashboard.slider.destroy');
