@@ -11,7 +11,6 @@ use Illuminate\Http\RedirectResponse;
 
 class SliderController extends Controller
 {
-    // Fungsi index() yang tadi dibilang undefined oleh Laravel
     public function index(): Response
     {
         return Inertia::render('Dashboard/SliderManagement', [
@@ -33,11 +32,9 @@ class SliderController extends Controller
 
     public function destroy(Slider $slider): RedirectResponse
     {
-        // Hapus file fisik dari folder storage
         if (Storage::disk('public')->exists($slider->image_path)) {
             Storage::disk('public')->delete($slider->image_path);
         }
-        // Hapus data dari database
         $slider->delete();
 
         return redirect()->back();
