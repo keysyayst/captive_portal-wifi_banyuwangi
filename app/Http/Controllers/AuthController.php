@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Device;
 use App\Models\User;
+use App\Services\RadiusService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -11,26 +12,27 @@ use Inertia\Response;
 
 class AuthController extends Controller
 {
+    public function __construct(private readonly RadiusService $radiusService) {}
 
     public function show(Request $request): Response
     {
         return Inertia::render('Portal/Login', [
             'error' => $request->query('error'),
-            'mac'   => $request->query('mac') ?? $request->query('usermac'),
-            'ap'    => $request->query('ap') ?? $request->query('apmac'),
-            'nik'   => $request->query('nik'),
+            'mac' => $request->query('mac') ?? $request->query('usermac'),
+            'ap' => $request->query('ap') ?? $request->query('apmac'),
+            'nik' => $request->query('nik'),
         ]);
     }
 
     public function login(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'phone_number'          => 'required|string',
-            'otp'                   => 'required|digits:6',
-            'mac_address'           => 'nullable|string',
-            'device_type'           => 'nullable|string',
+            'phone_number' => 'required|string',
+            'otp' => 'required|digits:6',
+            'mac_address' => 'nullable|string',
+            'device_type' => 'nullable|string',
             'access_point_location' => 'nullable|string',
-            'terms_agreed'          => 'required|boolean',
+            'terms_agreed' => 'required|boolean',
         ]);
 
         if (! $validated['terms_agreed']) {
@@ -39,12 +41,9 @@ class AuthController extends Controller
             ], 422);
         }
 
-
         $ipAddress = $request->header('X-Forwarded-For', $request->ip());
 
-
-        $macAddress = $validated['mac_address'] ?? 'unknown-' . $ipAddress;
-
+        $macAddress = $validated['mac_address'] ?? 'unknown-'.$ipAddress;
 
         $user = User::firstOrCreate(
             ['phone_number' => $validated['phone_number']],
@@ -54,17 +53,21 @@ class AuthController extends Controller
         $device = Device::firstOrCreate(
             ['mac_address' => $macAddress],
             [
-                'user_id'     => $user->id,
+                'user_id' => $user->id,
                 'device_type' => $validated['device_type'] ?? 'unknown',
             ]
         );
 
         $session = $device->sessions()->create([
-            'ip_address'             => $ipAddress,
-            'access_point_location'  => $validated['access_point_location'],
-            'login_time'             => now(),
-            'authentication_status'  => 'success',
+            'ip_address' => $ipAddress,
+            'access_point_location' => $validated['access_point_location'],
+            'login_time' => now(),
+            'authentication_status' => 'success',
         ]);
+
+        // Authorize user di FreeRADIUS (tulis ke radcheck/radreply/radusergroup).
+        // Error tidak menggagalkan login karena di-catch di dalam RadiusService.
+        $this->radiusService->authorizeUser($user, $device);
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -72,12 +75,12 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => 'Login berhasil',
-            'token'   => $token,
-            'user'    => $user,
+            'token' => $token,
+            'user' => $user,
 
             'redirect_url' => config('portal.redirect_url') ?? route('portal.welcome', [
                 'phone' => $user->phone_number,
-                'ap'    => $session->access_point_location,
+                'ap' => $session->access_point_location,
             ]),
         ]);
     }
@@ -96,24 +99,26 @@ class AuthController extends Controller
 
             $lastSession->update([
                 'logout_time' => now(),
-                'duration'    => $duration,
+                'duration' => $duration,
             ]);
         }
 
         $user->currentAccessToken()->delete();
 
+        // Deauthorize user dari FreeRADIUS (hapus dari radcheck/radreply/radusergroup).
+        $this->radiusService->deauthorizeUser($user);
+
         return response()->json([
-            'message'          => 'Logout berhasil',
+            'message' => 'Logout berhasil',
             'session_duration' => $lastSession?->duration ?? 0,
         ]);
     }
-
 
     public function welcome(Request $request): Response
     {
         return Inertia::render('Portal/Welcome', [
             'phone' => $request->query('phone'),
-            'ap'    => $request->query('ap'),
+            'ap' => $request->query('ap'),
         ]);
     }
 }

@@ -1,0 +1,81 @@
+﻿##
+## sites-available/default -- Virtual server utama captive portal
+##
+
+server default {
+
+    listen {
+        type = auth
+        ipaddr = *
+        port = 0
+    }
+
+    listen {
+        type = acct
+        ipaddr = *
+        port = 0
+    }
+
+    ##
+    ## Authorize: tentukan bagaimana user diautentikasi
+    ##
+    authorize {
+        ## Normalisasi username
+        filter_username
+
+        ## Preprocess request
+        preprocess
+
+        ## Cek apakah user ada di SQL
+        sql
+
+        ## Ekspand Stripped-User-Name
+        expiration
+
+        ## Set Auth-Type berdasarkan attribute yang ada
+        pap
+    }
+
+    ##
+    ## Authenticate: verifikasi password
+    ##
+    authenticate {
+        Auth-Type PAP {
+            pap
+        }
+        Auth-Type CHAP {
+            chap
+        }
+        Auth-Type MS-CHAP {
+            mschap
+        }
+    }
+
+    ##
+    ## Post-Auth: jalankan setelah auth berhasil/gagal
+    ##
+    post-auth {
+        ## Log ke SQL (radpostauth)
+        sql
+
+        Post-Auth-Type REJECT {
+            ## Log reject
+            sql
+            attr_filter.access_reject
+        }
+    }
+
+    ##
+    ## Accounting: catat sesi user
+    ##
+    accounting {
+        ## Pastikan Acct-Unique-Session-Id ada
+        acct_unique
+
+        ## Simpan ke SQL
+        sql
+
+        ## Kirim reply sukses
+        ok
+    }
+}
