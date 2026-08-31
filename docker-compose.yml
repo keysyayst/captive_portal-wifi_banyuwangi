@@ -42,6 +42,31 @@ services:
     networks:
       - captive_network
 
+  freeradius:
+    image: freeradius/freeradius-server:latest
+    container_name: captive_portal_radius
+    restart: unless-stopped
+    ports:
+      - "1812:1812/udp"
+      - "1813:1813/udp"
+    volumes:
+      - ./docker/freeradius/radiusd.conf:/etc/freeradius/3.0/radiusd.conf:ro
+      - ./docker/freeradius/mods-available/sql:/etc/freeradius/3.0/mods-available/sql:ro
+      - ./docker/freeradius/mods-enabled/sql:/etc/freeradius/3.0/mods-enabled/sql:ro
+      - ./docker/freeradius/clients.conf:/etc/freeradius/3.0/clients.conf:ro
+      - ./docker/freeradius/sites-available/default:/etc/freeradius/3.0/sites-available/default:ro
+      - ./docker/freeradius/sites-enabled/default:/etc/freeradius/3.0/sites-enabled/default:ro
+    depends_on:
+      - db
+    networks:
+      - captive_network
+    environment:
+      - RADIUS_DB_HOST=db
+      - RADIUS_DB_PORT=3306
+      - RADIUS_DB_NAME=captive_portal
+      - RADIUS_DB_USER=captive_user
+      - RADIUS_DB_PASS=captive_secret
+
 volumes:
   db_data:
 
