@@ -127,7 +127,16 @@ onUnmounted(() => {
       <header class="relative z-10 border-b border-white/10" style="background: rgba(255,255,255,0.9); backdrop-filter: blur(20px);">
         <div class="max-w-screen-xl mx-auto px-4 py-3 grid grid-cols-3 items-center gap-2">
           <div class="flex items-center gap-3 justify-self-start">
-            <img src="/images/logo_bwi.png" alt="Pemkab Banyuwangi" class="h-7 sm:h-8 object-contain" />
+            <img src="/images/logo_bwi.png" alt="Pemkab Banyuwangi" class="h-9 w-9 sm:h-10 sm:w-10 object-contain shrink-0" style="filter: drop-shadow(0 2px 6px rgba(0,0,0,0.55));" />
+            <div class="w-px h-8 bg-slate-200" />
+            <div class="leading-tight hidden sm:block">
+              <p class="font-display font-bold text-xs text-slate-700" style="letter-spacing: 0.01em;">
+                Pemerintah Kabupaten
+              </p>
+              <p class="font-display font-bold text-xs text-slate-700" style="letter-spacing: 0.01em;">
+                Banyuwangi
+              </p>
+            </div>
           </div>
 
           <div class="flex flex-col items-center justify-self-center text-center">
