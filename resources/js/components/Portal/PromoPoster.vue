@@ -6,10 +6,6 @@ interface PosterSlide {
   alt: string;
   href?: string;
 }
-
-// TODO: ganti gambar sesuai materi promosi terbaru. Pakai foto rasio POTRET
-// (mis. 1080x1440px, rasio 3:4) supaya tidak terpotong aneh — taruh filenya
-// di public/images/promo/poster/.
 const slides: PosterSlide[] = [
   { image: '/images/promo/poster1.jpg', alt: 'Banyuwangi Festival', href: 'https://banyuwangifestival.com/' },
   { image: '/images/promo/poster2.png', alt: 'Smart Kampung', href: 'https://smartkampung.id/' },
@@ -41,7 +37,6 @@ const { activeIndex, goTo } = useBackgroundSlider(slides, 5000);
       </div>
     </template>
 
-    <!-- Gradient tipis biar dot indicator tetap kebaca di atas gambar apa pun -->
     <div class="absolute inset-x-0 bottom-0 h-14 pointer-events-none" style="background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);" />
 
     <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">

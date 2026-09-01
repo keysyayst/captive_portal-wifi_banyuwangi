@@ -4,10 +4,9 @@ import PromoPoster from '@/components/Portal/PromoPoster.vue';
 import { useBackgroundSlider } from '@/composables/useBackgroundSlider';
 import type { BackgroundImage } from '@/types/portal';
 
-// Swap these for photos of your own service area / kabupaten.
 const images: BackgroundImage[] = [
-  { url: '/images/kawah-ijen.jpg', alt: 'Kawah Ijen' },
-  { url: '/images/pantai-banyuwangi.jpg', alt: 'Pantai Banyuwangi' },
+  { url: '/images/Kawah-Ijen-Indonesia.jpg', alt: 'Kawah Ijen' },
+  { url: '/images/pantai-merah-banyuwangi.jpg', alt: 'Pantai Banyuwangi' },
   { url: '/images/gunung-raung.jpg', alt: 'Gunung Raung' },
 ];
 
@@ -19,7 +18,6 @@ const { activeIndex, goTo } = useBackgroundSlider(images);
     <div class="min-h-screen relative flex items-center justify-center">
       <BackgroundSlider :images="images" :active-index="activeIndex" @select="goTo" />
 
-      <!-- Badge pemerintah, pojok kiri atas — tanpa lingkaran putih, teks dua baris -->
       <div class="absolute top-4 left-4 sm:top-6 sm:left-6 z-30 flex items-center gap-2.5">
         <img
           src="/images/logo_bwi.png"
@@ -37,7 +35,6 @@ const { activeIndex, goTo } = useBackgroundSlider(images);
         </div>
       </div>
 
-      <!-- Kolom utama: judul di atas, card (poster + form) di bawahnya, semuanya di tengah -->
       <div class="relative z-10 w-full flex flex-col items-center justify-center gap-6 sm:gap-8 px-4 py-24 sm:py-20">
         <div class="text-center max-w-2xl">
           <p class="text-xs font-semibold tracking-widest uppercase mb-2 sm:mb-3" style="color: rgba(255,255,255,0.6);">
@@ -58,12 +55,10 @@ const { activeIndex, goTo } = useBackgroundSlider(images);
             class="relative w-full flex flex-col lg:flex-row overflow-hidden"
             style="background: rgba(255,255,255,0.97); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(8,145,178,0.12); border-top: 3px solid #0891b2; border-radius: 20px; box-shadow: 0 24px 60px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.15);"
           >
-            <!-- Poster: atas di HP, kiri di desktop, dipisah garis tipis -->
             <div class="p-5 sm:p-6 lg:w-[320px] xl:w-[380px] shrink-0 border-b lg:border-b-0 lg:border-r border-slate-200/70 flex items-center justify-center">
               <PromoPoster />
             </div>
 
-            <!-- Form login -->
             <div class="flex-1 min-w-0">
               <slot />
             </div>
