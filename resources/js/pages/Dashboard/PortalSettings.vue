@@ -78,8 +78,8 @@ const deleteImage = (id: number) => {
                     >
                         <input type="radio" v-model="settingForm.login_method" value="phone" class="mt-1 w-5 h-5 text-cyan-600 focus:ring-cyan-500 border-slate-300">
                         <div>
-                            <div class="font-bold text-slate-800">Nomor Handphone (OTP)</div>
-                            <div class="text-sm text-slate-500 mt-0.5">Pengguna masuk menggunakan validasi nomor WhatsApp atau SMS.</div>
+                            <div class="font-bold text-slate-800">Nomor Handphone</div>
+                            <div class="text-sm text-slate-500 mt-0.5">Pengguna masuk menggunakan nomor HP (OTP dimatikan).</div>
                         </div>
                     </label>
 

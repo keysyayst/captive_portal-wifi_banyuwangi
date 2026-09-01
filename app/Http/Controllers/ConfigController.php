@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AccessPoint;
+use App\Models\PortalConfig;
+use App\Models\Setting;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\Models\PortalConfig;
-use App\Models\AccessPoint;
 
 class ConfigController extends Controller
 {
@@ -27,6 +28,9 @@ class ConfigController extends Controller
     {
         $config = $this->getConfigByAp($request);
 
+        $loginMethod = Setting::where('key', 'login_method')
+            ->first()?->value ?? 'phone';
+
         return response()->json([
             'organization_name' => $config->organization_name,
             'logo_url' => $config->logo_url,
@@ -34,6 +38,7 @@ class ConfigController extends Controller
             'primary_color' => $config->primary_color,
             'secondary_color' => $config->secondary_color,
             'ssid' => 'BanyuwangiWiFi_Free',
+            'login_method' => $loginMethod,
         ]);
     }
 
