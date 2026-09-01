@@ -105,7 +105,7 @@ const isValid = computed(() => {
 </script>
 
 <template>
-  <div class="px-5 sm:px-6 pb-6 pt-4 space-y-5 anim-up">
+  <div class="px-5 sm:px-6 pb-6 pt-4 space-y-5 anim-up max-w-md mx-auto">
     <div
       v-if="error"
       class="rounded-xl px-4 py-3 text-xs font-medium"
@@ -118,7 +118,7 @@ const isValid = computed(() => {
       {{ error }}
     </div>
 
-    <div class="text-center space-y-1">
+    <div class="text-center space-y-1 -mt-2">
 
       <p
         class="text-2xl font-bold font-display leading-tight tracking-tight"
