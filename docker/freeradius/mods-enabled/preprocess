@@ -1,0 +1,5 @@
+# Modul untuk handle prefix/realm
+preprocess {
+    huntgroups = ${confdir}/mods-config/preprocess/huntgroups
+    hints = ${confdir}/mods-config/preprocess/hints
+}

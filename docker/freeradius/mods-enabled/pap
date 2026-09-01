@@ -1,0 +1,5 @@
+# Modul PAP untuk autentikasi Cleartext-Password
+pap {
+    # normalisasi password
+    normalise = yes
+}

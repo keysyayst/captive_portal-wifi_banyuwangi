@@ -55,12 +55,11 @@ server default {
     ## Post-Auth: jalankan setelah auth berhasil/gagal
     ##
     post-auth {
-        ## Log ke SQL (radpostauth)
+        ## Log ke SQL (radpostauth) - hanya saat auth sukses
         sql
 
         Post-Auth-Type REJECT {
             ## Log reject
-            sql
             attr_filter.access_reject
         }
     }
