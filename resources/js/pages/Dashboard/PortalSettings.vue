@@ -307,7 +307,7 @@ const toggleAnnouncementActive = (announcement: Announcement) => {
             <!-- Daftar Pengumuman -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Info Sidebar -->
-                <div class="p-4 bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl border border-cyan-200">
+                <div class="p-4 bg-linear-to-br from-cyan-50 to-blue-50 rounded-xl border border-cyan-200">
                     <h4 class="text-sm font-bold uppercase tracking-wider text-slate-700 mb-4">📋 Statistik</h4>
                     <div class="space-y-3">
                         <div class="flex items-center justify-between">
@@ -382,6 +382,7 @@ const toggleAnnouncementActive = (announcement: Announcement) => {
 .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
