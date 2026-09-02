@@ -5,7 +5,6 @@ import DashboardLayout from '@/layouts/DashboardLayout.vue';
 
 defineOptions({ layout: DashboardLayout });
 
-// --- DEFINISI TIPE DATA ---
 type Slider = {
     id: number;
     image_path: string;
@@ -26,7 +25,6 @@ const props = defineProps<{
     announcements: Announcement[];
 }>();
 
-// --- LOGIKA FORM PENGATURAN LOGIN ---
 const settingForm = useForm({
     login_method: props.currentMethod,
 });
@@ -35,7 +33,6 @@ const saveSettings = () => {
     settingForm.post('/dashboard/settings', { preserveScroll: true });
 };
 
-// --- LOGIKA FORM SLIDER GAMBAR ---
 const fileInput = ref<HTMLInputElement | null>(null);
 const sliderForm = useForm({
     image: null as File | null,
@@ -66,7 +63,6 @@ const deleteImage = (id: number) => {
     }
 };
 
-// --- LOGIKA FORM PENGUMUMAN ---
 const showAnnouncementForm = ref(false);
 const editingAnnouncementId = ref<number | null>(null);
 
