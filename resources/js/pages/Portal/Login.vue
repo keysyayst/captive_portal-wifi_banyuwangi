@@ -11,12 +11,19 @@ import { usePortalLocation } from '@/composables/usePortalLocation';
 import { useOtpTimer } from '@/composables/useOtpTimer';
 import type { OtpMethod, PortalStep } from '@/types/portal';
 
+interface Slider {
+  id: number;
+  image_path: string;
+  type: string;
+}
+
 defineOptions({ layout: PortalLayout });
 const props = defineProps<{
   error?: string | null;
   mac?: string | null;
   ap?: string | null;
   nik?: string | null;
+  sliders?: Slider[];
 }>();
 
 const step = ref<PortalStep>('login');

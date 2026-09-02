@@ -1,8 +1,28 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import BackgroundSlider from '@/components/Portal/BackgroundSlider.vue';
-import PromoPoster from '@/components/Portal/PromoPoster.vue';
+import PromoPoster, { type PosterSlide } from '@/components/Portal/PromoPoster.vue';
 import { useBackgroundSlider } from '@/composables/useBackgroundSlider';
 import type { BackgroundImage } from '@/types/portal';
+
+interface Slider {
+  id: number;
+  image_path: string;
+  type: string;
+}
+
+const props = withDefaults(defineProps<{ sliders?: Slider[] }>(), {
+  sliders: () => [],
+});
+
+const posterSlides = computed<PosterSlide[]>(() =>
+  props.sliders
+    .filter((s) => s.type === 'before_login')
+    .map((s) => ({
+      image: `/storage/${s.image_path}`,
+      alt: 'Promo WiFi Gratis Banyuwangi',
+    })),
+);
 
 const images: BackgroundImage[] = [
   { url: '/images/Kawah-Ijen-Indonesia.jpg', alt: 'Kawah Ijen' },
@@ -55,8 +75,12 @@ const { activeIndex, goTo } = useBackgroundSlider(images);
             class="relative w-full flex flex-col lg:flex-row overflow-hidden"
             style="background: rgba(255,255,255,0.97); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid rgba(8,145,178,0.12); border-top: 3px solid #0891b2; border-radius: 20px; box-shadow: 0 24px 60px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.15);"
           >
-            <div class="p-5 sm:p-6 lg:w-[320px] xl:w-[380px] shrink-0 border-b lg:border-b-0 lg:border-r border-slate-200/70 flex items-center justify-center">
-              <PromoPoster />
+            <!-- Kolom poster cuma dirender kalau memang ada gambar type='before_login' -->
+            <div
+              v-if="posterSlides.length"
+              class="p-5 sm:p-6 lg:w-[320px] xl:w-[380px] shrink-0 border-b lg:border-b-0 lg:border-r border-slate-200/70 flex items-center justify-center"
+            >
+              <PromoPoster :slides="posterSlides" />
             </div>
 
             <div class="flex-1 min-w-0">
