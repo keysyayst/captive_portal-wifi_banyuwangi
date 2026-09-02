@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Announcement;
 use App\Models\Setting;
 use App\Models\Slider;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
-use Illuminate\Http\RedirectResponse;
 
 class SettingController extends Controller
 {
@@ -20,7 +21,8 @@ class SettingController extends Controller
 
         return Inertia::render('Dashboard/PortalSettings', [
             'currentMethod' => $loginMethod->value,
-            'sliders' => Slider::latest()->get()
+            'sliders' => Slider::latest()->get(),
+            'announcements' => Announcement::orderBy('sort_order')->orderBy('id')->get(),
         ]);
     }
 

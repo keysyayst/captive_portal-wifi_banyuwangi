@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SettingController;
@@ -20,3 +21,7 @@ Route::post('/dashboard/slider', [SliderController::class, 'store'])->name('dash
 Route::delete('/dashboard/slider/{slider}', [SliderController::class, 'destroy'])->name('dashboard.slider.destroy');
 Route::get('/dashboard/settings', [SettingController::class, 'index'])->name('dashboard.settings.index');
 Route::post('/dashboard/settings', [SettingController::class, 'update'])->name('dashboard.settings.update');
+Route::get('/dashboard/announcements', [AnnouncementController::class, 'dashboard'])->name('dashboard.announcements.dashboard');
+Route::post('/dashboard/announcements', [AnnouncementController::class, 'store'])->name('dashboard.announcements.store');
+Route::patch('/dashboard/announcements/{announcement}', [AnnouncementController::class, 'update'])->name('dashboard.announcements.update');
+Route::delete('/dashboard/announcements/{announcement}', [AnnouncementController::class, 'destroy'])->name('dashboard.announcements.destroy');
