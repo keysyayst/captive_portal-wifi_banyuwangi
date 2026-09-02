@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Device;
+use App\Models\Slider;
 use App\Models\User;
 use App\Services\RadiusService;
 use Illuminate\Http\JsonResponse;
@@ -22,6 +23,7 @@ class AuthController extends Controller
             'mac' => $request->query('mac') ?? $request->query('usermac'),
             'ap' => $request->query('ap') ?? $request->query('apmac'),
             'nik' => $request->query('nik'),
+            'sliders' => Slider::where('type', 'before_login')->latest()->get(['id', 'image_path', 'type']),
         ]);
     }
 
@@ -145,6 +147,7 @@ class AuthController extends Controller
         return Inertia::render('Portal/Welcome', [
             'phone' => $request->query('phone'),
             'ap' => $request->query('ap'),
+            'sliders' => Slider::where('type', 'after_login')->latest()->get(['id', 'image_path', 'type']),
         ]);
     }
 }

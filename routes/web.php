@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::redirect('/', '/portal')->name('home');
-Route::get('/portal', fn () => Inertia::render('Portal/Login'))->name('portal.login');
+Route::get('/portal', [AuthController::class, 'show'])->name('portal.login');
 Route::get('/portal/welcome', [AuthController::class, 'welcome'])->name('portal.welcome');
 Route::get('/portal/terms', fn () => Inertia::render('Portal/Terms'))->name('portal.terms');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
