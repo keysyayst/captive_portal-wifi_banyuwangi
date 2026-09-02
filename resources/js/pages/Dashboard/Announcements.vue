@@ -168,7 +168,7 @@ const toggleActive = (announcement: Announcement) => {
         <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
             <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-200">
                 <!-- Info Sidebar -->
-                <div class="p-6 md:p-8 bg-gradient-to-br from-cyan-50 to-blue-50">
+                <div class="p-6 md:p-8 bg-linear-to-br from-cyan-50 to-blue-50">
                     <h4 class="text-sm font-bold uppercase tracking-wider text-slate-700 mb-4">📋 Statistik Pengumuman</h4>
                     <div class="space-y-3">
                         <div class="flex items-center justify-between">
@@ -230,12 +230,12 @@ const toggleActive = (announcement: Announcement) => {
         </div>
     </section>
 </template>
-
+s
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity 0.3s ease;
-}
+}s
 
 .fade-enter-from,
 .fade-leave-to {
@@ -245,6 +245,7 @@ const toggleActive = (announcement: Announcement) => {
 .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
