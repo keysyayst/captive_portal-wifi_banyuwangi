@@ -57,7 +57,10 @@ class DashboardController extends Controller
         if ($search) {
             $query->where(function ($q) use ($search) {
                 $q->whereHas('device.user', function ($userQuery) use ($search) {
-                    $userQuery->where('phone_number', 'like', "%{$search}%");
+                    $userQuery->where(function ($identityQuery) use ($search) {
+                        $identityQuery->where('phone_number', 'like', "%{$search}%")
+                            ->orWhere('nik', 'like', "%{$search}%");
+                    });
                 })
                     ->orWhereHas('device', function ($deviceQuery) use ($search) {
                         $deviceQuery->where('mac_address', 'like', "%{$search}%");
@@ -71,7 +74,7 @@ class DashboardController extends Controller
             ->map(function ($session) {
                 return [
                     'id' => $session->id,
-                    'phone_number' => $session->device->user->phone_number ?? '-',
+                    'phone_number' => $session->device->user->phone_number ?? $session->device->user->nik ?? '-',
                     'device_type' => $session->device->device_type ?? 'Unknown',
                     'mac_address' => $session->device->mac_address ?? '-',
                     'ip_address' => $session->ip_address,
@@ -100,7 +103,10 @@ class DashboardController extends Controller
         if ($search) {
             $query->where(function ($q) use ($search) {
                 $q->whereHas('device.user', function ($userQuery) use ($search) {
-                    $userQuery->where('phone_number', 'like', "%{$search}%");
+                    $userQuery->where(function ($identityQuery) use ($search) {
+                        $identityQuery->where('phone_number', 'like', "%{$search}%")
+                            ->orWhere('nik', 'like', "%{$search}%");
+                    });
                 })
                     ->orWhereHas('device', function ($deviceQuery) use ($search) {
                         $deviceQuery->where('mac_address', 'like', "%{$search}%");
@@ -122,7 +128,7 @@ class DashboardController extends Controller
             ->through(function ($session) {
                 return [
                     'id' => $session->id,
-                    'phone_number' => $session->device->user->phone_number ?? '-',
+                    'phone_number' => $session->device->user->phone_number ?? $session->device->user->nik ?? '-',
                     'device_type' => $session->device->device_type ?? 'Unknown',
                     'mac_address' => $session->device->mac_address ?? '-',
                     'ip_address' => $session->ip_address,
@@ -154,7 +160,10 @@ class DashboardController extends Controller
         if ($search) {
             $query->where(function ($q) use ($search) {
                 $q->whereHas('device.user', function ($userQuery) use ($search) {
-                    $userQuery->where('phone_number', 'like', "%{$search}%");
+                    $userQuery->where(function ($identityQuery) use ($search) {
+                        $identityQuery->where('phone_number', 'like', "%{$search}%")
+                            ->orWhere('nik', 'like', "%{$search}%");
+                    });
                 })
                     ->orWhereHas('device', function ($deviceQuery) use ($search) {
                         $deviceQuery->where('mac_address', 'like', "%{$search}%");
@@ -195,7 +204,7 @@ class DashboardController extends Controller
 
             foreach ($records as $session) {
                 fputcsv($file, [
-                    $session->device->user->phone_number ?? '-',
+                    $session->device->user->phone_number ?? $session->device->user->nik ?? '-',
                     $session->device->device_type ?? 'Unknown',
                     $session->device->mac_address ?? '-',
                     $session->ip_address,
