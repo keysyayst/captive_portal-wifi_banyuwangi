@@ -5,7 +5,6 @@ import DashboardLayout from '@/layouts/DashboardLayout.vue';
 
 defineOptions({ layout: DashboardLayout });
 
-// --- DEFINISI TIPE DATA ---
 type Announcement = {
     id: number;
     message: string;
