@@ -11,9 +11,6 @@ interface Slider {
   type: string;
 }
 
-// Dikirim dari controller (mis. AuthController::show) lewat Inertia::render(..., ['sliders' => ...]).
-// Karena PortalLayout dipasang sebagai layout Inertia untuk halaman ini, dia otomatis
-// menerima props yang sama dengan page-nya — tidak perlu diteruskan manual dari Login.vue.
 const props = withDefaults(defineProps<{ sliders?: Slider[] }>(), {
   sliders: () => [],
 });
