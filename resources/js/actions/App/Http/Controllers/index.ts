@@ -5,6 +5,8 @@ import AnnouncementController from './AnnouncementController'
 import LocationWeatherController from './LocationWeatherController'
 import TickerItemController from './TickerItemController'
 import DashboardController from './DashboardController'
+import SliderController from './SliderController'
+import SettingController from './SettingController'
 const Controllers = {
     CountryController: Object.assign(CountryController, CountryController),
 AuthController: Object.assign(AuthController, AuthController),
@@ -13,6 +15,8 @@ AnnouncementController: Object.assign(AnnouncementController, AnnouncementContro
 LocationWeatherController: Object.assign(LocationWeatherController, LocationWeatherController),
 TickerItemController: Object.assign(TickerItemController, TickerItemController),
 DashboardController: Object.assign(DashboardController, DashboardController),
+SliderController: Object.assign(SliderController, SliderController),
+SettingController: Object.assign(SettingController, SettingController),
 }
 
 export default Controllers
