@@ -54,7 +54,6 @@ class AuthController extends Controller
             }
 
             $ipAddress = $request->header('X-Forwarded-For', $request->ip());
-            $macAddress = $validated['mac_address'] ?? 'unknown-'.$ipAddress;
 
             // Create/find user based on login method
             if (! empty($validated['nik'])) {
@@ -69,6 +68,11 @@ class AuthController extends Controller
                 );
             }
 
+            $macAddress = $validated['mac_address'] ?? null;
+            if (empty($macAddress) || $macAddress === '00:00:00:00:00:00') {
+                $macAddress = 'portal-'.$user->id.'-'.$ipAddress;
+            }
+
             $device = Device::firstOrCreate(
                 ['mac_address' => $macAddress],
                 [
@@ -77,16 +81,18 @@ class AuthController extends Controller
                 ]
             );
 
+            if (! $this->radiusService->authorizeUser($user, $device)) {
+                return response()->json([
+                    'message' => 'Login gagal: provisioning RADIUS tidak berhasil',
+                ], 503);
+            }
+
             $session = $device->sessions()->create([
                 'ip_address' => $ipAddress,
                 'access_point_location' => $validated['access_point_location'],
                 'login_time' => now(),
                 'authentication_status' => 'success',
             ]);
-
-            // Authorize user di FreeRADIUS (tulis ke radcheck/radreply/radusergroup).
-            // Error tidak menggagalkan login karena di-catch di dalam RadiusService.
-            $this->radiusService->authorizeUser($user, $device);
 
             $token = $user->createToken('auth_token')->plainTextToken;
 

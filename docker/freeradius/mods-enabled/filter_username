@@ -1,5 +1,0 @@
-# Modul untuk normalize username
-filter_username {
-    delimiter = "@"
-    delimiters = "@"
-}

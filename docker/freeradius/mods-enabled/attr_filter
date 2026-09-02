@@ -1,4 +1,4 @@
 # Modul filter untuk attributes yang diizinkan
 attr_filter {
-    attrsfile = ${confdir}/mods-config/attr_filter/default
+    filename = ${confdir}/mods-config/attr_filter/access_reject
 }

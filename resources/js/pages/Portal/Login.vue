@@ -227,7 +227,7 @@ async function verify() {
       :form="form"
       :location-text="location"
       :location-loading="locationLoading"
-      :error="error"
+      :error="submitError || error"
       @update:phone="(v) => (form.phone = v)"
       @update:country-code="(v) => (form.countryCode = v)"
       @toggle-agree="toggleAgree"

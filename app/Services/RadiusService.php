@@ -18,58 +18,58 @@ class RadiusService
      * @param  Device  $device  Device yang digunakan
      * @param  int  $sessionTimeout  Durasi session dalam detik (0 = pakai default config)
      */
-    public function authorizeUser(User $user, Device $device, int $sessionTimeout = 0): void
+    public function authorizeUser(User $user, Device $device, int $sessionTimeout = 0): bool
     {
         $username = $this->buildUsername($user);
         $timeout = $sessionTimeout > 0 ? $sessionTimeout : config('radius.session_timeout', 3600);
 
         try {
-            // Hapus entry lama jika ada (idempotent)
-            $this->removeUserEntries($username);
+            DB::transaction(function () use ($username, $device, $timeout): void {
+                $this->removeUserEntries($username);
 
-            // radcheck: autentikasi via Cleartext-Password
-            // Username adalah nomor HP, password adalah MAC address device
-            DB::table('radcheck')->insert([
-                'username' => $username,
-                'attribute' => 'Cleartext-Password',
-                'op' => ':=',
-                'value' => $device->mac_address,
-            ]);
-
-            // radreply: kirim Session-Timeout ke NAS
-            DB::table('radreply')->insert([
-                [
+                DB::table('radcheck')->insert([
                     'username' => $username,
-                    'attribute' => 'Session-Timeout',
+                    'attribute' => 'Cleartext-Password',
                     'op' => ':=',
-                    'value' => (string) $timeout,
-                ],
-                [
-                    'username' => $username,
-                    'attribute' => 'Idle-Timeout',
-                    'op' => ':=',
-                    'value' => '600',
-                ],
-            ]);
+                    'value' => $device->mac_address,
+                ]);
 
-            // radusergroup: masukkan ke group "users"
-            DB::table('radusergroup')->insert([
-                'username' => $username,
-                'groupname' => config('radius.default_group', 'users'),
-                'priority' => 1,
-            ]);
+                DB::table('radreply')->insert([
+                    [
+                        'username' => $username,
+                        'attribute' => 'Session-Timeout',
+                        'op' => ':=',
+                        'value' => (string) $timeout,
+                    ],
+                    [
+                        'username' => $username,
+                        'attribute' => 'Idle-Timeout',
+                        'op' => ':=',
+                        'value' => '600',
+                    ],
+                ]);
+
+                DB::table('radusergroup')->insert([
+                    'username' => $username,
+                    'groupname' => config('radius.default_group', 'users'),
+                    'priority' => 1,
+                ]);
+            });
 
             Log::info('RADIUS: User authorized', [
                 'username' => $username,
                 'mac' => $device->mac_address,
                 'timeout' => $timeout,
             ]);
+
+            return true;
         } catch (\Throwable $e) {
-            // Jangan gagalkan login jika RADIUS bermasalah, tapi log errornya
             Log::error('RADIUS: Failed to authorize user', [
                 'username' => $username,
                 'error' => $e->getMessage(),
             ]);
+
+            return false;
         }
     }
 
@@ -136,7 +136,7 @@ class RadiusService
      */
     private function buildUsername(User $user): string
     {
-        return $user->phone_number;
+        return (string) ($user->phone_number ?? $user->nik ?? '');
     }
 
     /**

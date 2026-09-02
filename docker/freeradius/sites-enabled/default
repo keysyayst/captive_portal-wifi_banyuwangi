@@ -43,12 +43,6 @@ server default {
         Auth-Type PAP {
             pap
         }
-        Auth-Type CHAP {
-            chap
-        }
-        Auth-Type MS-CHAP {
-            mschap
-        }
     }
 
     ##
@@ -68,9 +62,6 @@ server default {
     ## Accounting: catat sesi user
     ##
     accounting {
-        ## Pastikan Acct-Unique-Session-Id ada
-        acct_unique
-
         ## Simpan ke SQL
         sql
 
