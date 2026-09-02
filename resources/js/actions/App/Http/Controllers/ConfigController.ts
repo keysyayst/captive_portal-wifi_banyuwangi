@@ -1,7 +1,7 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\ConfigController::show
- * @see app/Http/Controllers/ConfigController.php:26
+ * @see app/Http/Controllers/ConfigController.php:27
  * @route '/api/config'
  */
 export const show = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ show.definition = {
 
 /**
 * @see \App\Http\Controllers\ConfigController::show
- * @see app/Http/Controllers/ConfigController.php:26
+ * @see app/Http/Controllers/ConfigController.php:27
  * @route '/api/config'
  */
 show.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ show.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\ConfigController::show
- * @see app/Http/Controllers/ConfigController.php:26
+ * @see app/Http/Controllers/ConfigController.php:27
  * @route '/api/config'
  */
 show.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -34,7 +34,7 @@ show.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\ConfigController::show
- * @see app/Http/Controllers/ConfigController.php:26
+ * @see app/Http/Controllers/ConfigController.php:27
  * @route '/api/config'
  */
 show.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -42,9 +42,44 @@ show.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     method: 'head',
 })
 
+    /**
+* @see \App\Http\Controllers\ConfigController::show
+ * @see app/Http/Controllers/ConfigController.php:27
+ * @route '/api/config'
+ */
+    const showForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: show.url(options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\ConfigController::show
+ * @see app/Http/Controllers/ConfigController.php:27
+ * @route '/api/config'
+ */
+        showForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: show.url(options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\ConfigController::show
+ * @see app/Http/Controllers/ConfigController.php:27
+ * @route '/api/config'
+ */
+        showForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: show.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    show.form = showForm
 /**
 * @see \App\Http\Controllers\ConfigController::terms
- * @see app/Http/Controllers/ConfigController.php:40
+ * @see app/Http/Controllers/ConfigController.php:45
  * @route '/api/terms'
  */
 export const terms = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -59,7 +94,7 @@ terms.definition = {
 
 /**
 * @see \App\Http\Controllers\ConfigController::terms
- * @see app/Http/Controllers/ConfigController.php:40
+ * @see app/Http/Controllers/ConfigController.php:45
  * @route '/api/terms'
  */
 terms.url = (options?: RouteQueryOptions) => {
@@ -68,7 +103,7 @@ terms.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\ConfigController::terms
- * @see app/Http/Controllers/ConfigController.php:40
+ * @see app/Http/Controllers/ConfigController.php:45
  * @route '/api/terms'
  */
 terms.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -77,13 +112,49 @@ terms.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\ConfigController::terms
- * @see app/Http/Controllers/ConfigController.php:40
+ * @see app/Http/Controllers/ConfigController.php:45
  * @route '/api/terms'
  */
 terms.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: terms.url(options),
     method: 'head',
 })
+
+    /**
+* @see \App\Http\Controllers\ConfigController::terms
+ * @see app/Http/Controllers/ConfigController.php:45
+ * @route '/api/terms'
+ */
+    const termsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: terms.url(options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\ConfigController::terms
+ * @see app/Http/Controllers/ConfigController.php:45
+ * @route '/api/terms'
+ */
+        termsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: terms.url(options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\ConfigController::terms
+ * @see app/Http/Controllers/ConfigController.php:45
+ * @route '/api/terms'
+ */
+        termsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: terms.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    terms.form = termsForm
 const ConfigController = { show, terms }
 
 export default ConfigController

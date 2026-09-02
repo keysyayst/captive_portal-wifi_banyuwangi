@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition } from './../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\DashboardController::stats
  * @see app/Http/Controllers/DashboardController.php:0
@@ -42,9 +42,44 @@ stats.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     method: 'head',
 })
 
+    /**
+* @see \App\Http\Controllers\DashboardController::stats
+ * @see app/Http/Controllers/DashboardController.php:0
+ * @route '/api/dashboard/stats'
+ */
+    const statsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: stats.url(options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\DashboardController::stats
+ * @see app/Http/Controllers/DashboardController.php:0
+ * @route '/api/dashboard/stats'
+ */
+        statsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: stats.url(options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\DashboardController::stats
+ * @see app/Http/Controllers/DashboardController.php:0
+ * @route '/api/dashboard/stats'
+ */
+        statsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: stats.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    stats.form = statsForm
 /**
 * @see \App\Http\Controllers\DashboardController::activeUsers
- * @see app/Http/Controllers/DashboardController.php:50
+ * @see app/Http/Controllers/DashboardController.php:52
  * @route '/api/dashboard/active-users'
  */
 const activeUsers9a044b30daf9b14571439ccaa28caa7f = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -59,7 +94,7 @@ activeUsers9a044b30daf9b14571439ccaa28caa7f.definition = {
 
 /**
 * @see \App\Http\Controllers\DashboardController::activeUsers
- * @see app/Http/Controllers/DashboardController.php:50
+ * @see app/Http/Controllers/DashboardController.php:52
  * @route '/api/dashboard/active-users'
  */
 activeUsers9a044b30daf9b14571439ccaa28caa7f.url = (options?: RouteQueryOptions) => {
@@ -68,7 +103,7 @@ activeUsers9a044b30daf9b14571439ccaa28caa7f.url = (options?: RouteQueryOptions) 
 
 /**
 * @see \App\Http\Controllers\DashboardController::activeUsers
- * @see app/Http/Controllers/DashboardController.php:50
+ * @see app/Http/Controllers/DashboardController.php:52
  * @route '/api/dashboard/active-users'
  */
 activeUsers9a044b30daf9b14571439ccaa28caa7f.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -77,7 +112,7 @@ activeUsers9a044b30daf9b14571439ccaa28caa7f.get = (options?: RouteQueryOptions):
 })
 /**
 * @see \App\Http\Controllers\DashboardController::activeUsers
- * @see app/Http/Controllers/DashboardController.php:50
+ * @see app/Http/Controllers/DashboardController.php:52
  * @route '/api/dashboard/active-users'
  */
 activeUsers9a044b30daf9b14571439ccaa28caa7f.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -87,7 +122,42 @@ activeUsers9a044b30daf9b14571439ccaa28caa7f.head = (options?: RouteQueryOptions)
 
     /**
 * @see \App\Http\Controllers\DashboardController::activeUsers
- * @see app/Http/Controllers/DashboardController.php:50
+ * @see app/Http/Controllers/DashboardController.php:52
+ * @route '/api/dashboard/active-users'
+ */
+    const activeUsers9a044b30daf9b14571439ccaa28caa7fForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: activeUsers9a044b30daf9b14571439ccaa28caa7f.url(options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\DashboardController::activeUsers
+ * @see app/Http/Controllers/DashboardController.php:52
+ * @route '/api/dashboard/active-users'
+ */
+        activeUsers9a044b30daf9b14571439ccaa28caa7fForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: activeUsers9a044b30daf9b14571439ccaa28caa7f.url(options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\DashboardController::activeUsers
+ * @see app/Http/Controllers/DashboardController.php:52
+ * @route '/api/dashboard/active-users'
+ */
+        activeUsers9a044b30daf9b14571439ccaa28caa7fForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: activeUsers9a044b30daf9b14571439ccaa28caa7f.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    activeUsers9a044b30daf9b14571439ccaa28caa7f.form = activeUsers9a044b30daf9b14571439ccaa28caa7fForm
+    /**
+* @see \App\Http\Controllers\DashboardController::activeUsers
+ * @see app/Http/Controllers/DashboardController.php:52
  * @route '/dashboard/active-users'
  */
 const activeUsers2370df3ce5aa63799349af99d0599b68 = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -102,7 +172,7 @@ activeUsers2370df3ce5aa63799349af99d0599b68.definition = {
 
 /**
 * @see \App\Http\Controllers\DashboardController::activeUsers
- * @see app/Http/Controllers/DashboardController.php:50
+ * @see app/Http/Controllers/DashboardController.php:52
  * @route '/dashboard/active-users'
  */
 activeUsers2370df3ce5aa63799349af99d0599b68.url = (options?: RouteQueryOptions) => {
@@ -111,7 +181,7 @@ activeUsers2370df3ce5aa63799349af99d0599b68.url = (options?: RouteQueryOptions) 
 
 /**
 * @see \App\Http\Controllers\DashboardController::activeUsers
- * @see app/Http/Controllers/DashboardController.php:50
+ * @see app/Http/Controllers/DashboardController.php:52
  * @route '/dashboard/active-users'
  */
 activeUsers2370df3ce5aa63799349af99d0599b68.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -120,13 +190,49 @@ activeUsers2370df3ce5aa63799349af99d0599b68.get = (options?: RouteQueryOptions):
 })
 /**
 * @see \App\Http\Controllers\DashboardController::activeUsers
- * @see app/Http/Controllers/DashboardController.php:50
+ * @see app/Http/Controllers/DashboardController.php:52
  * @route '/dashboard/active-users'
  */
 activeUsers2370df3ce5aa63799349af99d0599b68.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: activeUsers2370df3ce5aa63799349af99d0599b68.url(options),
     method: 'head',
 })
+
+    /**
+* @see \App\Http\Controllers\DashboardController::activeUsers
+ * @see app/Http/Controllers/DashboardController.php:52
+ * @route '/dashboard/active-users'
+ */
+    const activeUsers2370df3ce5aa63799349af99d0599b68Form = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: activeUsers2370df3ce5aa63799349af99d0599b68.url(options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\DashboardController::activeUsers
+ * @see app/Http/Controllers/DashboardController.php:52
+ * @route '/dashboard/active-users'
+ */
+        activeUsers2370df3ce5aa63799349af99d0599b68Form.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: activeUsers2370df3ce5aa63799349af99d0599b68.url(options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\DashboardController::activeUsers
+ * @see app/Http/Controllers/DashboardController.php:52
+ * @route '/dashboard/active-users'
+ */
+        activeUsers2370df3ce5aa63799349af99d0599b68Form.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: activeUsers2370df3ce5aa63799349af99d0599b68.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    activeUsers2370df3ce5aa63799349af99d0599b68.form = activeUsers2370df3ce5aa63799349af99d0599b68Form
 
 /**
 * Multiple routes resolve to \App\Http\Controllers\DashboardController::activeUsers, so this export is a
@@ -140,7 +246,7 @@ export const activeUsers = {
 
 /**
 * @see \App\Http\Controllers\DashboardController::loginHistory
- * @see app/Http/Controllers/DashboardController.php:73
+ * @see app/Http/Controllers/DashboardController.php:93
  * @route '/api/dashboard/login-history'
  */
 const loginHistory885c5e2e2d22542a23f911a7d4194464 = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -155,7 +261,7 @@ loginHistory885c5e2e2d22542a23f911a7d4194464.definition = {
 
 /**
 * @see \App\Http\Controllers\DashboardController::loginHistory
- * @see app/Http/Controllers/DashboardController.php:73
+ * @see app/Http/Controllers/DashboardController.php:93
  * @route '/api/dashboard/login-history'
  */
 loginHistory885c5e2e2d22542a23f911a7d4194464.url = (options?: RouteQueryOptions) => {
@@ -164,7 +270,7 @@ loginHistory885c5e2e2d22542a23f911a7d4194464.url = (options?: RouteQueryOptions)
 
 /**
 * @see \App\Http\Controllers\DashboardController::loginHistory
- * @see app/Http/Controllers/DashboardController.php:73
+ * @see app/Http/Controllers/DashboardController.php:93
  * @route '/api/dashboard/login-history'
  */
 loginHistory885c5e2e2d22542a23f911a7d4194464.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -173,7 +279,7 @@ loginHistory885c5e2e2d22542a23f911a7d4194464.get = (options?: RouteQueryOptions)
 })
 /**
 * @see \App\Http\Controllers\DashboardController::loginHistory
- * @see app/Http/Controllers/DashboardController.php:73
+ * @see app/Http/Controllers/DashboardController.php:93
  * @route '/api/dashboard/login-history'
  */
 loginHistory885c5e2e2d22542a23f911a7d4194464.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -183,7 +289,42 @@ loginHistory885c5e2e2d22542a23f911a7d4194464.head = (options?: RouteQueryOptions
 
     /**
 * @see \App\Http\Controllers\DashboardController::loginHistory
- * @see app/Http/Controllers/DashboardController.php:73
+ * @see app/Http/Controllers/DashboardController.php:93
+ * @route '/api/dashboard/login-history'
+ */
+    const loginHistory885c5e2e2d22542a23f911a7d4194464Form = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: loginHistory885c5e2e2d22542a23f911a7d4194464.url(options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\DashboardController::loginHistory
+ * @see app/Http/Controllers/DashboardController.php:93
+ * @route '/api/dashboard/login-history'
+ */
+        loginHistory885c5e2e2d22542a23f911a7d4194464Form.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: loginHistory885c5e2e2d22542a23f911a7d4194464.url(options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\DashboardController::loginHistory
+ * @see app/Http/Controllers/DashboardController.php:93
+ * @route '/api/dashboard/login-history'
+ */
+        loginHistory885c5e2e2d22542a23f911a7d4194464Form.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: loginHistory885c5e2e2d22542a23f911a7d4194464.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    loginHistory885c5e2e2d22542a23f911a7d4194464.form = loginHistory885c5e2e2d22542a23f911a7d4194464Form
+    /**
+* @see \App\Http\Controllers\DashboardController::loginHistory
+ * @see app/Http/Controllers/DashboardController.php:93
  * @route '/dashboard/login-history'
  */
 const loginHistoryee5fe52b972da42f26943713528422e2 = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -198,7 +339,7 @@ loginHistoryee5fe52b972da42f26943713528422e2.definition = {
 
 /**
 * @see \App\Http\Controllers\DashboardController::loginHistory
- * @see app/Http/Controllers/DashboardController.php:73
+ * @see app/Http/Controllers/DashboardController.php:93
  * @route '/dashboard/login-history'
  */
 loginHistoryee5fe52b972da42f26943713528422e2.url = (options?: RouteQueryOptions) => {
@@ -207,7 +348,7 @@ loginHistoryee5fe52b972da42f26943713528422e2.url = (options?: RouteQueryOptions)
 
 /**
 * @see \App\Http\Controllers\DashboardController::loginHistory
- * @see app/Http/Controllers/DashboardController.php:73
+ * @see app/Http/Controllers/DashboardController.php:93
  * @route '/dashboard/login-history'
  */
 loginHistoryee5fe52b972da42f26943713528422e2.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -216,13 +357,49 @@ loginHistoryee5fe52b972da42f26943713528422e2.get = (options?: RouteQueryOptions)
 })
 /**
 * @see \App\Http\Controllers\DashboardController::loginHistory
- * @see app/Http/Controllers/DashboardController.php:73
+ * @see app/Http/Controllers/DashboardController.php:93
  * @route '/dashboard/login-history'
  */
 loginHistoryee5fe52b972da42f26943713528422e2.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: loginHistoryee5fe52b972da42f26943713528422e2.url(options),
     method: 'head',
 })
+
+    /**
+* @see \App\Http\Controllers\DashboardController::loginHistory
+ * @see app/Http/Controllers/DashboardController.php:93
+ * @route '/dashboard/login-history'
+ */
+    const loginHistoryee5fe52b972da42f26943713528422e2Form = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: loginHistoryee5fe52b972da42f26943713528422e2.url(options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\DashboardController::loginHistory
+ * @see app/Http/Controllers/DashboardController.php:93
+ * @route '/dashboard/login-history'
+ */
+        loginHistoryee5fe52b972da42f26943713528422e2Form.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: loginHistoryee5fe52b972da42f26943713528422e2.url(options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\DashboardController::loginHistory
+ * @see app/Http/Controllers/DashboardController.php:93
+ * @route '/dashboard/login-history'
+ */
+        loginHistoryee5fe52b972da42f26943713528422e2Form.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: loginHistoryee5fe52b972da42f26943713528422e2.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    loginHistoryee5fe52b972da42f26943713528422e2.form = loginHistoryee5fe52b972da42f26943713528422e2Form
 
 /**
 * Multiple routes resolve to \App\Http\Controllers\DashboardController::loginHistory, so this export is a
@@ -277,9 +454,44 @@ locationStats.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => (
     method: 'head',
 })
 
+    /**
+* @see \App\Http\Controllers\DashboardController::locationStats
+ * @see app/Http/Controllers/DashboardController.php:0
+ * @route '/api/dashboard/location-stats'
+ */
+    const locationStatsForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: locationStats.url(options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\DashboardController::locationStats
+ * @see app/Http/Controllers/DashboardController.php:0
+ * @route '/api/dashboard/location-stats'
+ */
+        locationStatsForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: locationStats.url(options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\DashboardController::locationStats
+ * @see app/Http/Controllers/DashboardController.php:0
+ * @route '/api/dashboard/location-stats'
+ */
+        locationStatsForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: locationStats.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    locationStats.form = locationStatsForm
 /**
 * @see \App\Http\Controllers\DashboardController::index
- * @see app/Http/Controllers/DashboardController.php:14
+ * @see app/Http/Controllers/DashboardController.php:16
  * @route '/dashboard'
  */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -294,7 +506,7 @@ index.definition = {
 
 /**
 * @see \App\Http\Controllers\DashboardController::index
- * @see app/Http/Controllers/DashboardController.php:14
+ * @see app/Http/Controllers/DashboardController.php:16
  * @route '/dashboard'
  */
 index.url = (options?: RouteQueryOptions) => {
@@ -303,7 +515,7 @@ index.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\DashboardController::index
- * @see app/Http/Controllers/DashboardController.php:14
+ * @see app/Http/Controllers/DashboardController.php:16
  * @route '/dashboard'
  */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -312,7 +524,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\DashboardController::index
- * @see app/Http/Controllers/DashboardController.php:14
+ * @see app/Http/Controllers/DashboardController.php:16
  * @route '/dashboard'
  */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -320,9 +532,122 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     method: 'head',
 })
 
+    /**
+* @see \App\Http\Controllers\DashboardController::index
+ * @see app/Http/Controllers/DashboardController.php:16
+ * @route '/dashboard'
+ */
+    const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: index.url(options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\DashboardController::index
+ * @see app/Http/Controllers/DashboardController.php:16
+ * @route '/dashboard'
+ */
+        indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: index.url(options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\DashboardController::index
+ * @see app/Http/Controllers/DashboardController.php:16
+ * @route '/dashboard'
+ */
+        indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: index.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    index.form = indexForm
+/**
+* @see \App\Http\Controllers\DashboardController::exportLoginHistory
+ * @see app/Http/Controllers/DashboardController.php:151
+ * @route '/dashboard/login-history/export'
+ */
+export const exportLoginHistory = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: exportLoginHistory.url(options),
+    method: 'get',
+})
+
+exportLoginHistory.definition = {
+    methods: ["get","head"],
+    url: '/dashboard/login-history/export',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\DashboardController::exportLoginHistory
+ * @see app/Http/Controllers/DashboardController.php:151
+ * @route '/dashboard/login-history/export'
+ */
+exportLoginHistory.url = (options?: RouteQueryOptions) => {
+    return exportLoginHistory.definition.url + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\DashboardController::exportLoginHistory
+ * @see app/Http/Controllers/DashboardController.php:151
+ * @route '/dashboard/login-history/export'
+ */
+exportLoginHistory.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: exportLoginHistory.url(options),
+    method: 'get',
+})
+/**
+* @see \App\Http\Controllers\DashboardController::exportLoginHistory
+ * @see app/Http/Controllers/DashboardController.php:151
+ * @route '/dashboard/login-history/export'
+ */
+exportLoginHistory.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: exportLoginHistory.url(options),
+    method: 'head',
+})
+
+    /**
+* @see \App\Http\Controllers\DashboardController::exportLoginHistory
+ * @see app/Http/Controllers/DashboardController.php:151
+ * @route '/dashboard/login-history/export'
+ */
+    const exportLoginHistoryForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: exportLoginHistory.url(options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\DashboardController::exportLoginHistory
+ * @see app/Http/Controllers/DashboardController.php:151
+ * @route '/dashboard/login-history/export'
+ */
+        exportLoginHistoryForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: exportLoginHistory.url(options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\DashboardController::exportLoginHistory
+ * @see app/Http/Controllers/DashboardController.php:151
+ * @route '/dashboard/login-history/export'
+ */
+        exportLoginHistoryForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: exportLoginHistory.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    exportLoginHistory.form = exportLoginHistoryForm
 /**
 * @see \App\Http\Controllers\DashboardController::apManagement
- * @see app/Http/Controllers/DashboardController.php:99
+ * @see app/Http/Controllers/DashboardController.php:225
  * @route '/dashboard/ap-management'
  */
 export const apManagement = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -337,7 +662,7 @@ apManagement.definition = {
 
 /**
 * @see \App\Http\Controllers\DashboardController::apManagement
- * @see app/Http/Controllers/DashboardController.php:99
+ * @see app/Http/Controllers/DashboardController.php:225
  * @route '/dashboard/ap-management'
  */
 apManagement.url = (options?: RouteQueryOptions) => {
@@ -346,7 +671,7 @@ apManagement.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\DashboardController::apManagement
- * @see app/Http/Controllers/DashboardController.php:99
+ * @see app/Http/Controllers/DashboardController.php:225
  * @route '/dashboard/ap-management'
  */
 apManagement.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -355,13 +680,49 @@ apManagement.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\DashboardController::apManagement
- * @see app/Http/Controllers/DashboardController.php:99
+ * @see app/Http/Controllers/DashboardController.php:225
  * @route '/dashboard/ap-management'
  */
 apManagement.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: apManagement.url(options),
     method: 'head',
 })
-const DashboardController = { stats, activeUsers, loginHistory, locationStats, index, apManagement }
+
+    /**
+* @see \App\Http\Controllers\DashboardController::apManagement
+ * @see app/Http/Controllers/DashboardController.php:225
+ * @route '/dashboard/ap-management'
+ */
+    const apManagementForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: apManagement.url(options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\DashboardController::apManagement
+ * @see app/Http/Controllers/DashboardController.php:225
+ * @route '/dashboard/ap-management'
+ */
+        apManagementForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: apManagement.url(options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\DashboardController::apManagement
+ * @see app/Http/Controllers/DashboardController.php:225
+ * @route '/dashboard/ap-management'
+ */
+        apManagementForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: apManagement.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    apManagement.form = apManagementForm
+const DashboardController = { stats, activeUsers, loginHistory, locationStats, index, exportLoginHistory, apManagement }
 
 export default DashboardController
