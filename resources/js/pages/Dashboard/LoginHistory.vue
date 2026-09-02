@@ -92,16 +92,21 @@ const goToNextPage = () => {
 
         <!-- Filters Section -->
         <div class="mt-8 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-            <div class="grid gap-4 md:grid-cols-4">
+            <!-- Form Inputs -->
+            <div class="grid gap-4 md:grid-cols-3 mb-5">
                 <!-- Search Input -->
                 <div>
-                    <label class="mb-2 block text-sm font-medium text-slate-700">Search</label>
-                    <input
-                        v-model="search"
-                        type="text"
-                        placeholder="Nomor HP, MAC, atau Lokasi"
-                        class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm placeholder-slate-400 transition-all focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100 focus:outline-none"
-                    />
+                    <label class="mb-2 block text-sm font-medium text-slate-700">Pencarian</label>
+                    <div class="relative">
+                        <svg class="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                        <input
+                            v-model="search"
+                            type="text"
+                            placeholder="Nomor HP, MAC, atau Lokasi"
+                            class="w-full rounded-lg border border-slate-300 pl-10 pr-4 py-2.5 text-sm placeholder-slate-400 transition-all focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100 focus:outline-none"
+                            @keyup.enter="searchNow"
+                        />
+                    </div>
                 </div>
 
                 <!-- Start Date -->
@@ -123,34 +128,34 @@ const goToNextPage = () => {
                         class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm transition-all focus:border-cyan-500 focus:ring-2 focus:ring-cyan-100 focus:outline-none"
                     />
                 </div>
+            </div>
 
-                <!-- Actions -->
-                <div class="flex flex-col gap-2">
-                    <button
-                        @click="searchNow"
-                        class="flex items-center justify-center gap-2 rounded-lg bg-cyan-600 px-4 py-2.5 font-medium text-white transition-all hover:bg-cyan-700 focus:ring-2 focus:ring-cyan-200 focus:outline-none"
-                    >
-                        <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                        Cari
-                    </button>
-                    <button
-                        @click="resetFilters"
-                        class="rounded-lg border border-slate-300 px-4 py-2.5 font-medium text-slate-700 transition-all hover:bg-slate-50 focus:ring-2 focus:ring-slate-200 focus:outline-none"
-                    >
-                        Reset
-                    </button>
-                    <button
-                        @click="exportCSV"
-                        class="flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-4 py-2.5 font-medium text-white transition-all hover:bg-emerald-700 focus:ring-2 focus:ring-emerald-200 focus:outline-none"
-                    >
-                        <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 16v-4m0 0V8m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        Export CSV
-                    </button>
-                </div>
+            <!-- Actions -->
+            <div class="flex flex-wrap items-center justify-end gap-3 pt-5 border-t border-slate-100">
+                <button
+                    @click="resetFilters"
+                    class="rounded-lg border border-slate-300 px-5 py-2.5 text-sm font-medium text-slate-700 transition-all hover:bg-slate-50 focus:ring-2 focus:ring-slate-200 focus:outline-none"
+                >
+                    Reset
+                </button>
+                <button
+                    @click="exportCSV"
+                    class="flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-emerald-700 focus:ring-2 focus:ring-emerald-200 focus:outline-none"
+                >
+                    <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 16v-4m0 0V8m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Export CSV
+                </button>
+                <button
+                    @click="searchNow"
+                    class="flex items-center justify-center gap-2 rounded-lg bg-cyan-600 px-6 py-2.5 text-sm font-medium text-white transition-all hover:bg-cyan-700 focus:ring-2 focus:ring-cyan-200 focus:outline-none"
+                >
+                    <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    Terapkan Filter
+                </button>
             </div>
         </div>
 
