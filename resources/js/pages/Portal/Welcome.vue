@@ -1,14 +1,30 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { router } from '@inertiajs/vue3';
-import PromoCarousel from '@/components/Portal/PromoCarousel.vue';
+import PromoCarousel, { type PromoBanner } from '@/components/Portal/PromoCarousel.vue';
 import StatusBar from '@/components/Portal/StatusBar.vue';
 import TickerBar from '@/components/Portal/TickerBar.vue';
+
+interface Slider {
+  id: number;
+  image_path: string;
+  type: string;
+}
 
 const props = defineProps<{
   phone?: string | null;
   ap?: string | null;
+  sliders?: Slider[];
 }>();
+
+const promoBanners = computed<PromoBanner[]>(() =>
+  (props.sliders ?? [])
+    .filter((s) => s.type === 'after_login')
+    .map((s) => ({
+      image: `/storage/${s.image_path}`,
+      alt: 'Promo WiFi Gratis Banyuwangi',
+    })),
+);
 
 const maskedPhone = computed(() => {
   const phone = props.phone ?? '';
@@ -61,8 +77,8 @@ const services = [
   },
 ];
 
-
-
+// Kalau file logo belum ada / salah nama di public/images/services/, jangan
+// biarkan kotaknya kosong — fallback ke inisial huruf.
 const logoFailed = ref<Record<string, boolean>>({});
 function onLogoError(label: string) {
   logoFailed.value[label] = true;
@@ -99,7 +115,7 @@ async function logout() {
 }
 
 onMounted(() => {
-
+  // Poll every 30s in case an admin kills the session or it expires server-side.
   statusTimer = setInterval(checkStatus, 30000);
 });
 
@@ -113,7 +129,7 @@ onUnmounted(() => {
     <div class="min-h-screen flex flex-col relative">
       <TickerBar />
 
-
+      <!-- Background: foto budaya + overlay gelap tipis + blur halus, biar semua card di atasnya kontras -->
       <img
         src="/images/background-welcome.jpg"
         alt=""
@@ -123,20 +139,11 @@ onUnmounted(() => {
       />
       <div class="fixed inset-0" style="background: linear-gradient(180deg, rgba(6,20,35,0.55) 0%, rgba(6,20,35,0.4) 40%, rgba(6,20,35,0.62) 100%);" />
 
-
+      <!-- Baris 1: Header — logo kiri, judul+status tengah, keluar kanan -->
       <header class="relative z-10 border-b border-white/10" style="background: rgba(255,255,255,0.9); backdrop-filter: blur(20px);">
         <div class="max-w-screen-xl mx-auto px-4 py-3 grid grid-cols-3 items-center gap-2">
           <div class="flex items-center gap-3 justify-self-start">
-            <img src="/images/logo_bwi.png" alt="Pemkab Banyuwangi" class="h-9 w-9 sm:h-10 sm:w-10 object-contain shrink-0" style="filter: drop-shadow(0 2px 6px rgba(0,0,0,0.55));" />
-            <div class="w-px h-8 bg-slate-200" />
-            <div class="leading-tight hidden sm:block">
-              <p class="font-display font-bold text-xs text-slate-700" style="letter-spacing: 0.01em;">
-                Pemerintah Kabupaten
-              </p>
-              <p class="font-display font-bold text-xs text-slate-700" style="letter-spacing: 0.01em;">
-                Banyuwangi
-              </p>
-            </div>
+            <img src="/images/logo_bwi.png" alt="Pemkab Banyuwangi" class="h-7 sm:h-8 object-contain" />
           </div>
 
           <div class="flex flex-col items-center justify-self-center text-center">
@@ -169,13 +176,13 @@ onUnmounted(() => {
       </header>
 
       <main class="relative z-10 flex-1 max-w-screen-xl mx-auto w-full px-4 py-6 space-y-4">
-
-        <PromoCarousel />
-
-
+        <!-- Baris 2: status terhubung + cuaca/info, satu baris horizontal di desktop -->
         <StatusBar />
 
+        <!-- Baris 3: banner 21:9, max-height 230px -->
+        <PromoCarousel :banners="promoBanners" />
 
+        <!-- Baris 4: grid 3x2 akses cepat layanan, langsung di bawah banner -->
         <div>
           <p class="text-xs font-semibold uppercase tracking-widest mb-3 text-white/85" style="text-shadow: 0 1px 3px rgba(0,0,0,0.35);">
             Akses Cepat Layanan
@@ -187,7 +194,7 @@ onUnmounted(() => {
               :href="s.href"
               target="_blank"
               rel="noopener noreferrer"
-              class="group rounded-2xl p-4 flex flex-col items-center gap-3 text-center transition-all hover:scale-[1.02]"
+              class="group rounded-2xl p-4 flex flex-col gap-3 transition-all hover:scale-[1.02]"
               style="background: rgba(255,255,255,0.92); backdrop-filter: blur(16px); border: 1px solid rgba(148,163,184,0.25); box-shadow: 0 8px 20px rgba(15,23,42,0.12);"
             >
               <div class="w-9 h-9 rounded-xl flex items-center justify-center overflow-hidden" :style="{ background: s.color + '14' }">
