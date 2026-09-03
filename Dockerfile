@@ -64,6 +64,8 @@ COPY --from=frontend /app/public/build ./public/build
 
 USER root
 
+RUN php artisan storage:link
+
 RUN chown -R www-data:www-data \
     /var/www/html/storage \
     /var/www/html/bootstrap/cache
