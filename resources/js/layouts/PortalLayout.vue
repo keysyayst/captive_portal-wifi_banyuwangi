@@ -34,7 +34,7 @@ const { activeIndex, goTo } = useBackgroundSlider(images);
 </script>
 
 <template>
-  <div class="min-h-screen overflow-hidden text-slate-900" style="background: #050c1a;">
+  <div class="portal-page min-h-screen overflow-hidden text-slate-900" style="background: #050c1a;">
     <div class="min-h-screen relative flex items-center justify-center">
       <BackgroundSlider :images="images" :active-index="activeIndex" @select="goTo" />
 

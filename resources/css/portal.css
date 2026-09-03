@@ -10,6 +10,15 @@
   --font-serif: 'Lora', serif;
 }
 
+.portal-page {
+  overscroll-behavior-y: none;
+}
+
+html:has(.portal-page),
+body:has(.portal-page) {
+  overscroll-behavior-y: none;
+}
+
 .font-display { font-family: var(--font-display); }
 .font-serif { font-family: var(--font-serif); }
 

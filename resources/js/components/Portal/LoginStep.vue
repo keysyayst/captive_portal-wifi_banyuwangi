@@ -211,12 +211,13 @@ const isValid = computed(() => {
           @update:model-value="handleCountryChange"
         >
 
-          <div class="relative w-18 shrink-0">
+          <div class="relative shrink-0">
 
             <ListboxButton
               class="
                 relative
-                w-full
+                w-auto
+                min-w-[72px]
                 px-3
                 py-2.5
                 text-left
@@ -243,7 +244,7 @@ const isValid = computed(() => {
 
               <span
                 v-else
-                class="block truncate pr-5"
+                class="block pr-5 whitespace-nowrap"
               >
                 {{ selectedCountry?.phone_code }}
               </span>
