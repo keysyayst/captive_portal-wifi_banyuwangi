@@ -1,4 +1,4 @@
-import { queryParams, type RouteQueryOptions, type RouteDefinition, applyUrlDefaults } from './../../../../wayfinder'
+import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\TickerItemController::index
  * @see app/Http/Controllers/TickerItemController.php:14
@@ -42,6 +42,41 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     method: 'head',
 })
 
+    /**
+* @see \App\Http\Controllers\TickerItemController::index
+ * @see app/Http/Controllers/TickerItemController.php:14
+ * @route '/api/ticker-items'
+ */
+    const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: index.url(options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\TickerItemController::index
+ * @see app/Http/Controllers/TickerItemController.php:14
+ * @route '/api/ticker-items'
+ */
+        indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: index.url(options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\TickerItemController::index
+ * @see app/Http/Controllers/TickerItemController.php:14
+ * @route '/api/ticker-items'
+ */
+        indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: index.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    index.form = indexForm
 /**
 * @see \App\Http\Controllers\TickerItemController::adminIndex
  * @see app/Http/Controllers/TickerItemController.php:25
@@ -85,6 +120,41 @@ adminIndex.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     method: 'head',
 })
 
+    /**
+* @see \App\Http\Controllers\TickerItemController::adminIndex
+ * @see app/Http/Controllers/TickerItemController.php:25
+ * @route '/api/admin/ticker-items'
+ */
+    const adminIndexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: adminIndex.url(options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\TickerItemController::adminIndex
+ * @see app/Http/Controllers/TickerItemController.php:25
+ * @route '/api/admin/ticker-items'
+ */
+        adminIndexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: adminIndex.url(options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\TickerItemController::adminIndex
+ * @see app/Http/Controllers/TickerItemController.php:25
+ * @route '/api/admin/ticker-items'
+ */
+        adminIndexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: adminIndex.url({
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    adminIndex.form = adminIndexForm
 /**
 * @see \App\Http\Controllers\TickerItemController::store
  * @see app/Http/Controllers/TickerItemController.php:35
@@ -119,6 +189,27 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     method: 'post',
 })
 
+    /**
+* @see \App\Http\Controllers\TickerItemController::store
+ * @see app/Http/Controllers/TickerItemController.php:35
+ * @route '/api/admin/ticker-items'
+ */
+    const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: store.url(options),
+        method: 'post',
+    })
+
+            /**
+* @see \App\Http\Controllers\TickerItemController::store
+ * @see app/Http/Controllers/TickerItemController.php:35
+ * @route '/api/admin/ticker-items'
+ */
+        storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: store.url(options),
+            method: 'post',
+        })
+    
+    store.form = storeForm
 /**
 * @see \App\Http\Controllers\TickerItemController::show
  * @see app/Http/Controllers/TickerItemController.php:42
@@ -186,6 +277,41 @@ show.head = (args: { ticker_item: string | number | { id: string | number } } | 
     method: 'head',
 })
 
+    /**
+* @see \App\Http\Controllers\TickerItemController::show
+ * @see app/Http/Controllers/TickerItemController.php:42
+ * @route '/api/admin/ticker-items/{ticker_item}'
+ */
+    const showForm = (args: { ticker_item: string | number | { id: string | number } } | [ticker_item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+        action: show.url(args, options),
+        method: 'get',
+    })
+
+            /**
+* @see \App\Http\Controllers\TickerItemController::show
+ * @see app/Http/Controllers/TickerItemController.php:42
+ * @route '/api/admin/ticker-items/{ticker_item}'
+ */
+        showForm.get = (args: { ticker_item: string | number | { id: string | number } } | [ticker_item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: show.url(args, options),
+            method: 'get',
+        })
+            /**
+* @see \App\Http\Controllers\TickerItemController::show
+ * @see app/Http/Controllers/TickerItemController.php:42
+ * @route '/api/admin/ticker-items/{ticker_item}'
+ */
+        showForm.head = (args: { ticker_item: string | number | { id: string | number } } | [ticker_item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+            action: show.url(args, {
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'HEAD',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'get',
+        })
+    
+    show.form = showForm
 /**
 * @see \App\Http\Controllers\TickerItemController::update
  * @see app/Http/Controllers/TickerItemController.php:47
@@ -253,6 +379,51 @@ update.patch = (args: { ticker_item: string | number | { id: string | number } }
     method: 'patch',
 })
 
+    /**
+* @see \App\Http\Controllers\TickerItemController::update
+ * @see app/Http/Controllers/TickerItemController.php:47
+ * @route '/api/admin/ticker-items/{ticker_item}'
+ */
+    const updateForm = (args: { ticker_item: string | number | { id: string | number } } | [ticker_item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: update.url(args, {
+                    [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                        _method: 'PUT',
+                        ...(options?.query ?? options?.mergeQuery ?? {}),
+                    }
+                }),
+        method: 'post',
+    })
+
+            /**
+* @see \App\Http\Controllers\TickerItemController::update
+ * @see app/Http/Controllers/TickerItemController.php:47
+ * @route '/api/admin/ticker-items/{ticker_item}'
+ */
+        updateForm.put = (args: { ticker_item: string | number | { id: string | number } } | [ticker_item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: update.url(args, {
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'PUT',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'post',
+        })
+            /**
+* @see \App\Http\Controllers\TickerItemController::update
+ * @see app/Http/Controllers/TickerItemController.php:47
+ * @route '/api/admin/ticker-items/{ticker_item}'
+ */
+        updateForm.patch = (args: { ticker_item: string | number | { id: string | number } } | [ticker_item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: update.url(args, {
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'PATCH',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'post',
+        })
+    
+    update.form = updateForm
 /**
 * @see \App\Http\Controllers\TickerItemController::destroy
  * @see app/Http/Controllers/TickerItemController.php:54
@@ -310,6 +481,38 @@ destroy.delete = (args: { ticker_item: string | number | { id: string | number }
     url: destroy.url(args, options),
     method: 'delete',
 })
+
+    /**
+* @see \App\Http\Controllers\TickerItemController::destroy
+ * @see app/Http/Controllers/TickerItemController.php:54
+ * @route '/api/admin/ticker-items/{ticker_item}'
+ */
+    const destroyForm = (args: { ticker_item: string | number | { id: string | number } } | [ticker_item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        action: destroy.url(args, {
+                    [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                        _method: 'DELETE',
+                        ...(options?.query ?? options?.mergeQuery ?? {}),
+                    }
+                }),
+        method: 'post',
+    })
+
+            /**
+* @see \App\Http\Controllers\TickerItemController::destroy
+ * @see app/Http/Controllers/TickerItemController.php:54
+ * @route '/api/admin/ticker-items/{ticker_item}'
+ */
+        destroyForm.delete = (args: { ticker_item: string | number | { id: string | number } } | [ticker_item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+            action: destroy.url(args, {
+                        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+                            _method: 'DELETE',
+                            ...(options?.query ?? options?.mergeQuery ?? {}),
+                        }
+                    }),
+            method: 'post',
+        })
+    
+    destroy.form = destroyForm
 const TickerItemController = { index, adminIndex, store, show, update, destroy }
 
 export default TickerItemController
