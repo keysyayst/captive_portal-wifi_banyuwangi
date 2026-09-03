@@ -215,7 +215,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
  * @see app/Http/Controllers/AnnouncementController.php:62
  * @route '/dashboard/announcements/{announcement}'
  */
-export const update = (args: { announcement: string | number | { id: string | number } } | [announcement: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+export const update = (args: { announcement: number | { id: number } } | [announcement: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: update.url(args, options),
     method: 'patch',
 })
@@ -230,7 +230,7 @@ update.definition = {
  * @see app/Http/Controllers/AnnouncementController.php:62
  * @route '/dashboard/announcements/{announcement}'
  */
-update.url = (args: { announcement: string | number | { id: string | number } } | [announcement: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+update.url = (args: { announcement: number | { id: number } } | [announcement: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { announcement: args }
     }
@@ -263,7 +263,7 @@ update.url = (args: { announcement: string | number | { id: string | number } } 
  * @see app/Http/Controllers/AnnouncementController.php:62
  * @route '/dashboard/announcements/{announcement}'
  */
-update.patch = (args: { announcement: string | number | { id: string | number } } | [announcement: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+update.patch = (args: { announcement: number | { id: number } } | [announcement: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: update.url(args, options),
     method: 'patch',
 })
@@ -273,7 +273,7 @@ update.patch = (args: { announcement: string | number | { id: string | number } 
  * @see app/Http/Controllers/AnnouncementController.php:62
  * @route '/dashboard/announcements/{announcement}'
  */
-    const updateForm = (args: { announcement: string | number | { id: string | number } } | [announcement: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    const updateForm = (args: { announcement: number | { id: number } } | [announcement: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
         action: update.url(args, {
                     [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                         _method: 'PATCH',
@@ -288,7 +288,7 @@ update.patch = (args: { announcement: string | number | { id: string | number } 
  * @see app/Http/Controllers/AnnouncementController.php:62
  * @route '/dashboard/announcements/{announcement}'
  */
-        updateForm.patch = (args: { announcement: string | number | { id: string | number } } | [announcement: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        updateForm.patch = (args: { announcement: number | { id: number } } | [announcement: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
             action: update.url(args, {
                         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                             _method: 'PATCH',
@@ -304,7 +304,7 @@ update.patch = (args: { announcement: string | number | { id: string | number } 
  * @see app/Http/Controllers/AnnouncementController.php:77
  * @route '/dashboard/announcements/{announcement}'
  */
-export const destroy = (args: { announcement: string | number | { id: string | number } } | [announcement: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { announcement: number | { id: number } } | [announcement: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -319,7 +319,7 @@ destroy.definition = {
  * @see app/Http/Controllers/AnnouncementController.php:77
  * @route '/dashboard/announcements/{announcement}'
  */
-destroy.url = (args: { announcement: string | number | { id: string | number } } | [announcement: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+destroy.url = (args: { announcement: number | { id: number } } | [announcement: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { announcement: args }
     }
@@ -352,7 +352,7 @@ destroy.url = (args: { announcement: string | number | { id: string | number } }
  * @see app/Http/Controllers/AnnouncementController.php:77
  * @route '/dashboard/announcements/{announcement}'
  */
-destroy.delete = (args: { announcement: string | number | { id: string | number } } | [announcement: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { announcement: number | { id: number } } | [announcement: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -362,7 +362,7 @@ destroy.delete = (args: { announcement: string | number | { id: string | number 
  * @see app/Http/Controllers/AnnouncementController.php:77
  * @route '/dashboard/announcements/{announcement}'
  */
-    const destroyForm = (args: { announcement: string | number | { id: string | number } } | [announcement: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+    const destroyForm = (args: { announcement: number | { id: number } } | [announcement: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
         action: destroy.url(args, {
                     [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                         _method: 'DELETE',
@@ -377,7 +377,7 @@ destroy.delete = (args: { announcement: string | number | { id: string | number 
  * @see app/Http/Controllers/AnnouncementController.php:77
  * @route '/dashboard/announcements/{announcement}'
  */
-        destroyForm.delete = (args: { announcement: string | number | { id: string | number } } | [announcement: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+        destroyForm.delete = (args: { announcement: number | { id: number } } | [announcement: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
             action: destroy.url(args, {
                         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
                             _method: 'DELETE',

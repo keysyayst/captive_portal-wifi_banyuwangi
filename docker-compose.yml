@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        VITE_APP_NAME: "${VITE_APP_NAME}"
     container_name: captive_portal_app
     restart: unless-stopped
     ports:
