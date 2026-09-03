@@ -53,7 +53,17 @@ const uploadImage = () => {
 const handleFileChange = (e: Event) => {
     const target = e.target as HTMLInputElement;
     if (target.files && target.files.length > 0) {
-        sliderForm.image = target.files[0];
+        const file = target.files[0];
+
+        if (file.size > 2097152) {
+            alert('Gagal! Ukuran gambar terlalu besar. Maksimal ukuran file adalah 2MB.');
+
+            if (fileInput.value) fileInput.value.value = '';
+            sliderForm.image = null;
+            return;
+        }
+
+        sliderForm.image = file;
     }
 };
 
@@ -127,12 +137,10 @@ const toggleAnnouncementActive = (announcement: Announcement) => {
             <p class="text-sm text-slate-500 mt-1">Pusat kendali metode autentikasi dan aset visual halaman login WiFi.</p>
         </div>
 
-        <!-- SEKSI 1: KONFIGURASI METODE LOGIN -->
         <div class="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm mb-8">
             <h3 class="text-lg font-bold font-display text-slate-800 mb-4">Metode Login Utama</h3>
             <form @submit.prevent="saveSettings">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                    <!-- Opsi Phone -->
                     <label
                         class="flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-colors"
                         :class="settingForm.login_method === 'phone' ? 'border-cyan-500 bg-cyan-50/50' : 'border-slate-200 hover:bg-slate-50'"
@@ -144,7 +152,6 @@ const toggleAnnouncementActive = (announcement: Announcement) => {
                         </div>
                     </label>
 
-                    <!-- Opsi NIK -->
                     <label
                         class="flex items-start gap-4 p-4 rounded-xl border-2 cursor-pointer transition-colors"
                         :class="settingForm.login_method === 'nik' ? 'border-cyan-500 bg-cyan-50/50' : 'border-slate-200 hover:bg-slate-50'"
@@ -165,17 +172,15 @@ const toggleAnnouncementActive = (announcement: Announcement) => {
             </form>
         </div>
 
-        <!-- SEKSI 2: MANAJEMEN SLIDER GAMBAR -->
         <div class="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm">
             <h3 class="text-lg font-bold font-display text-slate-800 mb-1">Galeri Slider Portal</h3>
             <p class="text-sm text-slate-500 mb-6">Unggah dan kelola gambar yang akan tampil bergantian di halaman depan dan dalam.</p>
 
-            <!-- Form Upload -->
             <form @submit.prevent="uploadImage" class="flex flex-wrap items-end gap-4 mb-8 p-4 bg-slate-50 rounded-xl border border-slate-100">
 
                 <div class="flex-1 min-w-50">
                     <label class="block text-sm font-semibold text-slate-700 mb-2">Penempatan Gambar</label>
-                    <select v-model="sliderForm.type" class="block w-full text-sm text-slate-700 rounded-lg border-slate-300 focus:border-cyan-500 focus:ring-cyan-500 py-2.5">
+                    <select v-model="sliderForm.type" class="block w-full text-sm text-slate-700 rounded-lg border-2 border-slate-300 bg-white focus:border-cyan-500 focus:ring-cyan-500 py-2.5 px-3">
                         <option value="before_login">Portal Luar (Sebelum Login)</option>
                         <option value="after_login">Portal Dalam (Setelah Login)</option>
                     </select>
@@ -187,6 +192,9 @@ const toggleAnnouncementActive = (announcement: Announcement) => {
                         type="file" ref="fileInput" @change="handleFileChange" accept="image/jpeg,image/png,image/webp"
                         class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-cyan-100 file:text-cyan-700 hover:file:bg-cyan-200 transition-colors cursor-pointer"
                     />
+                    <div v-if="sliderForm.errors.image" class="mt-2 text-xs font-semibold text-rose-600">
+                        {{ sliderForm.errors.image }}
+                    </div>
                 </div>
 
                 <button type="submit" :disabled="sliderForm.processing || !sliderForm.image" class="rounded-xl bg-cyan-600 px-6 py-2.5 text-sm font-bold text-white hover:bg-cyan-700 disabled:opacity-50 transition-colors h-10.5">
@@ -194,7 +202,6 @@ const toggleAnnouncementActive = (announcement: Announcement) => {
                 </button>
             </form>
 
-            <!-- Grid Galeri -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
                 <div v-if="!sliders.length" class="col-span-full py-8 text-center text-sm text-slate-500 border-2 border-dashed border-slate-200 rounded-xl">
                     Belum ada gambar slider. Silakan unggah gambar pertama.
@@ -203,12 +210,10 @@ const toggleAnnouncementActive = (announcement: Announcement) => {
                 <div v-for="slider in sliders" :key="slider.id" class="group relative aspect-video bg-slate-100 rounded-xl border border-slate-200 overflow-hidden shadow-sm">
                     <img :src="`/storage/${slider.image_path}`" class="w-full h-full object-cover" alt="Slider Image" />
 
-                    <!-- Label Penempatan -->
                     <div class="absolute top-2 left-2 px-2 py-1 bg-slate-900/80 backdrop-blur-sm text-white text-[10px] font-bold uppercase tracking-wider rounded shadow-sm">
                         {{ slider.type === 'before_login' ? 'Portal Luar' : 'Portal Dalam' }}
                     </div>
 
-                    <!-- Overlay Hover (Tombol Hapus) -->
                     <div class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                         <button @click="deleteImage(slider.id)" class="px-4 py-2 bg-rose-500 text-white text-xs font-bold rounded-lg shadow-sm hover:bg-rose-600 transition-colors">
                             Hapus Gambar
@@ -218,7 +223,6 @@ const toggleAnnouncementActive = (announcement: Announcement) => {
             </div>
         </div>
 
-        <!-- SEKSI 3: MANAJEMEN PENGUMUMAN PORTAL -->
         <div class="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm mt-8">
             <div class="flex items-center justify-between mb-6">
                 <div>
@@ -234,11 +238,9 @@ const toggleAnnouncementActive = (announcement: Announcement) => {
                 </button>
             </div>
 
-            <!-- Form Tambah/Edit Pengumuman -->
             <transition name="fade">
                 <div v-if="showAnnouncementForm" class="p-4 mb-6 bg-slate-50 rounded-xl border border-slate-200">
                     <form @submit.prevent="saveAnnouncement" class="space-y-4">
-                        <!-- Kolom Message -->
                         <div>
                             <label class="block text-sm font-semibold text-slate-700 mb-2">Teks Pengumuman *</label>
                             <textarea
@@ -252,7 +254,6 @@ const toggleAnnouncementActive = (announcement: Announcement) => {
                             <div v-if="announcementForm.errors.message" class="mt-2 text-sm text-red-600">{{ announcementForm.errors.message }}</div>
                         </div>
 
-                        <!-- Kolom Sort Order -->
                         <div>
                             <label class="block text-sm font-semibold text-slate-700 mb-2">Urutan Tampil</label>
                             <input
@@ -265,7 +266,6 @@ const toggleAnnouncementActive = (announcement: Announcement) => {
                             <div class="mt-1 text-xs text-slate-500">Angka lebih kecil tampil lebih dulu. Kosongkan untuk otomatis.</div>
                         </div>
 
-                        <!-- Checkbox Aktif -->
                         <div class="flex items-center gap-3 pt-2">
                             <input
                                 v-model="announcementForm.is_active"
@@ -278,7 +278,6 @@ const toggleAnnouncementActive = (announcement: Announcement) => {
                             </label>
                         </div>
 
-                        <!-- Tombol Aksi -->
                         <div class="flex items-center gap-4 pt-4 border-t border-slate-200">
                             <button
                                 type="submit"
@@ -300,9 +299,7 @@ const toggleAnnouncementActive = (announcement: Announcement) => {
                 </div>
             </transition>
 
-            <!-- Daftar Pengumuman -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Info Sidebar -->
                 <div class="p-4 bg-linear-to-br from-cyan-50 to-blue-50 rounded-xl border border-cyan-200">
                     <h4 class="text-sm font-bold uppercase tracking-wider text-slate-700 mb-4">📋 Statistik</h4>
                     <div class="space-y-3">
@@ -320,14 +317,12 @@ const toggleAnnouncementActive = (announcement: Announcement) => {
                     </div>
                 </div>
 
-                <!-- Daftar Pengumuman -->
                 <div class="md:col-span-2 space-y-3 max-h-96 overflow-y-auto">
                     <div v-if="announcements.length === 0" class="py-8 text-center text-sm text-slate-500">
                         Belum ada pengumuman. Tambahkan pengumuman baru.
                     </div>
 
                     <div v-for="announcement in announcements" :key="announcement.id" class="p-3 rounded-lg border border-slate-200 hover:border-cyan-400 hover:bg-cyan-50/50 transition-colors group">
-                        <!-- Status Badge -->
                         <div class="flex items-start gap-2 mb-2">
                             <button
                                 @click="toggleAnnouncementActive(announcement)"
@@ -339,10 +334,8 @@ const toggleAnnouncementActive = (announcement: Announcement) => {
                             <span class="text-xs text-slate-500">Urutan: {{ announcement.sort_order }}</span>
                         </div>
 
-                        <!-- Pesan -->
                         <p class="text-sm text-slate-800 mb-2 line-clamp-2">{{ announcement.message }}</p>
 
-                        <!-- Tombol Aksi -->
                         <div class="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                             <button
                                 @click="startEditAnnouncement(announcement)"
