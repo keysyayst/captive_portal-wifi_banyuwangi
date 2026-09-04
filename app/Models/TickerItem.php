@@ -8,6 +8,7 @@ class TickerItem extends Model
 {
     protected $fillable = [
         'message',
+        'display_location',
         'is_active',
         'sort_order',
     ];
