@@ -40,7 +40,6 @@ const form = reactive({
   otp: ['', '', '', '', '', ''] as string[],
 });
 
-// Fetch login method setting from server
 onMounted(async () => {
   try {
     const res = await fetch('/api/config');
@@ -79,7 +78,6 @@ function goToOtpMethod() {
 function connectPhone() {
   const raw = form.phone.replace(/\s/g, '');
   if (raw.length >= 8 && form.agreed) {
-    // Bypass OTP - go directly to verify
     verifyPhone();
   }
 }
@@ -218,9 +216,7 @@ async function verify() {
 <template>
   <CardLogos />
 
-  <!-- Step 1: Login (Phone or NIK based on settings) -->
   <Transition v-if="step === 'login'" name="step-fade" mode="out-in">
-    <!-- Phone Login Flow -->
     <LoginStep
       v-if="loginMethod === 'phone'"
       key="login-phone"
@@ -235,7 +231,6 @@ async function verify() {
       @connect="connectPhone"
     />
 
-    <!-- NIK Login Flow -->
     <NikStep
       v-else
       key="login-nik"
@@ -251,7 +246,6 @@ async function verify() {
     />
   </Transition>
 
-  <!-- Step 2: OTP Method Selection (only for phone with OTP enabled - currently disabled) -->
   <Transition v-if="step === 'otp-method' && loginMethod === 'phone'" name="step-fade" mode="out-in">
     <OtpMethodStep
       key="otp-method"
@@ -262,8 +256,6 @@ async function verify() {
       @send="sendOtp"
     />
   </Transition>
-
-  <!-- Step 3: OTP Verification (only for phone with OTP enabled - currently disabled) -->
   <Transition v-if="step === 'otp' && loginMethod === 'phone'" name="step-fade" mode="out-in">
     <OtpStep
       key="otp"

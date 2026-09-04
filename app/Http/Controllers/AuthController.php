@@ -31,16 +31,19 @@ class AuthController extends Controller
     {
         try {
             $validated = $request->validate([
-                'phone_number' => 'nullable|string',
-                'nik' => 'nullable|string|digits:16',
+                'phone_number' => ['nullable', 'string', 'regex:/^[0-9]{7,15}$/'],
+                'nik' => ['nullable', 'string', 'digits:16'],
                 'otp' => 'nullable|string',
                 'mac_address' => 'nullable|string',
                 'device_type' => 'nullable|string',
                 'access_point_location' => 'nullable|string',
                 'terms_agreed' => 'required|boolean',
+            ], [
+                'phone_number.regex' => 'Nomor HP tidak valid. Gunakan 9-15 digit angka, tanpa awalan 0.',
+                'nik.digits' => 'NIK harus terdiri dari tepat 16 digit angka.',
+                'terms_agreed.required' => 'Anda harus menyetujui syarat dan ketentuan.',
             ]);
 
-            // Ensure at least phone_number or nik is provided
             if (empty($validated['phone_number']) && empty($validated['nik'])) {
                 return response()->json([
                     'message' => 'Nomor HP atau NIK harus diisi',
@@ -109,8 +112,14 @@ class AuthController extends Controller
                 ]),
             ]);
         } catch (ValidationException $e) {
+            $errors = $e->errors();
+            $message = $errors['phone_number'][0]
+                ?? $errors['nik'][0]
+                ?? $errors['terms_agreed'][0]
+                ?? 'Data yang dimasukkan tidak valid.';
+
             return response()->json([
-                'message' => 'Validasi gagal: '.implode(', ', $e->errors()['nik'] ?? $e->errors()['phone_number'] ?? $e->errors()['terms_agreed'] ?? []),
+                'message' => $message,
             ], 422);
         } catch (\Exception $e) {
             return response()->json([
@@ -139,7 +148,6 @@ class AuthController extends Controller
 
         $user->currentAccessToken()->delete();
 
-        // Deauthorize user dari FreeRADIUS (hapus dari radcheck/radreply/radusergroup).
         $this->radiusService->deauthorizeUser($user);
 
         return response()->json([

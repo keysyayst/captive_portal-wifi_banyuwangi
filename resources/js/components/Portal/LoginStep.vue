@@ -92,6 +92,8 @@ function formatPhone(value: string) {
 function onPhoneInput(event: Event) {
   const value = (event.target as HTMLInputElement).value;
 
+  hasInvalidChars.value = /[^\d\s]/.test(value);
+
   emit('update:phone', formatPhone(value));
 }
 
@@ -99,8 +101,22 @@ const rawPhoneLength = computed(() => {
   return props.form.phone.replace(/\s/g, '').length;
 });
 
+const touched = ref(false);
+const hasInvalidChars = ref(false);
+
+const phoneError = computed(() => {
+  if (hasInvalidChars.value) return 'Nomor HP hanya boleh berisi angka';
+  const raw = props.form.phone.replace(/\s/g, '');
+  if (!raw) return null;
+  if (raw.startsWith('0')) return 'Jangan diawali angka 0. Contoh: 812 3456 7890';
+  if (raw.length < 9) return `Nomor HP terlalu pendek (${raw.length}/9 digit minimal)`;
+  return null;
+});
+
+const showPhoneError = computed(() => hasInvalidChars.value || (touched.value && !!phoneError.value));
+
 const isValid = computed(() => {
-  return rawPhoneLength.value >= 8 && props.form.agreed;
+  return rawPhoneLength.value >= 9 && !phoneError.value && props.form.agreed;
 });
 </script>
 
@@ -360,6 +376,7 @@ const isValid = computed(() => {
             maxlength="13"
             :value="form.phone"
             @input="onPhoneInput"
+            @blur="touched = true"
           />
 
           <div
@@ -389,6 +406,10 @@ const isValid = computed(() => {
           </div>
         </div>
       </div>
+
+      <p v-if="showPhoneError" class="mt-1.5 text-xs font-medium" style="color: #dc2626;">
+        {{ phoneError }}
+      </p>
     </div>
 
     <div class="flex items-start gap-3 sm:gap-4">
