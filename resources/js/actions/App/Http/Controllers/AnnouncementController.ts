@@ -75,7 +75,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
                     }),
             method: 'get',
         })
-    
+
     index.form = indexForm
 /**
 * @see \App\Http\Controllers\AnnouncementController::dashboard
@@ -153,7 +153,7 @@ dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
                     }),
             method: 'get',
         })
-    
+
     dashboard.form = dashboardForm
 /**
 * @see \App\Http\Controllers\AnnouncementController::store
@@ -208,7 +208,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
             action: store.url(options),
             method: 'post',
         })
-    
+
     store.form = storeForm
 /**
 * @see \App\Http\Controllers\AnnouncementController::update
@@ -238,7 +238,7 @@ update.url = (args: { announcement: number | { id: number } } | [announcement: n
             if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
             args = { announcement: args.id }
         }
-    
+
     if (Array.isArray(args)) {
         args = {
                     announcement: args[0],
@@ -297,7 +297,7 @@ update.patch = (args: { announcement: number | { id: number } } | [announcement:
                     }),
             method: 'post',
         })
-    
+
     update.form = updateForm
 /**
 * @see \App\Http\Controllers\AnnouncementController::destroy
@@ -327,7 +327,7 @@ destroy.url = (args: { announcement: number | { id: number } } | [announcement: 
             if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
             args = { announcement: args.id }
         }
-    
+
     if (Array.isArray(args)) {
         args = {
                     announcement: args[0],
@@ -386,7 +386,7 @@ destroy.delete = (args: { announcement: number | { id: number } } | [announcemen
                     }),
             method: 'post',
         })
-    
+
     destroy.form = destroyForm
 const AnnouncementController = { index, dashboard, store, update, destroy }
 
