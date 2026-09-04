@@ -11,12 +11,14 @@
 }
 
 .portal-page {
-  overscroll-behavior-y: none;
+  overscroll-behavior-y: auto;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
 }
 
 html:has(.portal-page),
 body:has(.portal-page) {
-  overscroll-behavior-y: none;
+  overscroll-behavior-y: auto;
 }
 
 .font-display { font-family: var(--font-display); }
