@@ -56,7 +56,7 @@ login.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     login.form = loginForm
 /**
 * @see \App\Http\Controllers\AuthController::logout
- * @see app/Http/Controllers/AuthController.php:122
+ * @see app/Http/Controllers/AuthController.php:131
  * @route '/api/logout'
  */
 export const logout = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -71,7 +71,7 @@ logout.definition = {
 
 /**
 * @see \App\Http\Controllers\AuthController::logout
- * @see app/Http/Controllers/AuthController.php:122
+ * @see app/Http/Controllers/AuthController.php:131
  * @route '/api/logout'
  */
 logout.url = (options?: RouteQueryOptions) => {
@@ -80,7 +80,7 @@ logout.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\AuthController::logout
- * @see app/Http/Controllers/AuthController.php:122
+ * @see app/Http/Controllers/AuthController.php:131
  * @route '/api/logout'
  */
 logout.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -90,7 +90,7 @@ logout.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\AuthController::logout
- * @see app/Http/Controllers/AuthController.php:122
+ * @see app/Http/Controllers/AuthController.php:131
  * @route '/api/logout'
  */
     const logoutForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -100,7 +100,7 @@ logout.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\AuthController::logout
- * @see app/Http/Controllers/AuthController.php:122
+ * @see app/Http/Controllers/AuthController.php:131
  * @route '/api/logout'
  */
         logoutForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -189,7 +189,7 @@ show.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     show.form = showForm
 /**
 * @see \App\Http\Controllers\AuthController::welcome
- * @see app/Http/Controllers/AuthController.php:151
+ * @see app/Http/Controllers/AuthController.php:159
  * @route '/portal/welcome'
  */
 export const welcome = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -204,7 +204,7 @@ welcome.definition = {
 
 /**
 * @see \App\Http\Controllers\AuthController::welcome
- * @see app/Http/Controllers/AuthController.php:151
+ * @see app/Http/Controllers/AuthController.php:159
  * @route '/portal/welcome'
  */
 welcome.url = (options?: RouteQueryOptions) => {
@@ -213,7 +213,7 @@ welcome.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\AuthController::welcome
- * @see app/Http/Controllers/AuthController.php:151
+ * @see app/Http/Controllers/AuthController.php:159
  * @route '/portal/welcome'
  */
 welcome.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -222,7 +222,7 @@ welcome.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\AuthController::welcome
- * @see app/Http/Controllers/AuthController.php:151
+ * @see app/Http/Controllers/AuthController.php:159
  * @route '/portal/welcome'
  */
 welcome.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -232,7 +232,7 @@ welcome.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\AuthController::welcome
- * @see app/Http/Controllers/AuthController.php:151
+ * @see app/Http/Controllers/AuthController.php:159
  * @route '/portal/welcome'
  */
     const welcomeForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -242,7 +242,7 @@ welcome.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\AuthController::welcome
- * @see app/Http/Controllers/AuthController.php:151
+ * @see app/Http/Controllers/AuthController.php:159
  * @route '/portal/welcome'
  */
         welcomeForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -251,7 +251,7 @@ welcome.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\AuthController::welcome
- * @see app/Http/Controllers/AuthController.php:151
+ * @see app/Http/Controllers/AuthController.php:159
  * @route '/portal/welcome'
  */
         welcomeForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

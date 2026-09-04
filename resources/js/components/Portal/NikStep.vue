@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
-import type { PortalLoginState } from '@/types/portal';
+import { computed, ref } from 'vue';
 
 const props = defineProps<{
   form: { nik: string; agreed: boolean };
@@ -17,27 +16,71 @@ const emit = defineEmits<{
   (e: 'connect'): void;
 }>();
 
+
+const hasInvalidChars = ref(false);
+const touched = ref(false);
+
 function formatNik(value: string) {
-  const digits = value.replace(/\D/g, '').slice(0, 16);
-  return digits;
+  return value.replace(/\D/g, '').slice(0, 16);
 }
 
 function onNikInput(event: Event) {
-  const value = (event.target as HTMLInputElement).value;
-  emit('update:nik', formatNik(value));
+  const input = event.target as HTMLInputElement;
+  const value = input.value;
+
+  hasInvalidChars.value = /[^\d]/.test(value);
+
+  const digits = formatNik(value);
+
+  emit('update:nik', digits);
+
+  touched.value = true;
 }
+
 
 const rawNikLength = computed(() => {
   return props.form.nik.replace(/\D/g, '').length;
 });
 
+
+const nikError = computed(() => {
+  if (hasInvalidChars.value) {
+    return 'NIK hanya boleh berisi angka';
+  }
+
+  const raw = props.form.nik.replace(/\D/g, '');
+
+  if (!raw) {
+    return null;
+  }
+
+  if (raw.length < 16) {
+    return `NIK harus 16 digit angka (${raw.length}/16)`;
+  }
+
+  return null;
+});
+
+
+
+const showNikError = computed(() => {
+  return touched.value && !!nikError.value;
+});
+
+
 const isValid = computed(() => {
-  return rawNikLength.value === 16 && props.form.agreed;
+  return (
+    rawNikLength.value === 16 &&
+    !hasInvalidChars.value &&
+    !nikError.value &&
+    props.form.agreed
+  );
 });
 </script>
 
 <template>
   <div class="px-5 sm:px-6 pb-6 pt-4 space-y-5 anim-up max-w-md mx-auto">
+
     <div
       v-if="error"
       class="rounded-xl px-4 py-3 text-xs font-medium"
@@ -84,7 +127,9 @@ const isValid = computed(() => {
                 d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
               />
             </svg>
+
           </span>
+
           Mendeteksi lokasi...
         </span>
 
@@ -125,10 +170,12 @@ const isValid = computed(() => {
           />
 
         </span>
+
       </div>
     </div>
 
     <div>
+
       <label
         class="block text-xs font-semibold text-slate-500 uppercase tracking-widest mb-2"
       >
@@ -140,16 +187,22 @@ const isValid = computed(() => {
         <input
           type="tel"
           inputmode="numeric"
+          autocomplete="off"
           placeholder="6173051234567890"
           class="card-input w-full"
+          :class="{
+            'border-red-400 focus:border-red-500 focus:ring-red-100':
+              showNikError
+          }"
           style="letter-spacing: normal;"
           maxlength="16"
           :value="form.nik"
           @input="onNikInput"
+          @blur="touched = true"
         />
 
         <div
-          v-if="rawNikLength === 16"
+          v-if="rawNikLength === 16 && !hasInvalidChars"
           class="
             absolute
             right-3
@@ -172,8 +225,19 @@ const isValid = computed(() => {
           >
             <polyline points="20 6 9 17 4 12" />
           </svg>
+
         </div>
+
       </div>
+
+      <p
+        v-if="showNikError"
+        class="mt-1.5 text-xs font-medium"
+        style="color: #dc2626;"
+      >
+        {{ nikError }}
+      </p>
+
     </div>
 
     <div class="flex items-start gap-3 sm:gap-4">
@@ -254,11 +318,12 @@ const isValid = computed(() => {
         >
           Syarat &amp; Ketentuan Penggunaan
         </button>
+
         layanan WiFi Gratis Banyuwangi.
+
       </p>
 
     </div>
-
 
     <button
       type="button"
@@ -297,7 +362,6 @@ const isValid = computed(() => {
 
   </div>
 </template>
-
 
 <style scoped>
 
@@ -354,4 +418,6 @@ const isValid = computed(() => {
     font-size: 14px;
   }
 }
+
 </style>
+```
