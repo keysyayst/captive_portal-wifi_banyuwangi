@@ -169,7 +169,14 @@ const toggleContentActive = (content: PortalContent) => {
                 <form @submit.prevent="saveContent" class="space-y-4">
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-1.5">Teks *</label>
-                        <textarea v-model="contentForm.message" maxlength="1000" rows="2" class="block w-full text-sm rounded-lg border-slate-300 shadow-sm focus:border-cyan-500 focus:ring-cyan-500" placeholder="Contoh: Jelajahi layanan publik Kabupaten Banyuwangi..." />
+                        <textarea
+                            v-model="contentForm.message"
+                            maxlength="1000"
+                            rows="5"
+                            class="block min-h-32 w-full resize-y rounded-lg border border-slate-300 bg-white px-4 py-3 text-base leading-relaxed text-slate-800 shadow-sm placeholder:text-slate-400 focus:border-cyan-500 focus:ring-cyan-500"
+                            placeholder="Contoh: Jelajahi layanan publik Kabupaten Banyuwangi lewat menu Akses Cepat Layanan di bawah."
+                        />
+                        <div class="mt-1 flex justify-end text-xs text-slate-500">{{ contentForm.message.length }}/1000 karakter</div>
                         <div v-if="contentForm.errors.message" class="mt-1 text-sm text-red-600 font-medium">{{ contentForm.errors.message }}</div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
