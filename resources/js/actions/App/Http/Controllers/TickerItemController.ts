@@ -75,7 +75,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
                     }),
             method: 'get',
         })
-    
+
     index.form = indexForm
 /**
 * @see \App\Http\Controllers\TickerItemController::adminIndex
@@ -153,7 +153,7 @@ adminIndex.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
                     }),
             method: 'get',
         })
-    
+
     adminIndex.form = adminIndexForm
 /**
 * @see \App\Http\Controllers\TickerItemController::store
@@ -208,7 +208,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
             action: store.url(options),
             method: 'post',
         })
-    
+
     store.form = storeForm
 /**
 * @see \App\Http\Controllers\TickerItemController::show
@@ -238,7 +238,7 @@ show.url = (args: { ticker_item: number | { id: number } } | [ticker_item: numbe
             if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
             args = { ticker_item: args.id }
         }
-    
+
     if (Array.isArray(args)) {
         args = {
                     ticker_item: args[0],
@@ -310,7 +310,7 @@ show.head = (args: { ticker_item: number | { id: number } } | [ticker_item: numb
                     }),
             method: 'get',
         })
-    
+
     show.form = showForm
 /**
 * @see \App\Http\Controllers\TickerItemController::update
@@ -340,7 +340,7 @@ update.url = (args: { ticker_item: number | { id: number } } | [ticker_item: num
             if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
             args = { ticker_item: args.id }
         }
-    
+
     if (Array.isArray(args)) {
         args = {
                     ticker_item: args[0],
@@ -422,7 +422,7 @@ update.patch = (args: { ticker_item: number | { id: number } } | [ticker_item: n
                     }),
             method: 'post',
         })
-    
+
     update.form = updateForm
 /**
 * @see \App\Http\Controllers\TickerItemController::destroy
@@ -452,7 +452,7 @@ destroy.url = (args: { ticker_item: number | { id: number } } | [ticker_item: nu
             if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
             args = { ticker_item: args.id }
         }
-    
+
     if (Array.isArray(args)) {
         args = {
                     ticker_item: args[0],
@@ -511,7 +511,7 @@ destroy.delete = (args: { ticker_item: number | { id: number } } | [ticker_item:
                     }),
             method: 'post',
         })
-    
+
     destroy.form = destroyForm
 const TickerItemController = { index, adminIndex, store, show, update, destroy }
 

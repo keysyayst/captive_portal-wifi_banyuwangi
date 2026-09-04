@@ -52,7 +52,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
             action: store.url(options),
             method: 'post',
         })
-    
+
     store.form = storeForm
 /**
 * @see \App\Http\Controllers\SliderController::destroy
@@ -82,7 +82,7 @@ destroy.url = (args: { slider: number | { id: number } } | [slider: number | { i
             if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
             args = { slider: args.id }
         }
-    
+
     if (Array.isArray(args)) {
         args = {
                     slider: args[0],
@@ -141,7 +141,7 @@ destroy.delete = (args: { slider: number | { id: number } } | [slider: number | 
                     }),
             method: 'post',
         })
-    
+
     destroy.form = destroyForm
 const SliderController = { store, destroy }
 
