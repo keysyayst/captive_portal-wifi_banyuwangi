@@ -194,7 +194,7 @@ onUnmounted(() => {
       >
         <div
           class="
-            max-w-screen-xl
+            max-w-7xl
             mx-auto
 
             px-3
@@ -361,7 +361,7 @@ onUnmounted(() => {
 
           flex-1
 
-          max-w-screen-xl
+          max-w-7xl
           mx-auto
 
           w-full
@@ -549,7 +549,7 @@ onUnmounted(() => {
       >
         <div
           class="
-            max-w-screen-xl
+            max-w-7xl
             mx-auto
 
             px-4

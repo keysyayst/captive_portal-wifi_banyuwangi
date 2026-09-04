@@ -75,11 +75,11 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
                     }),
             method: 'get',
         })
-
+    
     index.form = indexForm
 /**
 * @see \App\Http\Controllers\TickerItemController::adminIndex
- * @see app/Http/Controllers/TickerItemController.php:25
+ * @see app/Http/Controllers/TickerItemController.php:26
  * @route '/api/admin/ticker-items'
  */
 export const adminIndex = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -94,7 +94,7 @@ adminIndex.definition = {
 
 /**
 * @see \App\Http\Controllers\TickerItemController::adminIndex
- * @see app/Http/Controllers/TickerItemController.php:25
+ * @see app/Http/Controllers/TickerItemController.php:26
  * @route '/api/admin/ticker-items'
  */
 adminIndex.url = (options?: RouteQueryOptions) => {
@@ -103,7 +103,7 @@ adminIndex.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\TickerItemController::adminIndex
- * @see app/Http/Controllers/TickerItemController.php:25
+ * @see app/Http/Controllers/TickerItemController.php:26
  * @route '/api/admin/ticker-items'
  */
 adminIndex.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -112,7 +112,7 @@ adminIndex.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\TickerItemController::adminIndex
- * @see app/Http/Controllers/TickerItemController.php:25
+ * @see app/Http/Controllers/TickerItemController.php:26
  * @route '/api/admin/ticker-items'
  */
 adminIndex.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -122,7 +122,7 @@ adminIndex.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\TickerItemController::adminIndex
- * @see app/Http/Controllers/TickerItemController.php:25
+ * @see app/Http/Controllers/TickerItemController.php:26
  * @route '/api/admin/ticker-items'
  */
     const adminIndexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -132,7 +132,7 @@ adminIndex.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\TickerItemController::adminIndex
- * @see app/Http/Controllers/TickerItemController.php:25
+ * @see app/Http/Controllers/TickerItemController.php:26
  * @route '/api/admin/ticker-items'
  */
         adminIndexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -141,7 +141,7 @@ adminIndex.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\TickerItemController::adminIndex
- * @see app/Http/Controllers/TickerItemController.php:25
+ * @see app/Http/Controllers/TickerItemController.php:26
  * @route '/api/admin/ticker-items'
  */
         adminIndexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -153,11 +153,11 @@ adminIndex.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
                     }),
             method: 'get',
         })
-
+    
     adminIndex.form = adminIndexForm
 /**
 * @see \App\Http\Controllers\TickerItemController::store
- * @see app/Http/Controllers/TickerItemController.php:35
+ * @see app/Http/Controllers/TickerItemController.php:36
  * @route '/api/admin/ticker-items'
  */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -172,7 +172,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\TickerItemController::store
- * @see app/Http/Controllers/TickerItemController.php:35
+ * @see app/Http/Controllers/TickerItemController.php:36
  * @route '/api/admin/ticker-items'
  */
 store.url = (options?: RouteQueryOptions) => {
@@ -181,7 +181,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\TickerItemController::store
- * @see app/Http/Controllers/TickerItemController.php:35
+ * @see app/Http/Controllers/TickerItemController.php:36
  * @route '/api/admin/ticker-items'
  */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -191,7 +191,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\TickerItemController::store
- * @see app/Http/Controllers/TickerItemController.php:35
+ * @see app/Http/Controllers/TickerItemController.php:36
  * @route '/api/admin/ticker-items'
  */
     const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -201,18 +201,18 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\TickerItemController::store
- * @see app/Http/Controllers/TickerItemController.php:35
+ * @see app/Http/Controllers/TickerItemController.php:36
  * @route '/api/admin/ticker-items'
  */
         storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
             action: store.url(options),
             method: 'post',
         })
-
+    
     store.form = storeForm
 /**
 * @see \App\Http\Controllers\TickerItemController::show
- * @see app/Http/Controllers/TickerItemController.php:42
+ * @see app/Http/Controllers/TickerItemController.php:43
  * @route '/api/admin/ticker-items/{ticker_item}'
  */
 export const show = (args: { ticker_item: number | { id: number } } | [ticker_item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -227,7 +227,7 @@ show.definition = {
 
 /**
 * @see \App\Http\Controllers\TickerItemController::show
- * @see app/Http/Controllers/TickerItemController.php:42
+ * @see app/Http/Controllers/TickerItemController.php:43
  * @route '/api/admin/ticker-items/{ticker_item}'
  */
 show.url = (args: { ticker_item: number | { id: number } } | [ticker_item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -238,7 +238,7 @@ show.url = (args: { ticker_item: number | { id: number } } | [ticker_item: numbe
             if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
             args = { ticker_item: args.id }
         }
-
+    
     if (Array.isArray(args)) {
         args = {
                     ticker_item: args[0],
@@ -260,7 +260,7 @@ show.url = (args: { ticker_item: number | { id: number } } | [ticker_item: numbe
 
 /**
 * @see \App\Http\Controllers\TickerItemController::show
- * @see app/Http/Controllers/TickerItemController.php:42
+ * @see app/Http/Controllers/TickerItemController.php:43
  * @route '/api/admin/ticker-items/{ticker_item}'
  */
 show.get = (args: { ticker_item: number | { id: number } } | [ticker_item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -269,7 +269,7 @@ show.get = (args: { ticker_item: number | { id: number } } | [ticker_item: numbe
 })
 /**
 * @see \App\Http\Controllers\TickerItemController::show
- * @see app/Http/Controllers/TickerItemController.php:42
+ * @see app/Http/Controllers/TickerItemController.php:43
  * @route '/api/admin/ticker-items/{ticker_item}'
  */
 show.head = (args: { ticker_item: number | { id: number } } | [ticker_item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -279,7 +279,7 @@ show.head = (args: { ticker_item: number | { id: number } } | [ticker_item: numb
 
     /**
 * @see \App\Http\Controllers\TickerItemController::show
- * @see app/Http/Controllers/TickerItemController.php:42
+ * @see app/Http/Controllers/TickerItemController.php:43
  * @route '/api/admin/ticker-items/{ticker_item}'
  */
     const showForm = (args: { ticker_item: number | { id: number } } | [ticker_item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -289,7 +289,7 @@ show.head = (args: { ticker_item: number | { id: number } } | [ticker_item: numb
 
             /**
 * @see \App\Http\Controllers\TickerItemController::show
- * @see app/Http/Controllers/TickerItemController.php:42
+ * @see app/Http/Controllers/TickerItemController.php:43
  * @route '/api/admin/ticker-items/{ticker_item}'
  */
         showForm.get = (args: { ticker_item: number | { id: number } } | [ticker_item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -298,7 +298,7 @@ show.head = (args: { ticker_item: number | { id: number } } | [ticker_item: numb
         })
             /**
 * @see \App\Http\Controllers\TickerItemController::show
- * @see app/Http/Controllers/TickerItemController.php:42
+ * @see app/Http/Controllers/TickerItemController.php:43
  * @route '/api/admin/ticker-items/{ticker_item}'
  */
         showForm.head = (args: { ticker_item: number | { id: number } } | [ticker_item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -310,11 +310,11 @@ show.head = (args: { ticker_item: number | { id: number } } | [ticker_item: numb
                     }),
             method: 'get',
         })
-
+    
     show.form = showForm
 /**
 * @see \App\Http\Controllers\TickerItemController::update
- * @see app/Http/Controllers/TickerItemController.php:47
+ * @see app/Http/Controllers/TickerItemController.php:48
  * @route '/api/admin/ticker-items/{ticker_item}'
  */
 export const update = (args: { ticker_item: number | { id: number } } | [ticker_item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -329,7 +329,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\TickerItemController::update
- * @see app/Http/Controllers/TickerItemController.php:47
+ * @see app/Http/Controllers/TickerItemController.php:48
  * @route '/api/admin/ticker-items/{ticker_item}'
  */
 update.url = (args: { ticker_item: number | { id: number } } | [ticker_item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -340,7 +340,7 @@ update.url = (args: { ticker_item: number | { id: number } } | [ticker_item: num
             if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
             args = { ticker_item: args.id }
         }
-
+    
     if (Array.isArray(args)) {
         args = {
                     ticker_item: args[0],
@@ -362,7 +362,7 @@ update.url = (args: { ticker_item: number | { id: number } } | [ticker_item: num
 
 /**
 * @see \App\Http\Controllers\TickerItemController::update
- * @see app/Http/Controllers/TickerItemController.php:47
+ * @see app/Http/Controllers/TickerItemController.php:48
  * @route '/api/admin/ticker-items/{ticker_item}'
  */
 update.put = (args: { ticker_item: number | { id: number } } | [ticker_item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -371,7 +371,7 @@ update.put = (args: { ticker_item: number | { id: number } } | [ticker_item: num
 })
 /**
 * @see \App\Http\Controllers\TickerItemController::update
- * @see app/Http/Controllers/TickerItemController.php:47
+ * @see app/Http/Controllers/TickerItemController.php:48
  * @route '/api/admin/ticker-items/{ticker_item}'
  */
 update.patch = (args: { ticker_item: number | { id: number } } | [ticker_item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
@@ -381,7 +381,7 @@ update.patch = (args: { ticker_item: number | { id: number } } | [ticker_item: n
 
     /**
 * @see \App\Http\Controllers\TickerItemController::update
- * @see app/Http/Controllers/TickerItemController.php:47
+ * @see app/Http/Controllers/TickerItemController.php:48
  * @route '/api/admin/ticker-items/{ticker_item}'
  */
     const updateForm = (args: { ticker_item: number | { id: number } } | [ticker_item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -396,7 +396,7 @@ update.patch = (args: { ticker_item: number | { id: number } } | [ticker_item: n
 
             /**
 * @see \App\Http\Controllers\TickerItemController::update
- * @see app/Http/Controllers/TickerItemController.php:47
+ * @see app/Http/Controllers/TickerItemController.php:48
  * @route '/api/admin/ticker-items/{ticker_item}'
  */
         updateForm.put = (args: { ticker_item: number | { id: number } } | [ticker_item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -410,7 +410,7 @@ update.patch = (args: { ticker_item: number | { id: number } } | [ticker_item: n
         })
             /**
 * @see \App\Http\Controllers\TickerItemController::update
- * @see app/Http/Controllers/TickerItemController.php:47
+ * @see app/Http/Controllers/TickerItemController.php:48
  * @route '/api/admin/ticker-items/{ticker_item}'
  */
         updateForm.patch = (args: { ticker_item: number | { id: number } } | [ticker_item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -422,11 +422,11 @@ update.patch = (args: { ticker_item: number | { id: number } } | [ticker_item: n
                     }),
             method: 'post',
         })
-
+    
     update.form = updateForm
 /**
 * @see \App\Http\Controllers\TickerItemController::destroy
- * @see app/Http/Controllers/TickerItemController.php:54
+ * @see app/Http/Controllers/TickerItemController.php:55
  * @route '/api/admin/ticker-items/{ticker_item}'
  */
 export const destroy = (args: { ticker_item: number | { id: number } } | [ticker_item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -441,7 +441,7 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\TickerItemController::destroy
- * @see app/Http/Controllers/TickerItemController.php:54
+ * @see app/Http/Controllers/TickerItemController.php:55
  * @route '/api/admin/ticker-items/{ticker_item}'
  */
 destroy.url = (args: { ticker_item: number | { id: number } } | [ticker_item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -452,7 +452,7 @@ destroy.url = (args: { ticker_item: number | { id: number } } | [ticker_item: nu
             if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
             args = { ticker_item: args.id }
         }
-
+    
     if (Array.isArray(args)) {
         args = {
                     ticker_item: args[0],
@@ -474,7 +474,7 @@ destroy.url = (args: { ticker_item: number | { id: number } } | [ticker_item: nu
 
 /**
 * @see \App\Http\Controllers\TickerItemController::destroy
- * @see app/Http/Controllers/TickerItemController.php:54
+ * @see app/Http/Controllers/TickerItemController.php:55
  * @route '/api/admin/ticker-items/{ticker_item}'
  */
 destroy.delete = (args: { ticker_item: number | { id: number } } | [ticker_item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -484,7 +484,7 @@ destroy.delete = (args: { ticker_item: number | { id: number } } | [ticker_item:
 
     /**
 * @see \App\Http\Controllers\TickerItemController::destroy
- * @see app/Http/Controllers/TickerItemController.php:54
+ * @see app/Http/Controllers/TickerItemController.php:55
  * @route '/api/admin/ticker-items/{ticker_item}'
  */
     const destroyForm = (args: { ticker_item: number | { id: number } } | [ticker_item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -499,7 +499,7 @@ destroy.delete = (args: { ticker_item: number | { id: number } } | [ticker_item:
 
             /**
 * @see \App\Http\Controllers\TickerItemController::destroy
- * @see app/Http/Controllers/TickerItemController.php:54
+ * @see app/Http/Controllers/TickerItemController.php:55
  * @route '/api/admin/ticker-items/{ticker_item}'
  */
         destroyForm.delete = (args: { ticker_item: number | { id: number } } | [ticker_item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -511,7 +511,7 @@ destroy.delete = (args: { ticker_item: number | { id: number } } | [ticker_item:
                     }),
             method: 'post',
         })
-
+    
     destroy.form = destroyForm
 const TickerItemController = { index, adminIndex, store, show, update, destroy }
 

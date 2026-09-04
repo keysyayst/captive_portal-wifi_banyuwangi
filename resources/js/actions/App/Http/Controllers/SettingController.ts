@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\SettingController::index
- * @see app/Http/Controllers/SettingController.php:15
+ * @see app/Http/Controllers/SettingController.php:16
  * @route '/dashboard/settings'
  */
 export const index = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ index.definition = {
 
 /**
 * @see \App\Http\Controllers\SettingController::index
- * @see app/Http/Controllers/SettingController.php:15
+ * @see app/Http/Controllers/SettingController.php:16
  * @route '/dashboard/settings'
  */
 index.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ index.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\SettingController::index
- * @see app/Http/Controllers/SettingController.php:15
+ * @see app/Http/Controllers/SettingController.php:16
  * @route '/dashboard/settings'
  */
 index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -34,7 +34,7 @@ index.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 /**
 * @see \App\Http\Controllers\SettingController::index
- * @see app/Http/Controllers/SettingController.php:15
+ * @see app/Http/Controllers/SettingController.php:16
  * @route '/dashboard/settings'
  */
 index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -44,7 +44,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
     /**
 * @see \App\Http\Controllers\SettingController::index
- * @see app/Http/Controllers/SettingController.php:15
+ * @see app/Http/Controllers/SettingController.php:16
  * @route '/dashboard/settings'
  */
     const indexForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -54,7 +54,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
             /**
 * @see \App\Http\Controllers\SettingController::index
- * @see app/Http/Controllers/SettingController.php:15
+ * @see app/Http/Controllers/SettingController.php:16
  * @route '/dashboard/settings'
  */
         indexForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -63,7 +63,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
         })
             /**
 * @see \App\Http\Controllers\SettingController::index
- * @see app/Http/Controllers/SettingController.php:15
+ * @see app/Http/Controllers/SettingController.php:16
  * @route '/dashboard/settings'
  */
         indexForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -79,7 +79,7 @@ index.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     index.form = indexForm
 /**
 * @see \App\Http\Controllers\SettingController::update
- * @see app/Http/Controllers/SettingController.php:29
+ * @see app/Http/Controllers/SettingController.php:52
  * @route '/dashboard/settings'
  */
 export const update = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -94,7 +94,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\SettingController::update
- * @see app/Http/Controllers/SettingController.php:29
+ * @see app/Http/Controllers/SettingController.php:52
  * @route '/dashboard/settings'
  */
 update.url = (options?: RouteQueryOptions) => {
@@ -103,7 +103,7 @@ update.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\SettingController::update
- * @see app/Http/Controllers/SettingController.php:29
+ * @see app/Http/Controllers/SettingController.php:52
  * @route '/dashboard/settings'
  */
 update.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -113,7 +113,7 @@ update.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
     /**
 * @see \App\Http\Controllers\SettingController::update
- * @see app/Http/Controllers/SettingController.php:29
+ * @see app/Http/Controllers/SettingController.php:52
  * @route '/dashboard/settings'
  */
     const updateForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -123,7 +123,7 @@ update.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
             /**
 * @see \App\Http\Controllers\SettingController::update
- * @see app/Http/Controllers/SettingController.php:29
+ * @see app/Http/Controllers/SettingController.php:52
  * @route '/dashboard/settings'
  */
         updateForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

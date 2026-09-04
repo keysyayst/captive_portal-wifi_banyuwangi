@@ -15,6 +15,7 @@ class TickerItemRequest extends FormRequest
     {
         return [
             'message' => [$this->isMethod('post') ? 'required' : 'sometimes', 'string', 'max:1000'],
+            'display_location' => ['sometimes', 'in:ticker,info'],
             'is_active' => ['sometimes', 'boolean'],
             'sort_order' => ['sometimes', 'integer', 'min:0'],
         ];

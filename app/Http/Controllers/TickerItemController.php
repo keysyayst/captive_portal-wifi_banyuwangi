@@ -16,6 +16,7 @@ class TickerItemController extends Controller
         return response()->json([
             'ticker_items' => TickerItem::query()
                 ->where('is_active', true)
+                ->where('display_location', 'ticker')
                 ->orderBy('sort_order')
                 ->orderBy('id')
                 ->get(['id', 'message']),
