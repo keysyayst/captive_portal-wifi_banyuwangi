@@ -25,16 +25,16 @@ type Pagination = {
     total: number;
 };
 
-defineProps<{
+const props = defineProps<{
     history: Pagination;
     search?: string;
     startDate?: string;
     endDate?: string;
 }>();
 
-const search = ref<string>('');
-const startDate = ref<string>('');
-const endDate = ref<string>('');
+const search = ref<string>(props.search ?? '');
+const startDate = ref<string>(props.startDate ?? '');
+const endDate = ref<string>(props.endDate ?? '');
 
 // Type for pagination data
 type HistoryData = Pagination;
@@ -85,7 +85,7 @@ const goToNextPage = () => {
 </script>
 
 <template>
-    <Head title="Login history" />
+    <Head title="Riwayat Login" />
     <section>
         <!-- Filters Section -->
         <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
