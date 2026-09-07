@@ -40,16 +40,28 @@ const resetFilter = () => {
         preserveState: false,
     });
 };
+
+const formatDuration = (minutes: number): string => {
+    if (minutes < 60) {
+        return `${Math.round(minutes)} min`;
+    }
+
+    const hours = minutes / 60;
+    if (hours < 24) {
+        const roundedHours = Math.round(hours * 10) / 10;
+        return `${roundedHours} ${roundedHours === 1 ? 'hour' : 'hours'}`;
+    }
+
+    const days = Math.round((hours / 24) * 10) / 10;
+    return `${days} ${days === 1 ? 'day' : 'days'}`;
+};
 </script>
 
 <template>
     <Head title="Active users" />
     <section>
-        <p class="text-sm text-slate-500">Live connections</p>
-        <h2 class="mt-1 text-3xl font-black tracking-tight">Active users</h2>
-
         <!-- Search Filter -->
-        <div class="mt-8 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
             <div class="flex gap-3">
                 <div class="flex-1">
                     <label class="mb-2 block text-sm font-medium text-slate-700">Search</label>
@@ -125,7 +137,7 @@ const resetFilter = () => {
                             </td>
                             <td class="px-6 py-4">
                                 <span class="inline-block rounded-md bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700 border border-emerald-100">
-                                    {{ user.duration_minutes }} min
+                                    {{ formatDuration(user.duration_minutes) }}
                                 </span>
                             </td>
                         </tr>

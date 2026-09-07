@@ -21,11 +21,6 @@ defineProps<{
 <template>
     <Head title="Manajemen AP" />
     <section>
-        <div class="mb-6">
-            <h2 class="text-3xl font-black tracking-tight">Manajemen Access Point (AP)</h2>
-            <p class="mt-1 text-sm text-slate-500">Monitoring kondisi perangkat pemancar WiFi secara keseluruhan.</p>
-        </div>
-
         <div v-if="!accessPoints.length" class="rounded-2xl border border-slate-200 bg-white p-8 text-sm text-slate-500">
             Belum ada data perangkat Access Point.
         </div>

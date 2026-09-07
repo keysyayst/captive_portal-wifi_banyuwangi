@@ -87,11 +87,8 @@ const goToNextPage = () => {
 <template>
     <Head title="Login history" />
     <section>
-        <p class="text-sm text-slate-500">Recent network activity</p>
-        <h2 class="mt-1 text-3xl font-black tracking-tight">Login history</h2>
-
         <!-- Filters Section -->
-        <div class="mt-8 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
             <!-- Form Inputs -->
             <div class="grid gap-4 md:grid-cols-3 mb-5">
                 <!-- Search Input -->

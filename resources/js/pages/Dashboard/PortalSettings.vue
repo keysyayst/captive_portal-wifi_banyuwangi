@@ -112,11 +112,6 @@ const toggleContentActive = (content: PortalContent) => {
 <template>
     <Head title="Pengaturan Portal" />
     <section class="anim-up">
-        <div class="mb-8">
-            <h2 class="text-3xl font-black font-display text-slate-800 tracking-tight">Pengaturan Portal</h2>
-            <p class="text-sm text-slate-500 mt-1">Pusat kendali metode autentikasi, aset visual, dan informasi portal.</p>
-        </div>
-
         <div class="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm mb-8">
             <h3 class="text-lg font-bold font-display text-slate-800 mb-4">Metode Login Utama</h3>
             <form @submit.prevent="saveSettings">
