@@ -4,17 +4,16 @@ import { computed } from 'vue';
 
 const navigation = [
     { label: 'Dashboard', href: '/dashboard' },
-    { label: 'Active users', href: '/dashboard/active-users' },
-    { label: 'Login history', href: '/dashboard/login-history' },
+    { label: 'Pengguna Aktif', href: '/dashboard/active-users' },
+    { label: 'Riwayat Login', href: '/dashboard/login-history' },
     { label: 'Manajemen AP', href: '/dashboard/ap-management' },
     { label: 'Pengaturan Portal', href: '/dashboard/settings' },
 ];
 
 const page = usePage();
+const currentPath = computed(() => page.url.split('?')[0]);
 const currentPageLabel = computed(() => {
-    const currentPath = page.url.split('?')[0];
-
-    return navigation.find((item) => item.href === currentPath)?.label ?? 'Dashboard';
+    return navigation.find((item) => item.href === currentPath.value)?.label ?? 'Dashboard';
 });
 </script>
 
@@ -40,7 +39,7 @@ const currentPageLabel = computed(() => {
                     :key="item.href"
                     :href="item.href"
                     class="block rounded-lg px-4 py-3 text-sm font-medium transition-colors"
-                    :class="$page.url === item.href ? 'bg-white/20 text-white border-l-4 border-cyan-200' : 'text-slate-100 hover:bg-white/10 hover:text-white'"
+                    :class="currentPath === item.href ? 'bg-white/20 text-white border-l-4 border-cyan-200' : 'text-slate-100 hover:bg-white/10 hover:text-white'"
                 >
                     {{ item.label }}
                 </Link>
@@ -60,7 +59,7 @@ const currentPageLabel = computed(() => {
                     :key="item.href"
                     :href="item.href"
                     class="rounded-lg px-3 py-2 text-sm whitespace-nowrap"
-                    :class="$page.url === item.href ? 'bg-white/20 text-white font-semibold' : 'text-slate-100 hover:bg-white/10 hover:text-white'"
+                    :class="currentPath === item.href ? 'bg-white/20 text-white font-semibold' : 'text-slate-100 hover:bg-white/10 hover:text-white'"
                 >
                     {{ item.label }}
                 </Link>

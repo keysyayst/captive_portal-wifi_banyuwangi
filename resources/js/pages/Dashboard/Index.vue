@@ -94,11 +94,11 @@ const locationSeries = computed(() => props.locations.map(loc => loc.total_sessi
                 <Link
                     href="/dashboard/active-users"
                     class="rounded-xl bg-slate-900 px-4 py-3 text-sm font-bold text-white hover:bg-slate-700"
-                    >See active users</Link>
+                    >Lihat Pengguna Aktif</Link>
                 <Link
                     href="/dashboard/login-history"
                     class="rounded-xl border border-slate-200 px-4 py-3 text-sm font-bold hover:bg-slate-50"
-                    >View login history</Link>
+                    >Lihat Riwayat Login</Link>
             </div>
         </div>
     </section>

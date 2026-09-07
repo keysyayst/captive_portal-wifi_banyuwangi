@@ -16,12 +16,12 @@ type ActiveUser = {
     mac_address: string;
 };
 
-defineProps<{
+const props = defineProps<{
     activeUsers: ActiveUser[];
     search?: string;
 }>();
 
-const search = ref<string>('');
+const search = ref<string>(props.search ?? '');
 
 const searchNow = () => {
     const params: any = {};
@@ -58,7 +58,7 @@ const formatDuration = (minutes: number): string => {
 </script>
 
 <template>
-    <Head title="Active users" />
+    <Head title="Pengguna Aktif" />
     <section>
         <!-- Search Filter -->
         <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
