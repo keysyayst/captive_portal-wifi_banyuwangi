@@ -51,16 +51,8 @@ const locationSeries = computed(() => props.locations.map(loc => loc.total_sessi
 </script>
 
 <template>
-    <Head title="Dashboard Overview" />
+    <Head title="Dashboard" />
     <section>
-        <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
-            <div>
-                <p class="text-sm text-slate-500">A quick view of the network</p>
-                <h2 class="mt-1 text-3xl font-black tracking-tight">Overview</h2>
-            </div>
-            <span class="text-sm text-slate-500">Updated just now</span>
-        </div>
-
         <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4 mb-8">
             <div
                 v-for="item in [
