@@ -222,12 +222,36 @@ class DashboardController extends Controller
         return ResponseFacade::stream($callback, 200, $headers);
     }
 
-    public function apManagement(): Response
+    public function apManagement(Request $request): Response
     {
-        $accessPoints = AccessPoint::orderBy('status', 'desc')->get();
+        $search = $request->string('search')->trim()->toString();
+
+        $accessPoints = AccessPoint::query()
+            ->select([
+                'id',
+                'name',
+                'ip_address',
+                'mac_address',
+                'location',
+                'status',
+            ])
+            ->when($search !== '', function ($query) use ($search) {
+                $query->where(function ($searchQuery) use ($search) {
+                    $searchQuery
+                        ->where('name', 'like', "%{$search}%")
+                        ->orWhere('ip_address', 'like', "%{$search}%")
+                        ->orWhere('mac_address', 'like', "%{$search}%")
+                        ->orWhere('location', 'like', "%{$search}%");
+                });
+            })
+            ->orderBy('status', 'desc')
+            ->orderBy('name')
+            ->paginate(12)
+            ->withQueryString();
 
         return Inertia::render('Dashboard/ApManagement', [
             'accessPoints' => $accessPoints,
+            'search' => $search,
         ]);
     }
 }
