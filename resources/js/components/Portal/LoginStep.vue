@@ -109,14 +109,14 @@ const phoneError = computed(() => {
   const raw = props.form.phone.replace(/\s/g, '');
   if (!raw) return null;
   if (raw.startsWith('0')) return 'Jangan diawali angka 0. Contoh: 812 3456 7890';
-  if (raw.length < 9) return `Nomor HP terlalu pendek (${raw.length}/9 digit minimal)`;
+  if (raw.length < 11) return `Nomor HP terlalu pendek (11 digit minimal)`;
   return null;
 });
 
 const showPhoneError = computed(() => hasInvalidChars.value || (touched.value && !!phoneError.value));
 
 const isValid = computed(() => {
-  return rawPhoneLength.value >= 9 && !phoneError.value && props.form.agreed;
+  return rawPhoneLength.value >= 11 && !phoneError.value && props.form.agreed;
 });
 </script>
 
