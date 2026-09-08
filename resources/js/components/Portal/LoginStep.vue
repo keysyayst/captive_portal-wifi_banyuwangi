@@ -380,7 +380,7 @@ const isValid = computed(() => {
           />
 
           <div
-            v-if="rawPhoneLength >= 8"
+            v-if="rawPhoneLength >= 11"
             class="
               absolute
               right-3
