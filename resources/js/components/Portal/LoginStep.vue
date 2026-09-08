@@ -233,7 +233,7 @@ const isValid = computed(() => {
               class="
                 relative
                 w-auto
-                min-w-[72px]
+                min-w-18
                 px-3
                 py-2.5
                 text-left
