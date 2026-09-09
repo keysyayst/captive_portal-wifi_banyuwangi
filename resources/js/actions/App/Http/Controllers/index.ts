@@ -5,6 +5,7 @@ import AnnouncementController from './AnnouncementController'
 import LocationWeatherController from './LocationWeatherController'
 import TickerItemController from './TickerItemController'
 import DashboardController from './DashboardController'
+import AccessPointController from './AccessPointController'
 import SliderController from './SliderController'
 import SettingController from './SettingController'
 import PortalContentController from './PortalContentController'
@@ -16,6 +17,7 @@ AnnouncementController: Object.assign(AnnouncementController, AnnouncementContro
 LocationWeatherController: Object.assign(LocationWeatherController, LocationWeatherController),
 TickerItemController: Object.assign(TickerItemController, TickerItemController),
 DashboardController: Object.assign(DashboardController, DashboardController),
+AccessPointController: Object.assign(AccessPointController, AccessPointController),
 SliderController: Object.assign(SliderController, SliderController),
 SettingController: Object.assign(SettingController, SettingController),
 PortalContentController: Object.assign(PortalContentController, PortalContentController),
