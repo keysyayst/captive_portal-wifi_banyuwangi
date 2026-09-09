@@ -16,9 +16,9 @@ services:
       - DB_CONNECTION=mysql
       - DB_HOST=db
       - DB_PORT=3306
-      - DB_DATABASE=captive_portal
-      - DB_USERNAME=captive_user
-      - DB_PASSWORD=captive_secret
+      - DB_DATABASE=${MYSQL_DATABASE}
+      - DB_USERNAME=${MYSQL_USER}
+      - DB_PASSWORD=${MYSQL_PASSWORD}
       - LOG_CHANNEL=stderr
       - LOG_LEVEL=debug
       - RADIUS_MODE=${RADIUS_MODE:-mock}
@@ -36,16 +36,16 @@ services:
     container_name: captive_portal_db
     restart: unless-stopped
     environment:
-      - MYSQL_DATABASE=captive_portal
-      - MYSQL_USER=captive_user
-      - MYSQL_PASSWORD=captive_secret
-      - MYSQL_ROOT_PASSWORD=root_secret
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     ports:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_secret"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
       interval: 5s
       timeout: 5s
       retries: 20
@@ -73,10 +73,10 @@ services:
     environment:
       - RADIUS_DB_HOST=db
       - RADIUS_DB_PORT=3306
-      - RADIUS_DB_NAME=captive_portal
-      - RADIUS_DB_USER=captive_user
-      - RADIUS_DB_PASS=captive_secret
-      - RADIUS_NAS_SECRET=IaWukVJiBJi4y3JV0iyx/fwpaRjCxRb4
+      - RADIUS_DB_NAME=${MYSQL_DATABASE}
+      - RADIUS_DB_USER=${MYSQL_USER}
+      - RADIUS_DB_PASS=${MYSQL_PASSWORD}
+      - RADIUS_NAS_SECRET=${RADIUS_NAS_SECRET}
 
 volumes:
   db_data:
